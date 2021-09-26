@@ -27,7 +27,7 @@ module.exports = {
                     message.channel.send({embeds : [data]})
                 })
                 .catch(err => message.channel.send(`Đã xảy ra lỗi : ${err}`))
-        }
+        } //g
         else {
             const main = await fetch("https://api.adviceslip.com/advice");
             const mat = await main.json();
