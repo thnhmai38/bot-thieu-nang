@@ -12,7 +12,7 @@ module.exports = {
         client.discordTogether = new DiscordTogether(client);
         if(message.member.voice.channel) {
             client.discordTogether.createTogetherCode(message.member.voice.channel.id, 'youtube').then(async invite => {
-                return message.channel.send(`BẤM VÀO **LIÊN KẾT** ĐÂY : ${invite.code} \n **ĐỪNG BẤM VÀO MẤY CÁI NÚT**`)  
+                return message.channel.send(`BẤM VÀO **LIÊN KẾT** ĐÂY : ${invite.code}`)  
             });
         } else message.channel.send(`Bạn phải ở trong 1 kênh nói thoại`);
     }
