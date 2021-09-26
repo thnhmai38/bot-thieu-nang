@@ -11,6 +11,7 @@ module.exports = {
         cmdlog.log(message)
     simplydjs.calculator(message, {
         embedColor: '#075FFF', //default: #075FFF
+        credit: false,
     })
 }
 }
