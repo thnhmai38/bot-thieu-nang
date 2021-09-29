@@ -31,12 +31,14 @@ client.on ("error", console.error);
     
         fs.readdir(dir, (err, files) => {
             let cmdcount = files.length;
-        let activities = [`v${package.version}`,`/>help`,`/>invite`,`/>changelog`,`/>support`,`${client.guilds.cache.size} máy chủ`,`${client.channels.cache.size} kênh`,`${cmdcount} lệnh`]
-        let i = 0
-        setInterval(() => client.user.setActivity(`${activities[i ++ % activities.length]}`, {
-            type: "STREAMING",
-            url: "https://www.twitch.tv/thanhgaming5550",
-        }), 30000)
+            let i = 0;
+        setInterval(() => {
+            let activities = [`v${package.version}`,`/>help`,`/>invite`,`/>changelog`,`/>support`,`${client.guilds.cache.size} máy chủ`,`${client.channels.cache.size} kênh`,`${cmdcount} lệnh`]
+            client.user.setActivity(`${activities[i ++ % activities.length]}`, {
+                type: "STREAMING",
+                url: "https://www.twitch.tv/thanhgaming5550",
+        })
+    }, 30000)
         //client.user.setActivity({
         //    name: "/>help ; />invite",
         //    type: "STREAMING",
