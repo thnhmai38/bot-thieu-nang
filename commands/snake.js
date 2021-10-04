@@ -12,8 +12,8 @@ module.exports = {
     const SnakeGame = new djsGames.SnakeGame({
         message: message,
         buttons: true, // If you want to use buttons || False if you want to use reactions
-        snake: '🟩',
-        apple: '🍎',
+        //snake: '🟩',
+        //apple: '🍎',
         embedColor: 'RANDOM',
         leftButton: '◀',
         rightButton: '▶',
