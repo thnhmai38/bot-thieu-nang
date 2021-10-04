@@ -9,7 +9,9 @@ module.exports = {
     const menu = require('../modules/menu.js')
         const cmdlog = new menu.cmdlog()
         cmdlog.log(message)
-    const FastTyper = new djsGames.FastTyper()
-    FastTyper.start(message)
+    const FastTyper = new djsGames.FastTyper({
+        message: message,
+    })
+    FastTyper.start();
     }
 }
