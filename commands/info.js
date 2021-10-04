@@ -39,7 +39,7 @@ module.exports = {
         },
         {
           name: 'Lần khởi động gần nhất',
-          value: `${(Math.round(process.uptime().toFixed(2) / 3600 * 1000)/1000).toString()}h`,
+          value: `${(Math.round(process.uptime().toFixed(2) / 3600 * 1000)/1000).toString()}h trước`,
           inline: true 
         },
         {
