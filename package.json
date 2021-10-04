@@ -1,11 +1,11 @@
 {
   "name": "bot-thieu-nang",
-  "version": "2.4.4",
+  "version": "2.4.5",
   "description": "Bot thieu nang Discord",
   "main": "index.js",
   "scripts": {
     "debug": "echo DEBUG MODE && node index.js",
-    "start": "node --max-old-space-size=2048 index.js"
+    "start": "node --max-old-space-size=4096 index.js"
   },
   "author": "thanhgaming5550",
   "license": "ISC",
@@ -19,7 +19,7 @@
     "@discordjs/voice": "^0.6.0",
     "anime-images-api": "^2.0.0",
     "ansi-regex": "^6.0.1",
-    "axios": "^0.21.4",
+    "axios": "^0.22.0",
     "chalk": "^4.1.2",
     "colors": "^1.4.0",
     "cpu-stat": "^2.0.1",
@@ -31,7 +31,7 @@
     "discord.js-minesweeper": "^1.0.6",
     "discordjs-activity": "1.3.0",
     "dj-games": "^3.0.1",
-    "djs-games": "^2.0.12",
+    "djs-games": "^2.1.0",
     "dotenv": "^10.0.0",
     "erela.js": "^2.3.3",
     "express": "^4.17.1",
@@ -39,7 +39,7 @@
     "ffmpeg-static": "^4.4.0",
     "figlet": "^1.5.2",
     "git-commit-info": "^2.0.0",
-    "jsoning": "^0.11.22",
+    "jsoning": "^0.12.22",
     "lavasfy": "2.3.0",
     "libsodium-wrappers": "^0.7.9",
     "lodash": "^4.17.21",
@@ -59,15 +59,14 @@
     "random-puppy": "^1.1.0",
     "random-words": "^1.1.1",
     "reconlx": "^2.4.3",
-    "semver-regex": "^4.0.1",
-    "simply-djs": "^2.0.9",
+    "semver-regex": "^4.0.2",
+    "simply-djs": "^2.0.96",
     "socket.io": "^4.2.0",
     "tar": "^6.1.11",
     "tz": "^0.1.1",
     "util": "^0.12.4",
     "weather-js": "^2.0.0",
     "winston": "^3.3.3",
-    "youtube-dl-exec": "^1.2.11",
     "ytdl-core": "^4.9.1",
     "ytsr": "^3.5.3"
   }
