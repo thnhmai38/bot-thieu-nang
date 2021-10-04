@@ -14,7 +14,7 @@ module.exports = {
         //avatar
         let avatar = member.displayAvatarURL({dynamic : true})
         const avt = new Discord.MessageEmbed()
-        .setTitle(`Ảnh đại diện của ${member.username}`)
+        .setTitle(`Ảnh đại diện của **${member.username}**`)
         .setImage(`${avatar}?size=1024`)
         .setColor("RANDOM")
         .setURL(`${avatar}?size=1024`)
@@ -58,12 +58,12 @@ module.exports = {
         }
         const bnn = await getUserBannerUrl(member.id, { size: 1024 })
         if (!bnn) {
-            message.channel.send(`${member.username} không có Ảnh Biểu ngữ :(`)
+            message.channel.send(`**${member.username}** không có Ảnh Biểu ngữ :(`)
             message.channel.send({embeds : [avt]})
         }
         else {
             const br = new Discord.MessageEmbed()
-                .setTitle(`Ảnh biểu ngữ của ${member.username}`)
+                .setTitle(`Ảnh biểu ngữ của **${member.username}**`)
                 .setImage(bnn)
                 .setColor("RANDOM")
                 .setURL(bnn)

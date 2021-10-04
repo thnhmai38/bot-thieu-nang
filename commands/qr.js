@@ -1,22 +1,19 @@
-const { Utils } = require('djs-utils')
-const Discord = require("discord.js");
+const Discord = require("discord.js")
 
 module.exports = {
     name: "qr",
-    desciption: "Create QR Code",
-
-    async run (client, message, args) {
-    const menu = require('../modules/menu.js')
+    description: "create qr code",
+    async run (client, message, args){
+        const menu = require('../modules/menu.js')
         const cmdlog = new menu.cmdlog()
         cmdlog.log(message)
-        const util = new Utils({
-            args: args[0],
-            message: message,
-            slashCommand: false,
-            embedFooter: `QR Code`, //The Footer of the embed
-            embedTitle: 'Đã tạo xong mã QR', //The title of the embed
-            embedColor: 'RANDOM', //The color of the embed! (Use Hex codes or use the color name)
-          })
-        util.qrcode()
+        if (!args[0]) {return message.channel.send("Bạn định tạo QR gì vậy?")}
+        const embed = new Discord.MessageEmbed()
+           .setColor('RANDOM')
+            .setTitle('Đã tạo xong mã QR')
+            .setImage(`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${args[0]}`)
+            .setFooter(`Tạo bởi ${message.author.username}`)
+            .setTimestamp()
+        message.channel.send({embeds : [embed]});
     }
 }

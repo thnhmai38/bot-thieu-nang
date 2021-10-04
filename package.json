@@ -32,7 +32,6 @@
     "discordjs-activity": "1.3.0",
     "dj-games": "^3.0.1",
     "djs-games": "^2.1.0",
-    "djs-utils": "^1.1.2",
     "dotenv": "^10.0.0",
     "erela.js": "^2.3.3",
     "express": "^4.17.1",

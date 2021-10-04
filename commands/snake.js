@@ -15,7 +15,7 @@ module.exports = {
         snake: '🟩',
         apple: '🍎',
         embedColor: 'RANDOM',
-        leftButton: '⬇️',
+        leftButton: '⬅️',
         rightButton: '➡️',
         upButton: '⬆️',
         downButton: '⬇️',

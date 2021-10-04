@@ -8,7 +8,7 @@ module.exports = {
 
 	//example : https://i.imgur.com/GyChaXg.png
     async run (client, message, args) {
-const exampleEmbed = new Discord.MessageEmbed()
+	const exampleEmbed = new Discord.MessageEmbed()
 	.setColor('#0099ff')
 	.setTitle('Some title')
 	.setURL('https://discord.js.org/')
