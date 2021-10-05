@@ -51,12 +51,11 @@ client.on ("error", console.error);
     });
 });
 
-client.player = new Player(client//, {
-//    ytdlDownloadOptions: {
-//        filter: "audioonly"
-//    }
-//}
-);
+client.player = new Player(client, {
+    ytdlDownloadOptions: {
+        filter: "audioonly"
+    }
+});
 
 client.player.on("error", (queue, error) => {
     console.log(colors.red(`Lỗi trong hàng đợi: ${error.message}`));
