@@ -26,8 +26,8 @@ module.exports = {
             requestedBy: message.user,
             searchEngine: QueryType.AUTO
         })
-        //if (!searchResult || !searchResult.tracks.length || !searchResult.playlist || !searchResult.tracks[0]) return message.channel.send("❌ | Không tìm thấy nhạc/video");
-        if (!searchResult.playlist && !searchResult.tracks[0]) return message.channel.send("❌ | Không tìm thấy nhạc/video");
+        if (!searchResult || !searchResult.tracks.length) return message.channel.send("❌ | Không tìm thấy nhạc/video hoặc đã xảy ra lỗi khi tìm kiếm");
+        //if (!searchResult.playlist && !searchResult.tracks[0]) return message.channel.send("❌ | Không tìm thấy nhạc/video");
         message.channel.send(`⏱ | Đang tải ${searchResult.playlist ? "danh sách phát" : "bài nhạc"}...` );
         if (searchResult.playlist) {queue.addTracks(searchResult.tracks)} else {queue.addTrack(searchResult.tracks[0])};
         if (!queue.playing) await queue.play();
