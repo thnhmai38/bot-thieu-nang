@@ -75,7 +75,7 @@ client.player.on("trackAdd", (queue, track) => {
 });
 
 client.player.on("botDisconnect", (queue) => {
-    queue.metadata.send("❌ | Xóa hàng đợi do bị ngắt kết nối khỏi kênh nói thủ công!");
+    queue.metadata.send("❌ | Xóa hàng đợi do bị ngắt kết nối thủ công!");
 });
 
 client.player.on("channelEmpty", (queue) => {
