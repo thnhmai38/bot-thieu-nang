@@ -16,7 +16,7 @@ module.exports = {
         const searchResult = await player.search(args.join(" "), {
             requestedBy: message.user,
             //searchEngine: QueryType.AUTO
-        }).then(x => x.tracks[0]);
+        });
         if (!searchResult || !searchResult.tracks.length) {
             return void message.channel.send("❌ | Không tìm thấy nhạc/video hoặc đã xảy ra lỗi khi tìm kiếm");
         }
