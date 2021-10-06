@@ -50,14 +50,12 @@ client.on ("error", console.error);
     console.log('==========================================================');
     });
 });
-/*/
+
 client.player = new Player(client, {
     ytdlDownloadOptions: {
         filter: "audioonly"
     }
 });
-/*/
-client.player = new Player(client);
 
 client.player.on("error", (queue, error) => {
     console.log(colors.red(`Lỗi trong hàng đợi: ${error.message}`));
@@ -77,7 +75,7 @@ client.player.on("trackAdd", (queue, track) => {
 });
 
 client.player.on("botDisconnect", (queue) => {
-    queue.metadata.send("❌ | Xóa hàng đợi do bị ngắt kết nối thủ công!");
+    queue.metadata.send("❌ | Xóa hàng đợi do bị ngắt kết nối khỏi kênh nói thủ công!");
 });
 
 client.player.on("channelEmpty", (queue) => {
