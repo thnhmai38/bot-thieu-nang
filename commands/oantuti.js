@@ -164,7 +164,7 @@ module.exports = {
                 .setCustomId('samchop')
                 .setLabel('Sấm Chớp')
                 .setStyle('PRIMARY'),
-                new MessageButton()
+            new MessageButton()
                 .setCustomId('sung')
                 .setLabel('Súng')
                 .setStyle('PRIMARY'),
