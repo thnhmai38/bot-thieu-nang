@@ -1,20 +1,21 @@
 const Discord = require('discord.js')
-const { Player, QueryType, QueueRepeatMode } = require("discord-player");
+
 module.exports = {
     name: "shuffle",
     description: "shuffle",
+    inVoiceChannel: true,
 
     async run (client, message, args) {
         const menu = require('../modules/menu.js')
         const cmdlog = new menu.cmdlog()
         cmdlog.log(message)
-        const player = client.player;
-        if (!message.member.voice.channel) return message.channel.send("❌ | **Bạn phải ở trong một kênh nói!**");
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.channel.send(":x: | **Bạn phải ở cùng kênh nói với Bot!**"); 
+        
+        if (!message.member.voice.channel) return message.channel.send(`${client.emotes.error} | Bạn phải ở trong một kênh nói`);
+        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.channel.send(`${client.emotes.error} | Bạn phải ở cùng kênh nói với Bot`); 
 
-        const queue = player.getQueue(message.guild.id);
-        if (!queue || !queue.playing) return message.channel.send("❌ | Chả có gì đang phát cả!");
-        const check = queue.shuffle();
-        return message.channel.send(`🎵 | Trộn bài ${check ? "Bật" : "Tắt"}!`);
+        const queue = client.distube.getQueue(message)
+        if (!queue) return message.channel.send(`${client.emotes.error} | Chả có gì đang phát cả`)
+        queue.shuffle()
+        message.channel.send(`${client.emotes.shuffle} | Đã xáo trộn danh sách chờ`)
     }
 }

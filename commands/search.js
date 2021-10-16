@@ -7,6 +7,7 @@ module.exports = {
         const menu = require('../modules/menu.js')
         const cmdlog = new menu.cmdlog()
         cmdlog.log(message)
+        
         const author = message.author.id;
         const query = args.join(" ");
         if(!query) return message.channel.send("Bạn tìm gì à?");
@@ -32,9 +33,9 @@ module.exports = {
         var link = [video.url, video1.url, video2.url, video3.url, video4.url, video5.url, video6.url, video7.url, video8.url, video9.url];
         var output = [];
         for (let i = 0; i < 10; i++) {
-            output[i] = `${i+1}. **${title[i]}** ([link](${link[i]}))`
+            output[i] = `${i+1}. [${title[i]}](${link[i]})`
         }
-        var arr = output.join('\n \n');
+        var arr = output.join('\n');
         const embed = new DiscordJS.MessageEmbed()
             .setColor('RANDOM')
             .setDescription(`${arr}`)

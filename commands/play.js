@@ -1,34 +1,41 @@
 const Discord = require('discord.js')
-const { Player, QueryType, QueueRepeatMode } = require("discord-player");
 
 module.exports = {
     name: "play",
     description: "play songs",
+    aliases: ["p"],
+    inVoiceChannel: true,
 
     async run (client, message, args) {
         const menu = require('../modules/menu.js')
         const cmdlog = new menu.cmdlog()
         cmdlog.log(message)
-        const player = client.player;
-        if (!message.member.voice.channel) return message.channel.send("❌ | **Bạn phải ở trong một kênh nói!**");
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.channel.send(":x: | **Bạn phải ở cùng kênh nói với Bot!**"); 
 
-        const queue = await player.createQueue(message.guild, {
-            metadata: message.channel
-        });
+        if (!message.member.voice.channel) return message.channel.send(`${client.emotes.error} |  Bạn phải ở trong một kênh nói`);
+        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.channel.send(`${client.emotes.error} |  Bạn phải ở cùng kênh nói với Bot`); 
+        if (!args.join(' ')) return message.channel.send(`${client.emotes.error} | Bạn không muốn phát bài gì cả`)
+        if (message.member.voice.channel.type == "GUILD_STAGE_VOICE" && message.member.voice.suppress == true) return message.channel.send(`${client.emotes.error} | Bạn đang ở trong kênh Sân khấu. Để dùng lệnh này trong kênh sân khấu, bạn phải **ở trên Sân khấu** (trở thành Người nói) trước`)
+
         try {
-            if (!queue.connection) await queue.connect(message.member.voice.channel);
-        } catch {
-            queue.destroy();
-            return message.channel.send("❌ | Đã xảy ra lỗi khi tham gia kênh nói!");
+            client.distube.play(message, args.join(' '));
+            function loop(client, message) {
+                if (message.member.voice.channel.type == "GUILD_STAGE_VOICE") {
+                    setTimeout(function () {
+                        if (client.distube.getQueue(message)) {
+                            try {
+                                message.guild.me.voice.setSuppressed(false)
+                            } catch (e) {
+                                message.guild.me.voice.setRequestToSpeak(true);
+                                message.channel.send(`${client.emotes.success} | Đã gửi **Đề nghị Nói**. \n*Nếu Bot chưa xuất hiện trên Sân khấu, hãy mời Bot lên Sân khấu (trở thành Người nói) ngay để tránh việc nhạc phát khi Bot chưa lên Sân khấu*`)
+                            };
+                            return;
+                        } else loop(client, message)
+                    }, 2000)
+                } else return;
+            }
+            loop(client, message);
+        } catch (e) {
+            message.channel.send(`${client.emotes.error} | Lỗi: **${e}**`)
         }
-        const searchResult = await player.search(args.join(" "), {
-            requestedBy: message.user,
-            searchEngine: QueryType.AUTO
-        })
-        if (!searchResult || !searchResult.tracks.length) return message.channel.send("❌ | Không tìm thấy nhạc/video hoặc đã xảy ra lỗi khi tìm kiếm");
-        message.channel.send(`⏱ | Đang tải ${searchResult.playlist ? "danh sách phát" : "bài nhạc"}...` );
-        if (searchResult.playlist) {queue.addTracks(searchResult.tracks)} else {queue.addTrack(searchResult.tracks[0])};
-        if (!queue.playing) await queue.play();
     }
 }

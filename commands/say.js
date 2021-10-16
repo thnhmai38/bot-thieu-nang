@@ -32,9 +32,8 @@ if (args[0] == 0) {
         const guild2 = await client.guilds.fetch(guild)
         const guild2Member = await guild2.members.fetch(userId)
         if (guild2Member.permissions.has("MANAGE_MESSAGES")) {
-            message.delete()
             client.channels.cache.get(channelId).send(msgr);
-            message.channel.send("DONE!")
+            message.channel.send("**DONE!**")
         } else message.channel.send('BẠN KHÔNG ĐỦ THẨM QUYỀN ĐỂ THỰC HIỆN LỆNH NÀY');
     }
 } else message.channel.send("Nhập sai giá trị cấu hình")

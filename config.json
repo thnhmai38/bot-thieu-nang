@@ -1,3 +1,15 @@
 {
-    "prefix":"/>"
+    "prefix":"/>",
+    "emoji": {
+        "play": "▶️",
+        "stop": "⏹️",
+        "queue": "📄",
+        "success": "☑️",
+        "repeat": "🔁",
+        "error": "❌",
+        "pause" : "⏸️",
+        "filter" : "✨",
+        "volume" : "🔊",
+        "shuffle" : "🔀"
+    }
 }
