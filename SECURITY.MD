@@ -1,5 +1,5 @@
 # CHÍNH SÁCH BẢO MẬT
 
-- BOT SẼ KHÔNG TỰ Ý THAY ĐỔI CÁC THIẾT ĐẶT, TRỪ KHI ĐƯỢC CHO PHÉP BẰNG LỆNH
+- BOT SẼ KHÔNG TỰ Ý THAY ĐỔI CÁC THIẾT ĐẶT, TRỪ KHI ĐƯỢC CHO PHÉP BẰNG LỆNH.
 - MỌI LỆNH MÀ BẠN GỬI ĐẾN CHO BOT SẼ LƯU VÀO NHẬT KÍ KÈM THEO NGÀY VÀ ID NGƯỜI DÙNG CỦA BẠN VÀ SẼ TỰ ĐỘNG XÓA VÀO LẦN KHỞI ĐỘNG BOT KẾ TIẾP
 - MỌI DỮ LIỆU BOT THU THẬP ĐƯỢC SẼ KHÔNG ĐƯỢC CHIA SẺ BẤT CỨ ĐẾN AI
