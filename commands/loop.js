@@ -15,12 +15,16 @@ module.exports = {
 
         const queue = client.distube.getQueue(message)
         if (!queue) return message.channel.send(`${client.emotes.error} | Chả có gì đang phát cả`)
+        if (!args[0]) return message.channel.send(`${client.emotes.repeat} | Lặp: ${queue.repeatMode ? queue.repeatMode === 2 ? "Tất cả" : "Bài này" : "Tắt"}`)
         let mode = null
-        switch (args[0]) {
+        switch (args[0].toLowerCase()) {
             case "off":
                 mode = 0
                 break
             case "song":
+                mode = 1
+                break
+            case "track":
                 mode = 1
                 break
             case "queue":
