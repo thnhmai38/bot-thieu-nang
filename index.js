@@ -60,8 +60,9 @@ try {
         searchCooldown: 30,
         leaveOnEmpty: true,
         emptyCooldown: 60,
-        leaveOnFinish: false,
-        leaveOnStop: false,
+        leaveOnFinish: true,
+        leaveOnStop: true,
+        savePreviousSongs: true,
         plugins: [new SoundCloudPlugin(), new SpotifyPlugin()],
     })
     const status = queue => `Âm lượng: ${queue.volume}% | Bộ lọc: ${queue.filters.length === 0 ? "Tắt" : queue.filters} | Lặp: ${queue.repeatMode ? queue.repeatMode === 2 ? "Tất cả" : "Bài này" : "Tắt"} | Tự động phát: ${queue.autoplay ? "Bật" : "Tắt"}`
