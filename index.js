@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-//const { Client, Collection } = require("discord.js");
 const client = new Discord.Client({intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "GUILD_VOICE_STATES"]});
 const fs = require('fs');
 module.exports = client;
