@@ -46,7 +46,7 @@ const { REST } = require("@discordjs/rest")
     }
     loaded ? console.log(colors.bold(colors.green(`Loaded all Commands!`))) : console.log(colors.bold(colors.red(`Load all Commands Falled!`)))
     
-    const rest = new REST({ version: "9" }).setToken(process.env.token);
+    const rest = new REST({ version: "9" }).setToken(process.env.TOKEN);
     count = 0;
     console.log(colors.bold(colors.yellow(`Starting load Slash Commands...`)))
     const slashFiles = readdirSync(join(__dirname, "slash")).filter(file => file.endsWith(".js"));
