@@ -19,15 +19,20 @@ module.exports = {
             required: false,
         }
     ],
-    async run (client, interaction, option) {
-        /**
+    /**
         *
         * @param {Client} client
         * @param {CommandInteraction} interaction
         * @param {Object[]} option //{ name: 'id', type: 'INTEGER', value: 69 }
         */
-        if (isNaturalNumber(Number(option[0].value)) && Number(option[0].value)!==0) {
-            fetch(`https://api.adviceslip.com/advice/${option[0].value}`)
+    async run (client, interaction, option) {
+        try {
+            var num = option[0].value;
+        } catch {
+            var num=0;
+        }
+        if (isNaturalNumber(Number(num)) && Number(num)!==0) {
+            fetch(`https://api.adviceslip.com/advice/${num}`)
                 .then(response => response.text())
                 .then((response) => {
                     const string = response
@@ -40,7 +45,7 @@ module.exports = {
                             .setColor("RANDOM")
                         interaction.reply({embeds : [data], ephemeral: false})
                     } catch {
-                        interaction.reply({content: `Không có lời khuyên mã **${option[0].value}**`, ephemeral: true})
+                        interaction.reply({content: `Không có lời khuyên mã **${num}**`, ephemeral: true})
                     }
                 })
                 .catch(err => interaction.reply({content: `Đã xảy ra lỗi : ${err}`, ephemeral: true}))
