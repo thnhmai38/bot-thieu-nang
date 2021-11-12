@@ -28,6 +28,7 @@
     "chalk": "^4.1.2",
     "colors": "^1.4.0",
     "cpu-stat": "^2.0.1",
+    "discord-api-types": "^0.24.0",
     "discord-buttons": "^4.0.0",
     "discord-stage": "^1.0.3",
     "discord-together": "^1.3.2",
