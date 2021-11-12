@@ -7,9 +7,7 @@ module.exports = {
     name: "anime",
     description: "Gives you a type of anime",
     async run(client, message, args) {
-        const menu = require('../modules/menu.js')
-        const cmdlog = new menu.cmdlog()
-        cmdlog.log(message)
+        
 
         var pick;
         var url;
@@ -74,7 +72,7 @@ module.exports = {
                     .setTitle(`Ảnh Anime ${input}`)
                     .setImage(url)
                     .setURL(url)
-            message.channel.send({embeds: [content]});
+            message.reply({embeds: [content]});
         }
         else if (pick == 1) {
         //first
@@ -87,7 +85,7 @@ module.exports = {
                     .setTitle(`Ảnh Anime ${input}`)
                     .setImage(url)
                     .setURL(url)
-                message.channel.send({embeds: [content]});
+                message.reply({embeds: [content]});
             })
         }   
     }

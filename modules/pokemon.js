@@ -27,6 +27,8 @@ class Pokemon {
     .addField(`Năng lực:`, `${data.Data.abilities}`)
     .setImage(data.question)
     .setFooter(`Nhập stop để dừng chơi`)
+    .setColor("RANDOM")
+    .setTimestamp()
 
     const right = new Discord.MessageEmbed()
     .setTitle(`Bạn đã đoán đúng!`)
@@ -34,6 +36,10 @@ class Pokemon {
     .setURL(data.Data.Link)
     .setDescription(`Nó là ${data.Data.name}`)
     .setImage(data.answer)
+    .setColor("RANDOM")
+    .addField(`Thể loại:`,`${data.Data.Type}`, true)
+    .addField(`Năng lực:`, `${data.Data.abilities}`)
+    .setTimestamp()
    
 
     const wrong = new Discord.MessageEmbed()
@@ -42,26 +48,29 @@ class Pokemon {
     .setURL(data.Data.Link)
     .setDescription(`Nó là ${data.Data.name}`)
     .setImage(data.answer)
+    .setColor("RANDOM")
+    .addField(`Thể loại:`,`${data.Data.Type}`, true)
+    .addField(`Năng lực:`, `${data.Data.abilities}`)
+    .setTimestamp()
     
 
-    this.message.channel.send({embeds : [pok]})
+    this.message.reply({embeds : [pok]})
     const gameFilter = m => m.author.id
     const gameCollector = this.message.channel.createMessageCollector(gameFilter);
 
     gameCollector.on('collect', async msg => {
-      if(msg.author.bot) return
-          const selection = msg.content.toLowerCase();
-if (selection === data.Data.name.toLowerCase()) {
-this.message.reply({embeds : [right]})
-gameCollector.stop()
-          }else if (selection === "stop") {
-            this.message.channel.send({embeds : [wrong]})
+        if(msg.author.bot) return
+        const selection = msg.content.toLowerCase();
+        if (selection === data.Data.name.toLowerCase()) {
+            msg.reply({embeds : [right]})
+            gameCollector.stop()
+        } else if (selection === "stop") {
+            msg.reply({embeds : [wrong]})
             gameCollector.stop();
           } else if (selection !== data.Data.name ) {
-            this.message.channel.send("SAI! - Nhập `stop` nếu bạn muốn dừng chơi")
+            msg.reply("**SAI!** - Nhập `stop` nếu bạn muốn dừng chơi")
           }
     })
-    
 })
 }
 }

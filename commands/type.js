@@ -6,9 +6,7 @@ module.exports = {
     desciption: "solo gõ nhanh",
 
     async run (client, message, args) {
-    const menu = require('../modules/menu.js')
-        const cmdlog = new menu.cmdlog()
-        cmdlog.log(message)
+    
     const FastTyper = new djsGames.FastTyper({
         message: message,
     })

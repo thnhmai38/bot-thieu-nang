@@ -1,20 +1,22 @@
 const weather = require('weather-js');
 const Discord = require('discord.js');
+const colors = require('colors');
 
 module.exports = {
     name: "weather",
     description: "Checks a weather forecast",
 
     async run (client, message, args){
-        const menu = require('../modules/menu.js')
-        const cmdlog = new menu.cmdlog()
-        cmdlog.log(message)
+        
     weather.find({search: args.join(" "), degreeType: 'C'}, function (error, result){
         // 'C' can be changed to 'F' for farneheit results
-        if(error) return message.channel.send(error);
-        if(!args[0]) return message.channel.send('Vui lòng đưa ra 1 vị trí')
+        if(!args[0]) return message.reply('Vui lòng đưa ra 1 vị trí')
+        if (error) {
+            console.log(colors.red(error));
+            return message.reply({content: `Đã xảy ra lỗi, vui lòng thử lại.`});
+        }
 
-        if(result === undefined || result.length === 0) return message.channel.send('Vị trí không hợp lệ. Vui lòng kiểm tra lại.');
+        if(result === undefined || result.length === 0) return message.reply('Vị trí không hợp lệ. Vui lòng kiểm tra lại.');
 
         var current = result[0].current;
         var location = result[0].location;
@@ -31,7 +33,7 @@ module.exports = {
         .addField('Cảm nhận thấy', `${current.feelslike}°`, true)
         .addField('Độ ẩm', `${current.humidity}%`, true)
 
-        message.channel.send({embeds : [weatherinfo]})
+        message.reply({embeds : [weatherinfo]})
         })        
     }
 }

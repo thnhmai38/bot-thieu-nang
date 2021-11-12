@@ -6,9 +6,7 @@ module.exports = {
     description: "Covid-19 News",
 
     async run (client, message, args) {
-        const menu = require('../modules/menu.js')
-        const cmdlog = new menu.cmdlog()
-        cmdlog.log(message)
+        
         let countries = args.join(" ");
 
         if(args[0] === "all" || !args[0]){
@@ -29,7 +27,7 @@ module.exports = {
                     .addField('Số ca chữa khỏi : ', recovered)
                     .setFooter(`Cập nhật lần cuối lúc ${lastUpdate}`)
 
-                    message.channel.send({embeds : [embed]})
+                    message.reply({embeds : [embed]})
                 })
             } else {
                 fetch(`https://covid19.mathdro.id/api/countries/${countries}`)
@@ -49,9 +47,9 @@ module.exports = {
                     .setImage(`https://covid19.mathdro.id/api/countries/${countries}/og`)
                     .setFooter(`Cập nhật lần cuối lúc ${lastUpdate}`)
                     
-                    message.channel.send({embeds : [embed]})
+                    message.reply({embeds : [embed]})
             }).catch(e => {
-                return message.channel.send('Quốc gia được cung cấp không hợp lệ hoặc máy chủ cung cấp không phản hồi')
+                return message.reply('Quốc gia được cung cấp không hợp lệ hoặc máy chủ cung cấp không phản hồi')
            })
         }
     }

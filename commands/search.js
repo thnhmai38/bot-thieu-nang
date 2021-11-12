@@ -4,20 +4,18 @@ const ytsr = require('ytsr')
 module.exports = {
     name : 'search',
     run : async(client, message, args) => {
-        const menu = require('../modules/menu.js')
-        const cmdlog = new menu.cmdlog()
-        cmdlog.log(message)
+        
         
         const author = message.author.id;
         const query = args.join(" ");
-        if(!query) return message.channel.send("Bạn tìm gì à?");
+        if(!query) return message.reply("Bạn tìm gì à?");
     
         const res = await ytsr(query).catch(e => {
-            return message.channel.send(`Không có kết quả tìm kiếm trên Youtube cho **${query}**`);
+            return message.reply(`Không có kết quả tìm kiếm trên Youtube cho **${query}**`);
         });
     
         const video = res.items.filter(i => i.type == "video")[0];
-        if (!video) return message.channel.send(`Không có kết quả tìm kiếm trên Youtube cho **${query}**`);
+        if (!video) return message.reply(`Không có kết quả tìm kiếm trên Youtube cho **${query}**`);
     
         const video1 = res.items.filter(i => i.type == "video")[1];
         const video2 = res.items.filter(i => i.type == "video")[2];
@@ -36,13 +34,19 @@ module.exports = {
             output[i] = `${i+1}. [${title[i]}](${link[i]})`
         }
         var arr = output.join('\n');
+        function youtube_parser(url){
+            var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+            var match = url.match(regExp);
+            return (match&&match[7].length==11)? match[7] : false;
+        }
         const embed = new DiscordJS.MessageEmbed()
             .setColor('RANDOM')
             .setDescription(`${arr}`)
             .setTitle(query)
+            .setThumbnail(`https://img.youtube.com/vi/${youtube_parser(video.url)}/default.jpg`)
             .setFooter(`Tìm kiếm trên Youtube bởi ${message.author.tag}`, "https://www.iconpacks.net/icons/2/free-youtube-logo-icon-2431-thumb.png")
             .setTimestamp();
 
-        message.channel.send({embeds : [embed]});
+        message.reply({embeds : [embed]});
     }
 }

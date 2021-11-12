@@ -7,17 +7,15 @@ module.exports = {
     description: "Brodcast someone's avatar",
 
     async run (client, message, args) {
-        const menu = require('../modules/menu.js')
-        const cmdlog = new menu.cmdlog()
-        cmdlog.log(message)
+        
         let member = message.mentions.users.first() || message.author
         //avatar
         let avatar = member.displayAvatarURL({dynamic : true})
         const avt = new Discord.MessageEmbed()
-        .setTitle(`Ảnh đại diện của **${member.username}**`)
-        .setImage(`${avatar}?size=1024`)
-        .setColor("RANDOM")
-        .setURL(`${avatar}?size=1024`)
+            .setTitle(`Ảnh đại diện của **${member.username}**`)
+            .setImage(`${avatar}?size=1024`)
+            .setColor("RANDOM")
+            .setURL(`${avatar}?size=1024`)
         
         //banner
         async function getUserBannerUrl(userId, { dynamicFormat = true, defaultFormat = "webp", size = 512 } = {}) {
@@ -58,8 +56,7 @@ module.exports = {
         }
         const bnn = await getUserBannerUrl(member.id, { size: 1024 })
         if (!bnn) {
-            message.channel.send(`**${member.username}** không có Ảnh Biểu ngữ :(`)
-            message.channel.send({embeds : [avt]})
+            message.reply({content: `**${member.username}** không có Ảnh Biểu ngữ :(`, embed: avt})
         }
         else {
             const br = new Discord.MessageEmbed()
@@ -67,7 +64,7 @@ module.exports = {
                 .setImage(bnn)
                 .setColor("RANDOM")
                 .setURL(bnn)
-        message.channel.send({embeds : [br, avt]})
+        message.reply({embeds : [br, avt]})
         }
     }
 }

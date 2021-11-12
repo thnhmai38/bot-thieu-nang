@@ -13,9 +13,7 @@ module.exports = {
     description: "bot info",
 
     async run(client, message, args) {
-    const menu = require('../modules/menu.js')
-        const cmdlog = new menu.cmdlog()
-        cmdlog.log(message)
+    
 
     fs.readdir(dir, (err, files) => {
         var cmdcount = files.length;
@@ -95,7 +93,7 @@ module.exports = {
       )
       .setTimestamp()
 
-    message.channel.send({embeds : [embed]})
+    message.reply({embeds : [embed]})
     })
   }
 }

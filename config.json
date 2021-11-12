@@ -10,6 +10,7 @@
         "pause" : "⏸️",
         "filter" : "✨",
         "volume" : "🔊",
-        "shuffle" : "🔀"
+        "shuffle" : "🔀",
+        "single" : "🔂"
     }
 }

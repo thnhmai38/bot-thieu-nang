@@ -5,9 +5,7 @@ module.exports = {
     desciption: "say command",
 
     async run (client, message, args) {
-    const menu = require('../modules/menu.js')
-        const cmdlog = new menu.cmdlog()
-        cmdlog.log(message)
+    
 // />say vl Text
 if (args[0] == 0) {
     if (!args[1]) {message.channel.send("Gửi cái gì cơ?")} else {
@@ -29,12 +27,14 @@ if (args[0] == 0) {
         const channelId = args[2]
         const msgr = args.slice(3).join(" ");
         const userId = message.author.id
-        const guild2 = await client.guilds.fetch(guild)
-        const guild2Member = await guild2.members.fetch(userId)
-        if (guild2Member.permissions.has("MANAGE_MESSAGES")) {
-            client.channels.cache.get(channelId).send(msgr);
-            message.channel.send("**DONE!**")
-        } else message.channel.send('BẠN KHÔNG ĐỦ THẨM QUYỀN ĐỂ THỰC HIỆN LỆNH NÀY');
+        try {
+            const guild2 = await client.guilds.fetch(guild)
+            const guild2Member = await guild2.members.fetch(userId)
+            if (guild2Member.permissions.has("MANAGE_MESSAGES")) {
+                client.channels.cache.get(channelId).send(msgr);
+                message.reply("**DONE!**")
+            } else message.channel.send('BẠN KHÔNG ĐỦ THẨM QUYỀN ĐỂ THỰC HIỆN LỆNH NÀY');
+        } catch {message.channel.send("Bạn hoặc Bot không ở máy chủ đó hoặc Bot không thể truy cập kênh đó hoặc Bot không gửi được tin nhắn ở đó.")}
     }
 } else message.channel.send("Nhập sai giá trị cấu hình")
 } 

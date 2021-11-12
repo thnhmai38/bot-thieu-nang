@@ -6,8 +6,6 @@ module.exports = {
     desciption: "chơi connect 4",
 
     async run(client, message, args) {
-        const cmdlog = new menu.cmdlog()
-        cmdlog.log(message)
         const ConnectFour = new menu.ConnectFour()
         ConnectFour.startGame(message)
     }

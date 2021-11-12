@@ -11,22 +11,25 @@ module.exports = {
     name: "advice",
     description: "Gives you a advice",
     async run (client, message, args){
-        const menu = require('../modules/menu.js')
-        const cmdlog = new menu.cmdlog()
-        cmdlog.log(message)
+        
         if (isNaturalNumber(Number(args[0])) && Number(args[0])!==0) {
             fetch(`https://api.adviceslip.com/advice/${args[0]}`)
                 .then(response => response.text())
                 .then((response) => {
-                    const string = response + `}`;
+                    const string = response
                     const mat = JSON.parse(string);
-                    const data = new Discord.MessageEmbed()
-                        .setDescription(`**${mat.slip.advice}**`)
-                        .setFooter(`Lời khuyên mã ${mat.slip.id}`)
-                        .setColor("RANDOM")
-                    message.channel.send({embeds : [data]})
+
+                    try {
+                        const data = new Discord.MessageEmbed()
+                            .setDescription(`**${mat.slip.advice}**`)
+                            .setFooter(`Lời khuyên mã ${mat.slip.id}`)
+                            .setColor("RANDOM")
+                        message.reply({embeds : [data]})
+                    } catch {
+                        message.reply(`Không có lời khuyên mã **${args[0]}**`)
+                    }
                 })
-                .catch(err => message.channel.send(`Đã xảy ra lỗi : ${err}`))
+                .catch(err => message.reply(`Đã xảy ra lỗi : ${err}`))
         }
         else {
             const main = await fetch("https://api.adviceslip.com/advice");
@@ -36,7 +39,7 @@ module.exports = {
                 .setDescription(`**${mat.slip.advice}**`)
                 .setFooter(`Lời khuyên mã ${mat.slip.id}`)
                 .setColor("RANDOM")
-            message.channel.send({embeds : [data]})
+            message.reply({embeds : [data]})
         }
     }
 }

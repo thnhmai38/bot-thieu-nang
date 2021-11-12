@@ -8,9 +8,7 @@ module.exports = {
     desciption: "đoán logo",
 
     async run(client, message, args) {
-        const menu = require('../modules/menu.js')
-        const cmdlog = new menu.cmdlog()
-        cmdlog.log(message)
+        
 
         const dagpiToken = process.env.DAGPITOKEN;
         const token = dagpiToken;
@@ -20,7 +18,7 @@ module.exports = {
         const lostFooter = "BẠN ĐÃ THUA!";
         const questionColor = "BLUE";
         const stopCommand = "stop"
-        const questionFooter = `ĐÂY LÀ CÔNG TI HAY TỔ CHỨC NÀO? Nhập ${stopCommand} để dừng chơi`;
+        const questionFooter = `ĐÂY LÀ LOGO CỦA CÁI GÌ? Nhập ${stopCommand} để dừng chơi`;
 
         
         fetch(`https://api.dagpi.xyz/data/logo`, {
@@ -33,34 +31,37 @@ module.exports = {
 
                 const que = new Discord.MessageEmbed()
                     .setTitle(`Đoán Logo!`)
-                    .addField(`Mô tả:`, `${data.clue}`, true)
-                    .addField(`Gợi ý:`, `${data.hint}`)
+                    .addField(`Mô tả: `, `${data.clue ? data.clue : "Không có"}`, true)
+                    .addField(`Gợi ý: `, `${data.hint}`)
                     .setColor(questionColor || "RANDOM")
                     .setImage(data.question)
-                    .setFooter(questionFooter || "Made by GizmoLab")
+                    .setFooter(questionFooter)
+                    .setTimestamp()
 
 
                 const right = new Discord.MessageEmbed()
                     .setTitle(`Bạn đã đoán đúng!`)
-                    .setAuthor(message.author.tag)
-                    .setURL(data.wiki_url)
+                    .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic : true}))
                     .setColor(winColor || "RANDOM")
-                    .setDescription(`Nó là ${data.brand}`)
+                    .setDescription(`Đây là Logo của **${data.brand}**`)
                     .setImage(data.answer)
-                    .setFooter(winFooter || "Made by GizmoLab")
+                    .setFooter(winFooter)
+                    .setTimestamp()
+                    .addField(`Mô tả: `, `${data.clue ? data.clue : "Không có"}`, true)
 
 
                 const wrong = new Discord.MessageEmbed()
                     .setTitle(`Bạn đã thua!`)
                     .setColor(lostColor || "RANDOM")
-                    .setAuthor(message.author.tag)
-                    .setURL(data.wiki_url)
-                    .setDescription(`Nó là ${data.brand}`)
+                    .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic : true}))
+                    .setDescription(`Đây là Logo của **${data.brand}**`)
                     .setImage(data.answer)
-                    .setFooter(lostFooter || "Made by GizmoLab")
+                    .setFooter(lostFooter)
+                    .setTimestamp()
+                    .addField(`Mô tả: `, `${data.clue ? data.clue : "Không có"}`, true)
 
 
-                message.channel.send({embeds : [que]})
+                message.reply({embeds : [que]})
                 const gameFilter = m => m.author.id
                 const gameCollector = message.channel.createMessageCollector(gameFilter);
 
@@ -68,13 +69,13 @@ module.exports = {
                     if (msg.author.bot) return
                     const selection = msg.content.toLowerCase();
                     if (selection === data.brand.toLowerCase()) {
-                        message.reply({embeds : [right]})
+                        msg.reply({embeds : [right]})
                         gameCollector.stop()
                     } else if (selection === stopCommand) {
-                        message.channel.send({embeds : [wrong]})
+                        msg.reply({embeds : [wrong]})
                         gameCollector.stop();
                     } else if (selection !== data.brand) {
-                        message.channel.send(`Sai! - Nhập ${stopCommand} để bỏ cuộc`)
+                        msg.reply(`**Sai!** - Nhập \`${stopCommand}\` để bỏ cuộc`)
                     }
                 })
             })

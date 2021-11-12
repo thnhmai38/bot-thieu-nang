@@ -5,11 +5,9 @@ module.exports = {
     name: "meme",
     description: "Gives you a meme",
     async run (client, message, args){
-        const menu = require('../modules/menu.js')
-        const cmdlog = new menu.cmdlog()
-        cmdlog.log(message)
+        
 
-        const subReddits = ["dankmeme", "meme", "memes"]
+        const subReddits = ["dankmeme", "meme", "memes","dankmemes"]
         const random = subReddits[Math.floor(Math.random() * subReddits.length)]
 
         const img = await randomPuppy(random);
@@ -21,6 +19,6 @@ module.exports = {
         .setFooter(`Từ r/${random}`)
         .setURL(`https://reddit.com/r/${random}`)
 
-        message.channel.send({embeds : [embed]});
+        message.reply({embeds : [embed]});
     }
 }

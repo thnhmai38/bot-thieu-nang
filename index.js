@@ -11,9 +11,11 @@ const package = require('./package.json')
 const DisTube = require("distube")
 const { SoundCloudPlugin } = require("@distube/soundcloud");
 const { SpotifyPlugin } = require('@distube/spotify');
+client.slash = new Discord.Collection()
+const { Routes } = require("discord-api-types/v9")
+const { REST } = require("@discordjs/rest")
 
-try {
-    console.log(colors.yellow('Running Bot...'));
+    console.log(colors.bold(colors.cyan('Preparing and Running...')));
 
     const jsonString = fs.readFileSync("./config.json");
     const config = JSON.parse(jsonString);
@@ -23,24 +25,68 @@ try {
     client.emotes = config.emoji;
 
     const commandFiles = readdirSync(join(__dirname, "commands")).filter(file => file.endsWith(".js"));
-
+    
+    const cmdcount = fs.readdirSync('./commands').length;
+    const slscount = fs.readdirSync('./slash').length;
+    
+    console.log(colors.bold(colors.yellow(`Starting load Commands...`)))
+    var loaded = true; var count = 0;
     for (const file of commandFiles) {
         const command = require(join(__dirname, "commands", `${file}`));
-        client.commands.set(command.name, command);
+        try {
+            client.commands.set(command.name, command) 
+            count++;
+            let text = colors.yellow(`[Command] `) + colors.green(`[${count}/${cmdcount}] Loaded ${file}`);
+            console.log(text);
+        } catch {
+            let text = colors.yellow(`[Command] `) + colors.red(`[${count}/${cmdcount}] Unloaded ${file}`);
+            loaded = false;
+            console.log(text);
+        }
     }
+    loaded ? console.log(colors.bold(colors.green(`Loaded all Commands!`))) : console.log(colors.bold(colors.red(`Load all Commands Falled!`)))
+    
+    const rest = new REST({ version: "9" }).setToken(process.env.token);
+    count = 0;
+    console.log(colors.bold(colors.yellow(`Starting load Slash Commands...`)))
+    const slashFiles = readdirSync(join(__dirname, "slash")).filter(file => file.endsWith(".js"));
+    const arrayOfSlashCommands = [];
+    for (const file of slashFiles) {
+        const command = require(join(__dirname, "slash", `${file}`));
+        try {
+            client.slash.set(command.name, command)
+            arrayOfSlashCommands.push(command);
+            count++
+            let text = colors.yellow(`[Slash] `) + colors.green(`[${count}/${slscount}] Loaded ${file}`);
+            console.log(text);
+        } catch {
+            let text = colors.yellow(`[Slash] `) + colors.red(`[${count}/${slscount}] Unloaded ${file}`);
+            loaded = false;
+            console.log(text);
+        }
+    }
+    (async () => {
+        try {
+            await rest.put(
+                Routes.applicationCommands(process.env.clientID),
+                    { body: arrayOfSlashCommands }
+                )
+            console.log(colors.bold(colors.green(`Loaded all Slash Commands!`)))
+        } catch (error) {
+            console.error(colors.red(error))
+            console.log(colors.bold(colors.red(`Load all Slash Commands Falled!`)))
+        }
+    })();
 
     client.on ("error", console.error);
-        client.on('ready', () => {    
-            const dir = './commands';
-        
-            fs.readdir(dir, (err, files) => {
-                let cmdcount = files.length;
-                let i = 0;
-            setInterval(() => {
-                let activities = [`v${package.version}`,`/>help`,`/>invite`,`/>changelog`,`/>support`,`${client.guilds.cache.size} máy chủ`,`${client.channels.cache.size} kênh`,`${cmdcount} lệnh`]
-                client.user.setActivity(`${activities[i ++ % activities.length]}`, {
-                    type: "STREAMING",
-                    url: "https://www.twitch.tv/thanhgaming5550",
+
+    client.on('ready', () => {
+        let i = 0;
+        setInterval(() => {
+            let activities = [`v${package.version}`,`/>help`,`/>invite`,`/>changelog`,`/>support`,`${client.guilds.cache.size} máy chủ`,`${client.channels.cache.size} kênh`,`${cmdcount} lệnh chữ`, `${slscount} lệnh gạch chéo`]
+            client.user.setActivity(`${activities[i ++ % activities.length]}`, {
+                type: "STREAMING",
+                url: "https://www.twitch.tv/thanhgaming5550",
             })
         }, 30000)
             //client.user.setActivity({
@@ -48,11 +94,10 @@ try {
             //    type: "STREAMING",
             //    url: "https://www.twitch.tv/thanhgaming5550"
             //})
-        console.log(colors.green(`Logged in as ${client.user.tag}!`));
+        console.log(colors.bold(colors.green(`Logged in as ${client.user.tag}!`)));
         console.log(colors.green(`Online`));
-        console.log(`Bot hiện đang ở ${client.guilds.cache.size} máy chủ, theo dõi ${client.channels.cache.size} kênh và phục vụ ${cmdcount} lệnh cho ${client.users.cache.size} người dùng`);
-        console.log('==========================================================');
-        });
+        console.log(`Bot hiện đang ở ${client.guilds.cache.size} máy chủ, theo dõi ${client.channels.cache.size} kênh và phục vụ ${cmdcount} lệnh chữ và ${slscount} lệnh gạch chéo cho ${client.users.cache.size} người dùng`);
+        console.log('=========================================================================================================');
     });
 
     client.distube = new DisTube.default(client, {
@@ -145,7 +190,7 @@ try {
             queue.textChannel.send(`${client.emotes.queue} | Đã xóa danh sách chờ`)
         })
 
-    client.on("messageCreate", async message => {
+    client.on("messageCreate", async (message) => {
         if(message.author.bot) return;
         if(message.channel.type === 'dm') return;
         if(message.content.startsWith(prefix)) {
@@ -156,23 +201,51 @@ try {
 
             try {
                 client.commands.get(command).run(client, message, args);
-                
+                console.log(colors.yellow(`[Command] `) + `${message.author.tag} ${message.author} : ${message}`)
             } catch (error){ 
                 console.error(error);
             }
         }
     });
 
+    client.on("interactionCreate", async (interaction) => {
+        if (interaction.isCommand() || interaction.isContextMenu()) {
+            if (!interaction.guild) return;
+            const command = client.slash.get(interaction.commandName);
+            try {
+                 //{ name: 'id', type: 'INTEGER', value: 69 }
+                const option = [];
+                const output = [];
+                for (let opt of interaction.options.data) {
+                    option.push(opt);
+                    if (opt.type !== "SUB_COMMAND") {
+                       output.push(opt.name + ":\"" + opt.value + "\"")
+                    } else {
+                        let string = `${opt.name} `
+                        for (let dem = 0; dem < opt.options.length; dem++) {
+                            string = string + opt.options[dem].name + `:"` + opt.options[dem].value + `" `
+                        }
+                        output.push(string)
+                    }
+                }
+                interaction.member = interaction.guild.members.cache.get(interaction.user.id);
+                command.run(client, interaction, option);
+                console.log(colors.yellow(`[Slash]   `) + `${interaction.user.tag} ${interaction.user} : /${interaction.commandName} ${output.join(" ")}`)
+            } catch (error) {
+                console.error(colors.red(error))
+                await interaction.reply({ content: "Đã xảy ra lỗi! Vui lòng thử lại.", ephemeral: true })
+            }
+        }
+    })
+
     process.on('uncaughtException', function (err) {
-        console.log(colors.red('ĐÃ PHÁT HIỆN LỖI : ', err));
+        console.log(colors.red(err));
     });
+
+    console.log(colors.bold(colors.cyan('Logging in...')));
 
     client.login(process.env.TOKEN).then((token) => {
         client.user.setPresence({
         status: 'online',
         });
     });
-} catch (err) {
-    console.log(err);
-    return;
-}

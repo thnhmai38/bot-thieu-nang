@@ -10,9 +10,7 @@ module.exports = {
     desciption: "đoán số",
 
     async run (client, message, args) {
-    const menu = require('../modules/menu.js')
-        const cmdlog = new menu.cmdlog()
-        cmdlog.log(message)
+    
     if (!args[0]) {var result = randomXToY(0, 10) 
         var min = 0
         var max = 10
@@ -28,7 +26,7 @@ module.exports = {
 
         const filter = m => m.author.id == message.author.id
     
-        message.channel.send(`**Mình có một số nguyên trong khoảng từ ${min} đến ${max} trong đầu. BẠN ĐOÁN NÓ ĐI! Mình cho bạn 4 cơ hội!**`).then(async msg => {
+        message.reply(`**Mình có một số nguyên trong khoảng từ ${min} đến ${max} trong đầu. BẠN ĐOÁN NÓ ĐI! Mình cho bạn 4 cơ hội!**`).then(async msg => {
     
             message.channel.awaitMessages({filter, max: 1, time: 60000})
                 .then(collected => {

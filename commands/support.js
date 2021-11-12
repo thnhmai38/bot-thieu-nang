@@ -5,9 +5,7 @@ module.exports = {
     desciption: "support discord server",
 
     async run (client, message, args) {
-        const menu = require('../modules/menu.js')
-        const cmdlog = new menu.cmdlog()
-        cmdlog.log(message)
+        
         const help = new Discord.MessageEmbed()
             .setTitle(`**-> NHẤN VÀO ĐỂ THAM GIA MÁY CHỦ HỖ TRỢ <-**`)
             .setDescription(`Hỗ trợ sử dụng Bot Thieu Nang`)
@@ -15,6 +13,6 @@ module.exports = {
             .setURL(`https://discord.gg/yUfA2km5Uj`)
             .setTimestamp()
             .setColor("RANDOM")
-        message.channel.send({embeds : [help]});
+        message.reply({embeds : [help]});
     }
 }

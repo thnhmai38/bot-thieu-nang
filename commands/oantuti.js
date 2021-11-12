@@ -41,11 +41,9 @@ module.exports = {
     description: "keo bua bao",
 
     async run(client, message, args) {
-        const menu = require('../modules/menu.js')
-        const cmdlog = new menu.cmdlog()
-        cmdlog.log(message)
         
-        if (message.mentions.users.size < 2) return message.channel.send(`Thật buồn khi ta không được chơi với ai...`)
+        
+        if (message.mentions.users.size < 2) return message.reply(`Thật buồn khi ta không được chơi với ai...`)
         //Cấu hình
         let readylist = []
         let ready = []
@@ -172,7 +170,7 @@ module.exports = {
 
         
         //Phần ready và đợi
-        message.channel.send({embeds : [list], components : [readybutton]}).then((msg)=> {
+        message.reply({embeds : [list], components : [readybutton]}).then((msg)=> {
             const filter = (interaction) => {
                 for (let k = 0; k < player.length; k++) {
                     if (interaction.user.id == player[k].id) return true;

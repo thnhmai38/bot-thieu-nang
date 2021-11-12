@@ -8,9 +8,7 @@ module.exports = {
     desciption: "đoán cờ",
 
     async run(client, message, args) {
-        const menu = require('../modules/menu.js')
-        const cmdlog = new menu.cmdlog()
-        cmdlog.log(message)
+        
 
         const dagpiToken = process.env.DAGPITOKEN;
         const token = dagpiToken;
@@ -32,31 +30,36 @@ module.exports = {
 
                 const que = new Discord.MessageEmbed()
                     .setTitle(`ĐOÁN CỜ!`)
-                    .addField(`Thủ đô:`, `${data.Data.capital}`)
+                    .addField(`Thủ đô: `, `${data.Data.capital}`)
                     .setColor(questionColor || "RANDOM")
                     .setImage(data.flag)
-                    .setFooter(questionFooter || "Made by GizmoLab")
+                    .setFooter(questionFooter)
+                    .setTimestamp()
 
 
                 const right = new Discord.MessageEmbed()
                     .setTitle(`Bạn đã đoán đúng!`)
-                    .setAuthor(message.author.tag)
+                    .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic : true}))
                     .setColor(winColor || "RANDOM")
-                    .setDescription(`Đây là nước ${data.Data.name.common}`)
+                    .setDescription(`Đây là nước **${data.Data.name.common}**`)
                     .setImage(data.flag)
-                    .setFooter(winFooter || "Made by GizmoLab")
+                    .setFooter(winFooter)
+                    .setTimestamp()
+                    .addField(`Thủ đô: `, `${data.Data.capital}`)
 
 
                 const wrong = new Discord.MessageEmbed()
                     .setTitle(`Bạn đã thua!`)
                     .setColor(lostColor || "RANDOM")
-                    .setAuthor(message.author.tag)
-                    .setDescription(`Đây là nước ${data.Data.name.common}`)
+                    .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic : true}))
+                    .setDescription(`Đây là nước **${data.Data.name.common}**`)
                     .setImage(data.flag)
-                    .setFooter(lostFooter || "Made by GizmoLab")
+                    .setFooter(lostFooter)
+                    .setTimestamp()
+                    .addField(`Thủ đô: `, `${data.Data.capital}`)
 
 
-                message.channel.send({embeds : [que]})
+                message.reply({embeds : [que]})
                 const gameFilter = m => m.author.id
                 const gameCollector = message.channel.createMessageCollector(gameFilter);
 
@@ -64,16 +67,15 @@ module.exports = {
                     if (msg.author.bot) return
                     const selection = msg.content;
                     if (selection === data.Data.name.common.toLowerCase()) {
-                        message.reply({embeds : [right]})
+                         msg.reply({embeds : [right]})
                         gameCollector.stop()
                     } else if (selection === stopCommand) {
-                        message.channel.send({embeds : [wrong]})
+                         msg.reply({embeds : [wrong]})
                         gameCollector.stop();
                     } else if (selection !== data.Data.name.common) {
-                        message.channel.send(`Sai! - Nhập ${stopCommand} để bỏ cuộc`)
+                        msg.reply(`**Sai!** - Nhập \`${stopCommand}\` để bỏ cuộc`)
                     }
                 })
-
             })
     }
 }
