@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const { DiscordTogether } = require('discord-together');
 
 module.exports = {
-    name: "youtube",
+    name: "puttparty",
     description: "start watching Youtube",
 
     async run (client, message, args){
