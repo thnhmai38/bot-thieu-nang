@@ -55,6 +55,10 @@ module.exports = {
                     name: "Checkers",
                     value: "checkers"
                 },
+                {
+                    name: "Puttparty",
+                    value: "puttparty"
+                },
             ]
         }
     ],
