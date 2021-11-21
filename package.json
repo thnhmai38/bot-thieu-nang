@@ -1,6 +1,6 @@
 {
   "name": "bot-thieu-nang",
-  "version": "2.9.1",
+  "version": "2.9.0",
   "description": "Bot thieu nang Discord",
   "main": "index.js",
   "scripts": {
