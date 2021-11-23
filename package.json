@@ -75,8 +75,6 @@
     "util": "^0.12.4",
     "weather-js": "^2.0.0",
     "winston": "^3.3.3",
-    "youtube-dl-exec": "^2.0.0",
-    "ytdl-core": "^4.9.1",
     "ytsr": "^3.5.3"
   },
   "engines": {
