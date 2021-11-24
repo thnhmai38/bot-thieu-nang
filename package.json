@@ -1,6 +1,6 @@
 {
   "name": "bot-thieu-nang",
-  "version": "2.9.0",
+  "version": "2.10.0",
   "description": "Bot thieu nang Discord",
   "main": "index.js",
   "scripts": {
@@ -39,7 +39,6 @@
     "dj-games": "^3.0.1",
     "djs-games": "^2.1.10",
     "dotenv": "^10.0.0",
-    "erela.js": "^2.3.3",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "ffmpeg-static": "^4.4.0",
@@ -69,7 +68,6 @@
     "reconlx": "^2.5.1",
     "semver-regex": "^4.0.2",
     "simply-djs": "^2.2.0",
-    "socket.io": "^4.4.0",
     "tar": "^6.1.11",
     "tz": "^0.1.1",
     "util": "^0.12.4",
@@ -78,6 +76,6 @@
     "ytsr": "^3.5.3"
   },
   "engines": {
-    "node": "16.10.0"
+    "node": ">=16.10.0"
   }
 }

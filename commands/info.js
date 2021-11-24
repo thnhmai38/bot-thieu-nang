@@ -62,7 +62,7 @@ module.exports = {
         },
         {
             name: 'Người tạo ra',
-            value: "<@384282911479693313>",
+            value: "thanhgaming5550",//"<@384282911479693313>",
             inline: true  
         },
         {

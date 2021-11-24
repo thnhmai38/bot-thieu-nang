@@ -101,7 +101,7 @@ const { REST } = require("@discordjs/rest")
     });
 
     client.distube = new DisTube.default(client, {
-        searchSongs: 0,
+        searchSongs: 5,
         searchCooldown: 30,
         leaveOnEmpty: true,
         emptyCooldown: 60,
@@ -132,9 +132,11 @@ const { REST } = require("@discordjs/rest")
                 .addField('Thời lượng', `${song.formattedDuration}`, true)
                 .addField('Lượt xem', `${song.views}`,true)
                 .addField('Lượt Thích', `${song.likes}`,true)
-                .addField('Lượt không thích', `${song.dislikes}`, true)
+                .addField('Lượt không thích', `${song.dislikes === 0 ? "Không có hoặc không rõ" : song.dislikes}`, true)
+                .addField('Lượt chia sẻ', `${song.reposts === 0 ? "Không có hoặc không rõ" : song.reposts}`, true)
+                .addField('Người tải lên', `[${song.uploader.name}](${song.uploader.url})`, true)
                 .setTimestamp()
-                .setFooter(`Yêu cầu bởi : ${song.user.tag}`,`https://i.imgur.com/hfTBpOg.gif`);
+                .setFooter(`Yêu cầu bởi: ${song.user.tag}`,`https://i.imgur.com/hfTBpOg.gif`);
             queue.textChannel.send({embeds : [exampleEmbed]});
         })
         .on("playSong", (queue, song) => {
@@ -147,9 +149,11 @@ const { REST } = require("@discordjs/rest")
                 .addField('Thời lượng', `${song.formattedDuration}`, true)
                 .addField('Lượt xem', `${song.views}`, true)
                 .addField('Lượt Thích', `${song.likes}`, true)
-                .addField('Lượt không thích', `${song.dislikes}`, true)
+                .addField('Lượt không thích', `${song.dislikes === 0 ? "Không có hoặc không rõ" : song.dislikes}`, true)
+                .addField('Lượt chia sẻ', `${song.reposts === 0 ? "Không có hoặc không rõ" : song.reposts}`, true)
+                .addField('Người tải lên', `[${song.uploader.name}](${song.uploader.url})`, true)
                 .setTimestamp()
-                .setFooter(`${status(queue)} | Yêu cầu bởi : ${song.user.tag}`, `https://i.imgur.com/hfTBpOg.gif`);
+                .setFooter(`${status(queue)} | Yêu cầu bởi: ${song.user.tag}`, `https://i.imgur.com/hfTBpOg.gif`);
             queue.textChannel.send({
                 embeds: [exampleEmbed]
             });
@@ -168,27 +172,35 @@ const { REST } = require("@discordjs/rest")
                 .setThumbnail(`${playlist.thumbnail}`)
                 .setDescription(`**Gồm các bài:** \n ${song} \n\n *Tổng thời lượng : ${playlist.formattedDuration}*`)
                 .setTimestamp()
-                .setFooter(`Yêu cầu bởi : ${playlist.user.tag}`, `https://i.imgur.com/hfTBpOg.gif`);
+                .setFooter(`Yêu cầu bởi: ${playlist.user.tag}`, `https://i.imgur.com/hfTBpOg.gif`);
             queue.textChannel.send({embeds : [exampleEmbed]});
         })
-        /*/
-        .on("searchResult", (message, results) => {
-            let i = 0
-            message.channel.send(`**Nhập STT bài hát bạn muốn phát: **\n${results.map(song => `**${++i}**. ${song.name} - \`${song.formattedDuration}\``).join("\n")}\n*Tự động hủy sau 30s*`)
+        
+        .on("searchResult", (message, results, query) => {
+            let i = 0;
+            const exampleEmbed = new Discord.MessageEmbed()
+                .setColor(`GREEN`)
+                .setTimestamp()
+                .setAuthor(`${client.emotes.search} | Kết quả tìm kiếm cho "${query}"`)
+                .setTitle(`Gửi số thứ tự bài bạn muốn phát tương ứng`)
+                .setThumbnail(`${results[1].thumbnail}`)
+                .setDescription(`\n${results.map(song => `**${++i}**. [${song.name}](${song.url}) - \`${song.isLive ? "LIVE" : song.formattedDuration}\``).join("\n")}\n`)
+                .setFooter(`Yêu cầu bởi: ${message.author.tag} | Tự động hủy sau 30s`, `https://i.imgur.com/hfTBpOg.gif`)
+            message.channel.send({embeds : [exampleEmbed]});
         })
-        .on("searchCancel", message => message.channel.send(`${client.emotes.error} | Hủy tìm kiếm`))
+        .on("searchCancel", message => message.channel.send(`${client.emotes.error} | Hủy phát nhạc do người dùng chưa chọn bài`))
         .on('searchInvalidAnswer', message => message.channel.send(`${client.emotes.error} | Tìm kiếm không hợp lệ`))
         .on('searchNoResult', message => message.channel.send(`${client.emotes.error} | Không có kết quả tìm kiếm`))
-        /*/
+        .on("searchDone", () => {})
+
         .on('finish', queue => {
             queue.textChannel.send(`${client.emotes.success} | Đã phát xong`)
         })
         .on('finishSong', queue => queue.textChannel.send(`${client.emotes.success} | Đã phát xong bài`))
         .on('disconnect', queue => queue.textChannel.send(`${client.emotes.success} | Đã thoát kênh`))
         .on('empty', queue => queue.textChannel.send(`${client.emotes.queue} | Danh sách chờ đã Trống. Tự động thoát sau 60s`))
-        .on('deleteQueue', queue => {
-            queue.textChannel.send(`${client.emotes.queue} | Đã xóa danh sách chờ`)
-        })
+        .on('deleteQueue', queue => queue.textChannel.send(`${client.emotes.queue} | Đã xóa danh sách chờ`))
+        .on("noRelated", queue => queue.textChannel.send(`${client.emotes.error} | Không tìm thấy bài liên quan`));
 
     client.on("messageCreate", async (message) => {
         if(message.author.bot) return;
