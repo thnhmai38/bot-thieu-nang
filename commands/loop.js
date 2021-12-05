@@ -43,9 +43,12 @@ module.exports = {
             case "all":
                 mode = 2
                 break
+            case "on":
+                mode = 2
+                break
         }
         mode = queue.setRepeatMode(mode)
-        mode = mode ? mode === 2 ? "Lặp toàn bộ" : "Lặp một bài" : "Tắt"
-        message.reply(`${mode == 1 ? client.emotes.single : client.emotes.repeat} | Chỉnh chế độ lặp thành **${mode}**`)
+        mode = mode ? mode === 2 ? "Lặp toàn bộ" : "Lặp đơn bài" : "Tắt"
+        message.reply(`${mode == "Lặp đơn bài" ? client.emotes.single : client.emotes.repeat} | Chỉnh chế độ lặp thành **${mode}**`)
     }
 }

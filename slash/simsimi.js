@@ -1,7 +1,6 @@
 const fetch = require('node-fetch')
 const Discord = require('discord.js')
 const { MessageActionRow, MessageButton, Client, CommandInteraction } = require("discord.js");
-const { underline } = require('chalk');
 
 module.exports = {
     name: "simsimi",

@@ -63,7 +63,7 @@ module.exports = {
         }
         if (mode == 4) return interaction.reply(`${client.emotes.repeat} | Lặp: ${queue.repeatMode ? queue.repeatMode === 2 ? "Tất cả" : "Bài này" : "Tắt"}`)
         mode = queue.setRepeatMode(mode)
-        mode = mode ? mode === 2 ? "Lặp toàn bộ" : "Lặp một bài" : "Tắt"
-        interaction.reply(`${mode == 1 ? client.emotes.single : client.emotes.repeat} | Chỉnh chế độ lặp thành **${mode}**`)
+        mode = mode ? mode === 2 ? "Lặp toàn bộ" : "Lặp đơn bài" : "Tắt"
+        interaction.reply(`${mode == "Lặp đơn bài" ? client.emotes.single : client.emotes.repeat} | Chỉnh chế độ lặp thành **${mode}**`)
     }
 }

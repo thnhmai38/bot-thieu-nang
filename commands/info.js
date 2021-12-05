@@ -80,16 +80,6 @@ module.exports = {
             value: `${(Math.round(os.uptime() / 3600 * 1000)/1000).toString()}h`,
             inline: true  
         },
-        {
-            name: 'Phiên bản Node.js',
-            value: process.version.toString(),
-            inline: true  
-        },
-        {
-          name: 'Phiên bản Discord.js',
-          value: package.dependencies['discord.js'],
-          inline: true  
-      },
       )
       .setTimestamp()
 
