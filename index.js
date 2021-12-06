@@ -186,14 +186,14 @@ const { REST } = require("@discordjs/rest")
                 .setTimestamp()
                 .setAuthor(`${client.emotes.search} | Kết quả tìm kiếm cho "${query}"`)
                 .setTitle(`Gửi số thứ tự bài bạn muốn phát tương ứng`)
-                .setThumbnail(`${results[1].thumbnail}`)
-                .setDescription(`\n${results.map(song => `**${++i}**. [${song.name}](${song.url}) - \`${song.isLive ? "LIVE" : song.formattedDuration}\``).join("\n")}\n`)
-                .setFooter(`Yêu cầu bởi: ${message.author.tag} | Tự động hủy sau 30s`)
-            message.channel.send({embeds : [exampleEmbed]});
+                .setThumbnail(`${results[0].thumbnail}`)
+                .setDescription(`\n${results.map(song => `**${++i}**. [${song.name}](${song.url}) - \`${song.isLive ? "LIVE" : song.formattedDuration}\``).join("\n")}\n\n*Yêu cầu bởi: ${message.author}*`)
+                .setFooter(`Tự động hủy sau 30s`, "https://www.iconpacks.net/icons/2/free-youtube-logo-icon-2431-thumb.png")
+            message.reply({embeds : [exampleEmbed]});
         })
-        .on("searchCancel", message => message.channel.send(`${client.emotes.error} | Hủy phát nhạc do người dùng chưa chọn bài`))
-        .on('searchInvalidAnswer', message => message.channel.send(`${client.emotes.error} | Tìm kiếm không hợp lệ`))
-        .on('searchNoResult', message => message.channel.send(`${client.emotes.error} | Không có kết quả tìm kiếm`))
+        .on("searchCancel", message => message.reply(`${client.emotes.error} | Hủy phát nhạc do người dùng chưa chọn bài`))
+        .on('searchInvalidAnswer', message => message.reply(`${client.emotes.error} | Tìm kiếm không hợp lệ`))
+        .on('searchNoResult', message => message.reply(`${client.emotes.error} | Không có kết quả tìm kiếm`))
         .on("searchDone", () => {})
 
         .on('finish', queue => {

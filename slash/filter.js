@@ -99,15 +99,15 @@ module.exports = {
         const queue = client.distube.getQueue(interaction)
         if (!queue) return interaction.reply({content: `${client.emotes.error} | Chả có gì đang phát cả!`, ephemeral: true});
         
-        if (option[0].value == "none") return interaction.reply(`${client.emotes.filter} Filter : **${queue.filters.length === 0 ? "Tắt" : queue.filters}**`)
+        if (option[0].value == "none") return interaction.reply(`${client.emotes.filter} Filter : **${queue.filters.length === 0 ? "`Tắt`" : "`" + queue.filters.join(", ") + "`"}**`)
         else if (option[0].value.toLowerCase() === "off" && queue.filters?.length) {
             queue.setFilter(false)
-            interaction.reply(`${client.emotes.filter} | **Tắt toàn bộ Filter** \n*Vui lòng đợi một lát để áp dụng thay đổi*`)
+            interaction.reply(`${client.emotes.filter} | **\`Tắt toàn bộ Filter\`** \n*Vui lòng đợi một lát để áp dụng thay đổi*`)
         }
         else {
             const filter = queue.setFilter(option[0].value)
             let status;
-            if (filter.includes(option[0].value)) {status = "Bật"} else {status = "Tắt"} 
+            if (filter.includes(option[0].value)) {status = "`Bật`"} else {status = "`Tắt`"} 
             interaction.reply(`${client.emotes.filter} | **${option[0].value}: ${status}** \n*Vui lòng đợi một lát để áp dụng thay đổi*`);
         }
     }
