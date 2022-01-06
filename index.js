@@ -138,7 +138,7 @@ const { REST } = require("@discordjs/rest")
                 .addField('Filter', `\`${queue.filters.length === 0 ? "Tắt" : queue.filters.join(", ")}\``, true)
                 .setTimestamp()
             queue.textChannel.send({embeds : [exampleEmbed]});
-        }) //hello
+        })
         .on("playSong", (queue, song) => {
             const exampleEmbed = new Discord.MessageEmbed()
                 .setColor('BLUE')
