@@ -100,7 +100,7 @@ const { REST } = require("@discordjs/rest")
         console.log('=========================================================================================================');
     });
 
-    client.distube = new DisTube.default(client, {
+    client.distube = new DisTube(client, {
         searchSongs: 5,
         searchCooldown: 30,
         leaveOnEmpty: true,
