@@ -27,10 +27,10 @@ module.exports = {
 
     const embed = new MessageEmbed()
       .setColor("RANDOM")
-      .setAuthor(
-        `Thông tin về ${client.user.username}`,
-        client.user.displayAvatarURL()
-      )
+      .setAuthor({
+        name: `Thông tin về ${client.user.username}`,
+        iconURL: client.user.displayAvatarURL()
+      })
       .addFields(
         {
           name: 'Tên đầy đủ',

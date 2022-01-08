@@ -28,9 +28,9 @@ module.exports = {
                     .setTitle(`Đào mìn 9x9, số lượng mìn 10`)
                     .setDescription(data)
                     .setTimestamp()
-                    .setFooter(`Tạo bởi ${message.author.tag}`, message.author.displayAvatarURL({
+                    .setFooter({text: `Tạo bởi ${message.author.tag}`, iconURL: message.author.displayAvatarURL({
                         dynamic: true
-                    }));
+                    })});
                 msg.edit({
                     embeds: [embed],
                     content: "*Đã tạo xong*"

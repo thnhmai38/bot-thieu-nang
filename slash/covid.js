@@ -43,7 +43,7 @@ module.exports = {
                         .addField('Số ca nhiễm : ', confirmed)
                         .addField('Số ca chết : ', deaths)
                         .addField('Số ca chữa khỏi : ', recovered)
-                        .setFooter(`Cập nhật lần cuối lúc ${lastUpdate}`)
+                        .setFooter({text: `Cập nhật lần cuối lúc ${lastUpdate}`})
 
                     interaction.reply({embeds : [embed]})
                 })
@@ -63,7 +63,7 @@ module.exports = {
                         .addField('Số ca chết : ', deaths)
                         .addField('Số ca chữa khỏi : ', recovered)
                         .setImage(`https://covid19.mathdro.id/api/countries/${countries}/og`)
-                        .setFooter(`Cập nhật lần cuối lúc ${lastUpdate}`)
+                        .setFooter({text: `Cập nhật lần cuối lúc ${lastUpdate}`})
                     
                     interaction.reply({embeds : [embed]})
             }).catch(e => {
