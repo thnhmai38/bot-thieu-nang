@@ -41,7 +41,7 @@ module.exports = {
                         .setTitle(`Thông tin COVID-19 ở trên thế giới`)
                         .setImage(`https://covid19.mathdro.id/api/og`)
                         .addField('Số ca nhiễm : ', confirmed)
-                        .addField('Số ca chết : ', deaths)
+                        .addField('Số ca chết : ', deaths==0?`API chưa cung cấp`:deaths)
                         .addField('Số ca chữa khỏi : ', recovered)
                         .setFooter({text: `Cập nhật lần cuối lúc ${lastUpdate}`})
 
@@ -60,7 +60,7 @@ module.exports = {
                         .setColor('#0099ff')
                         .setTitle(`Thông tin COVID-19 ở **${countries}**`)
                         .addField('Số ca nhiễm : ', confirmed)
-                        .addField('Số ca chết : ', deaths)
+                        .addField('Số ca chết : ', deaths==0?`API cung cấp không rõ`:deaths)
                         .addField('Số ca chữa khỏi : ', recovered)
                         .setImage(`https://covid19.mathdro.id/api/countries/${countries}/og`)
                         .setFooter({text: `Cập nhật lần cuối lúc ${lastUpdate}`})
