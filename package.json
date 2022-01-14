@@ -73,7 +73,8 @@
     "util": "^0.12.4",
     "weather-js": "^2.0.0",
     "winston": "^3.4.0",
-    "ytsr": "^3.6.0"
+    "ytsr": "^3.6.0",
+    "follow-redirects": ">=1.14.7"
   },
   "engines": {
     "node": ">=16.10.0"
