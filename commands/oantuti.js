@@ -82,8 +82,8 @@ module.exports = {
             .setTitle("Đang chờ người chơi sẵn sàng...")
             .setDescription(`Danh sách người chơi:
             ${ready.join("\n")}`)
-            .setAuthor({name: 'Oản tù tì Phiên bản Mở rộng'})
-            .setFooter({text: `${demsansang(readylist)}/${readylist.length} sẵn sàng`})
+            .setAuthor('Oản tù tì Phiên bản Mở rộng')
+            .setFooter(`${demsansang(readylist)}/${readylist.length} sẵn sàng`)
             .setThumbnail(`https://photo-cms-viettimes.zadn.vn/w666/Uploaded/2021/firns/2019_03_11/7ea25208ab4942171b58.jpg`)
             .setColor("BLUE")
             .setTimestamp()
@@ -191,8 +191,8 @@ module.exports = {
                         .setTitle("Đang chờ người chơi sẵn sàng...")
                         .setDescription(`Danh sách người chơi:
                         ${ready.join("\n")}`)
-                        .setAuthor({name: 'Oản tù tì Phiên bản Mở rộng'})
-                        .setFooter({text: `${demsansang(readylist)}/${readylist.length} sẵn sàng`})
+                        .setAuthor('Oản tù tì Phiên bản Mở rộng')
+                        .setFooter(`${demsansang(readylist)}/${readylist.length} sẵn sàng`)
                         .setThumbnail(`https://photo-cms-viettimes.zadn.vn/w666/Uploaded/2021/firns/2019_03_11/7ea25208ab4942171b58.jpg`)
                         .setColor("BLUE")
                         .setTimestamp()
@@ -209,8 +209,8 @@ module.exports = {
                         .setTitle("Đang chờ người chơi sẵn sàng...")
                         .setDescription(`Danh sách người chơi:
                         ${ready.join("\n")}`)
-                        .setAuthor({name: 'Oản tù tì Phiên bản Mở rộng'})
-                        .setFooter({text: `${demsansang(readylist)}/${readylist.length} sẵn sàng`})
+                        .setAuthor('Oản tù tì Phiên bản Mở rộng')
+                        .setFooter(`${demsansang(readylist)}/${readylist.length} sẵn sàng`)
                         .setThumbnail(`https://photo-cms-viettimes.zadn.vn/w666/Uploaded/2021/firns/2019_03_11/7ea25208ab4942171b58.jpg`)
                         .setColor("BLUE")
                         .setTimestamp()
@@ -220,7 +220,7 @@ module.exports = {
                 if (demsansang(readylist) == readylist.length && kt==false) {
                     if (ingame == false) {
                         var list = new Discord.MessageEmbed()
-                        .setAuthor({name: "Oản tù tì phiên bản Mở rộng"})
+                        .setAuthor("Oản tù tì phiên bản Mở rộng")
                         .setTitle(`Trò chơi sẽ bắt đầu sau 15s`)
                         .setDescription(`**Luật chơi:**
                         Thắng sẽ được 2 điểm
@@ -234,7 +234,7 @@ module.exports = {
                         setTimeout(function(){
                             if (kt == true) return;
                             var start = new Discord.MessageEmbed()
-                                .setAuthor({name: "Oản tù tì phiên bản Mở rộng"})
+                                .setAuthor("Oản tù tì phiên bản Mở rộng")
                                 .setTitle(`Oản tù tì, ra cái gì, ra cái...`)
                                 .setDescription(`**Luật chơi:**
                             Thắng sẽ được 2 điểm
@@ -260,13 +260,13 @@ module.exports = {
                             save[findk] = lcid;
                         } // Chống chọn 2 lần
                         var start = new Discord.MessageEmbed()
-                            .setAuthor({name: "Oản tù tì phiên bản Mở rộng"})
+                            .setAuthor("Oản tù tì phiên bản Mở rộng")
                             .setTitle(`Oản tù tì, ra cái gì, ra cái...`)
                             .setDescription(`Danh sách người chơi đã chọn:
                             ${savetext.join("\n")}`)
                             .setThumbnail(`https://photo-cms-viettimes.zadn.vn/w666/Uploaded/2021/firns/2019_03_11/7ea25208ab4942171b58.jpg`)
                             .setColor("YELLOW")
-                            .setFooter({text: `${demsansang(savelist)}/${savelist.length} đã chọn`})
+                            .setFooter(`${demsansang(savelist)}/${savelist.length} đã chọn`)
                             .setTimestamp()
                         if (kt == true) return;
                         msg.edit({embeds : [start]})
@@ -305,7 +305,7 @@ module.exports = {
                             }
 
                             var end = new Discord.MessageEmbed()
-                                .setAuthor({name: "Oản tù tì phiên bản Mở rộng"})
+                                .setAuthor("Oản tù tì phiên bản Mở rộng")
                                 .setTitle(`Trò chơi kết thúc!`)
                                 .setDescription(`Danh sách điểm:
                                 ${scoretext.join("\n")}`)

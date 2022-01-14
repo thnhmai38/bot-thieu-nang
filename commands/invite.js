@@ -20,7 +20,7 @@ module.exports = {
         Server Support: *Dùng lệnh \`/>support\`* `)
         .setURL(`https://discord.com/oauth2/authorize?client_id=848103224854315018&permissions=4294967287&scope=applications.commands%20bot`)
         .setTimestamp()
-	    .setFooter({text: 'Một sản phẩm đầu tay của thanhgaming5550'});
+	    .setFooter('Một sản phẩm đầu tay của thanhgaming5550');
         message.reply({embeds : [embed]});
    }
 }

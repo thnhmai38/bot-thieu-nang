@@ -21,7 +21,7 @@ module.exports = {
             .setColor("RANDOM")
             .setImage(img)
             .setTitle(`Meme`)
-            .setFooter({text: `Từ r/${random}`})
+            .setFooter(`Từ r/${random}`)
             .setURL(`https://reddit.com/r/${random}`)
 
         interaction.reply({embeds : [embed]});

@@ -43,7 +43,7 @@ class ConnectFour {
         const initial = new discord.MessageEmbed()
         .setTitle(`🔴 Lượt của ${msg.author.username}`)
         .setDescription(initialState)
-        .setFooter({text: `${gameData[0].playerColor}${challenger.username} vs ${gameData[1].playerColor}${oppenent.username}`})
+        .setFooter(`${gameData[0].playerColor}${challenger.username} vs ${gameData[1].playerColor}${oppenent.username}`)
         .setTimestamp()
         msg.reply({embeds : [initial]}).then(gameMessage => {
 
@@ -185,7 +185,7 @@ class ConnectFour {
                         const TieEmbed = new discord.MessageEmbed()
                         .setTitle(`HÒA!`)
                         .setDescription(renderBoard(board))
-                        .setFooter({text: `${gameData[0].playerColor}${challenger.username} vs ${gameData[1].playerColor}${oppenent.username}`})
+                        .setFooter(`${gameData[0].playerColor}${challenger.username} vs ${gameData[1].playerColor}${oppenent.username}`)
                         .addField('Lí do:', `Hòa theo luật`, true)
                         .setTimestamp()
                         gameCollector.stop("Hòa")
@@ -202,7 +202,7 @@ class ConnectFour {
                             const WinEmbed = new discord.MessageEmbed()
                             .setTitle(`${gameData[player].playerColor} ${gameData[player].member.username} dành chiến thắng!`)
                             .setDescription(renderBoard(board))
-                            .setFooter({text: `${gameData[0].playerColor}${challenger.username} vs ${gameData[1].playerColor}${oppenent.username}`})
+                            .setFooter(`${gameData[0].playerColor}${challenger.username} vs ${gameData[1].playerColor}${oppenent.username}`)
                             .addField('Lí do:', `${gameData[player].member.username} thắng theo luật`, true)
                             .setTimestamp()
                             ended=true;
@@ -223,7 +223,7 @@ class ConnectFour {
                             const WinEmbed = new discord.MessageEmbed()
                             .setTitle(`${gameData[kt].playerColor} ${winner} dành chiến thắng!`)
                             .setDescription(renderBoard(board))
-                            .setFooter({text: `${gameData[0].playerColor}${challenger.username} vs ${gameData[1].playerColor}${oppenent.username}`})
+                            .setFooter(`${gameData[0].playerColor}${challenger.username} vs ${gameData[1].playerColor}${oppenent.username}`)
                             .addField('Lí do:', `${winner} thắng do đối phương bỏ cuộc`, true)
                             .setTimestamp()
                             ended=true;
@@ -236,7 +236,7 @@ class ConnectFour {
                     const newEmbed = new discord.MessageEmbed()
                     .setTitle(`${gameData[player].playerColor} Lượt của ${gameData[player].member.username}`)
                     .setDescription(renderBoard(board))
-                    .setFooter({text: `${gameData[0].playerColor}${challenger.username} vs ${gameData[1].playerColor}${oppenent.username}`})
+                    .setFooter(`${gameData[0].playerColor}${challenger.username} vs ${gameData[1].playerColor}${oppenent.username}`)
                     .setTimestamp()
                     gameMessage.edit({embeds: [newEmbed]});
                 } else {
@@ -251,7 +251,7 @@ class ConnectFour {
                         const WinEmbed = new discord.MessageEmbed()
                         .setTitle(`${gameData[kt].playerColor} ${winner} dành chiến thắng!`)
                         .setDescription(renderBoard(board))
-                        .setFooter({text: `${gameData[0].playerColor}${challenger.username} vs ${gameData[1].playerColor}${oppenent.username}`})
+                        .setFooter(`${gameData[0].playerColor}${challenger.username} vs ${gameData[1].playerColor}${oppenent.username}`)
                         .addField('Lí do:', `${winner} thắng do đối phương bỏ cuộc`, true)
                         .setTimestamp()
                         ended=true;

@@ -44,7 +44,7 @@ module.exports = {
             .setDescription(`${arr}`)
             .setTitle(query)
             .setThumbnail(`https://img.youtube.com/vi/${youtube_parser(video.url)}/default.jpg`)
-            .setFooter({text: `Tìm kiếm trên Youtube bởi ${message.author.tag}`, iconURL: "https://www.iconpacks.net/icons/2/free-youtube-logo-icon-2431-thumb.png"})
+            .setFooter(`Tìm kiếm trên Youtube bởi ${message.author.tag}`, "https://www.iconpacks.net/icons/2/free-youtube-logo-icon-2431-thumb.png")
             .setTimestamp();
 
         message.reply({embeds : [embed]});

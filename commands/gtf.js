@@ -33,17 +33,17 @@ module.exports = {
                     .addField(`Thủ đô: `, `${data.Data.capital}`)
                     .setColor(questionColor || "RANDOM")
                     .setImage(data.flag)
-                    .setFooter({text: questionFooter})
+                    .setFooter(questionFooter)
                     .setTimestamp()
 
 
                 const right = new Discord.MessageEmbed()
                     .setTitle(`Bạn đã đoán đúng!`)
-                    .setAuthor({name: message.author.tag, iconURL: message.author.displayAvatarURL({dynamic : true})})
+                    .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic : true}))
                     .setColor(winColor || "RANDOM")
                     .setDescription(`Đây là nước **${data.Data.name.common}**`)
                     .setImage(data.flag)
-                    .setFooter({text: winFooter})
+                    .setFooter(winFooter)
                     .setTimestamp()
                     .addField(`Thủ đô: `, `${data.Data.capital}`)
 
@@ -51,10 +51,10 @@ module.exports = {
                 const wrong = new Discord.MessageEmbed()
                     .setTitle(`Bạn đã thua!`)
                     .setColor(lostColor || "RANDOM")
-                    .setAuthor({name: message.author.tag, iconURL: message.author.displayAvatarURL({dynamic : true})})
+                    .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic : true}))
                     .setDescription(`Đây là nước **${data.Data.name.common}**`)
                     .setImage(data.flag)
-                    .setFooter({text: lostFooter})
+                    .setFooter(lostFooter)
                     .setTimestamp()
                     .addField(`Thủ đô: `, `${data.Data.capital}`)
 

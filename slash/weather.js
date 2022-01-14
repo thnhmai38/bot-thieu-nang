@@ -33,7 +33,7 @@ module.exports = {
 
         const weatherinfo = new Discord.MessageEmbed()
             .setDescription(`**${current.skytext}**`)
-            .setAuthor({name : `DỰ BÁO THỜI TIẾT Ở ${current.observationpoint}`})
+            .setAuthor(`DỰ BÁO THỜI TIẾT Ở ${current.observationpoint}`)
             .setThumbnail(current.imageUrl)
             .setColor(0x111111)
             .addField('Múi giờ', `UTC${location.timezone}`, true)

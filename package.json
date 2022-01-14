@@ -1,6 +1,10 @@
 {
   "name": "bot-thieu-nang",
+<<<<<<< HEAD
   "version": "2.11.4",
+=======
+  "version": "2.11.2",
+>>>>>>> parent of d389c34 (2.11.3)
   "description": "Bot thieu nang Discord",
   "main": "index.js",
   "scripts": {
