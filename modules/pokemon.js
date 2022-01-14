@@ -26,7 +26,7 @@ class Pokemon {
     .addField(`Thể loại:`,`${data.Data.Type}`, true)
     .addField(`Năng lực:`, `${data.Data.abilities}`)
     .setImage(data.question)
-    .setFooter(`Nhập stop để dừng chơi`)
+    .setFooter({text: `Nhập stop để dừng chơi`})
     .setColor("RANDOM")
     .setTimestamp()
 

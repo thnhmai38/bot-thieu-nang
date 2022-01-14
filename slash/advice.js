@@ -41,7 +41,7 @@ module.exports = {
                     try {
                         const data = new Discord.MessageEmbed()
                             .setDescription(`**${mat.slip.advice}**`)
-                            .setFooter(`Lời khuyên mã ${mat.slip.id}`)
+                            .setFooter({text: `Lời khuyên mã ${mat.slip.id}`})
                             .setColor("RANDOM")
                         interaction.reply({embeds : [data], ephemeral: false})
                     } catch {
@@ -56,7 +56,7 @@ module.exports = {
 
             const data = new Discord.MessageEmbed()
                 .setDescription(`**${mat.slip.advice}**`)
-                .setFooter(`Lời khuyên mã ${mat.slip.id}`)
+                .setFooter({text: `Lời khuyên mã ${mat.slip.id}`})
                 .setColor("RANDOM")
                 interaction.reply({embeds : [data], ephemeral: false})
         }

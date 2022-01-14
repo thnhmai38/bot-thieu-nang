@@ -50,9 +50,12 @@ module.exports = {
                 .setTitle(`Đào mìn 9x9, số lượng mìn 10`)
                 .setDescription(data)
                 .setTimestamp()
-                .setFooter(`Tạo bởi ${interaction.user.tag}`, interaction.user.displayAvatarURL({
-                    dynamic: true
-                }));
+                .setFooter({
+                    text: `Tạo bởi ${interaction.user.tag}`,
+                    iconURL: interaction.user.displayAvatarURL({
+                        dynamic: true
+                    })
+                });
             interaction.editReply({
                 embeds: [embed],
                 content: "*Đã tạo xong*"

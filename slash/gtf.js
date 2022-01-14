@@ -38,27 +38,27 @@ module.exports = {
                     .addField(`Thủ đô: `, `${data.Data.capital}`)
                     .setColor(questionColor || "RANDOM")
                     .setImage(data.flag)
-                    .setFooter(questionFooter)
+                    .setFooter({text: questionFooter})
                     .setTimestamp()
 
 
                 const right = new Discord.MessageEmbed()
                     .setTitle(`Bạn đã đoán đúng!`)
-                    .setAuthor(interaction.user.tag, interaction.user.displayAvatarURL({dynamic : true}))
+                    .setAuthor({name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL({dynamic : true})})
                     .setColor(winColor || "RANDOM")
                     .setDescription(`Đây là nước **${data.Data.name.common}**`)
                     .setImage(data.flag)
-                    .setFooter(winFooter)
+                    .setFooter({text: winFooter})
                     .setTimestamp()
 
 
                 const wrong = new Discord.MessageEmbed()
                     .setTitle(`Bạn đã thua!`)
                     .setColor(lostColor || "RANDOM")
-                    .setAuthor(interaction.user.tag, interaction.user.displayAvatarURL({dynamic : true}))
+                    .setAuthor({name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL({dynamic : true})})
                     .setDescription(`Đây là nước **${data.Data.name.common}**`)
                     .setImage(data.flag)
-                    .setFooter(lostFooter)
+                    .setFooter({text: lostFooter})
                     .setTimestamp()
 
 
