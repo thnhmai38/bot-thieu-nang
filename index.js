@@ -14,7 +14,7 @@ const { SpotifyPlugin } = require('@distube/spotify');
 client.slash = new Discord.Collection()
 const { Routes } = require("discord-api-types/v9")
 const { REST } = require("@discordjs/rest")
-const { YtDlpPlugin } = require("@distube/yt-dlp");
+const { YtDlpPlugin } = require("modules\yt-dlp-1.0.2\src\index.ts"); //Anti-Block on Railways
 
     console.log(colors.bold(colors.cyan('Preparing and Running...')));
 

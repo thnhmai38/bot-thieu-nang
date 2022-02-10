@@ -22,7 +22,6 @@
     "@discordjs/voice": "^0.7.5",
     "@distube/soundcloud": "^1.1.0",
     "@distube/spotify": "^1.2.1",
-    "@distube/yt-dlp": "^1.0.2",
     "anime-images-api": "^2.0.0",
     "ansi-regex": "^6.0.1",
     "axios": "^0.25.0",

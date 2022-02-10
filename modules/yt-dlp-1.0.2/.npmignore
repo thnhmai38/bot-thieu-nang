@@ -1,0 +1,7 @@
+.*
+index.ts
+tsconfig.json
+*.dev.js
+src
+tsconfig.eslint.json
+bin
