@@ -14,6 +14,7 @@ const { SpotifyPlugin } = require('@distube/spotify');
 client.slash = new Discord.Collection()
 const { Routes } = require("discord-api-types/v9")
 const { REST } = require("@discordjs/rest")
+const { YtDlpPlugin } = require("@distube/yt-dlp");
 
     console.log(colors.bold(colors.cyan('Preparing and Running...')));
 
@@ -85,9 +86,14 @@ const { REST } = require("@discordjs/rest")
         setInterval(() => {
             let activities = [`v${package.version}`,`/>help`,`/>invite`,`/>changelog`,`/>support`,`${client.guilds.cache.size} máy chủ`,`${client.channels.cache.size} kênh`,`${cmdcount} lệnh chữ`, `${slscount} lệnh gạch chéo`, `${client.users.cache.size} người dùng`]
             client.user.setActivity(`${activities[i ++ % activities.length]}`, {
+                type: "PLAYING",
+            })
+            /*
+            client.user.setActivity(`${activities[i ++ % activities.length]}`, {
                 type: "STREAMING",
                 url: "https://www.twitch.tv/thanhgaming5550",
             })
+            */
         }, 30000)
             //client.user.setActivity({
             //    name: "/>help ; />invite",
@@ -108,7 +114,9 @@ const { REST } = require("@discordjs/rest")
         leaveOnFinish: true,
         leaveOnStop: true,
         savePreviousSongs: true,
-        plugins: [new SoundCloudPlugin(), new SpotifyPlugin()],
+        youtubeDL: false,
+        nsfw: true,
+        plugins: [new SoundCloudPlugin(), new YtDlpPlugin(), new SpotifyPlugin()],
     })
     client.distube
         .on("error", (channel, error) => {
@@ -116,7 +124,7 @@ const { REST } = require("@discordjs/rest")
             const exampleEmbed = new Discord.MessageEmbed()
                 .setColor('RED')
                 .setAuthor({name: `${client.emotes.error} | Đã xảy ra lỗi`})
-                .setDescription(`**${error}**\n\n \`Vui lòng thử lại sau!\``)
+                .setDescription(`\n\`${error}\`\n\n \*Vui lòng thử lại sau!\*`)
                 .setTimestamp()
             channel.send({embeds : [exampleEmbed]});
         })
@@ -204,7 +212,6 @@ const { REST } = require("@discordjs/rest")
         .on('empty', queue => queue.textChannel.send(`${client.emotes.queue} | Danh sách chờ đã Trống. Tự động thoát kênh sau 60s trống người`))
         .on('deleteQueue', queue => queue.textChannel.send(`${client.emotes.queue} | Đã xóa danh sách chờ`))
         .on("noRelated", queue => queue.textChannel.send(`${client.emotes.error} | Không tìm thấy bài liên quan`));
-
     client.on("messageCreate", async (message) => {
         if(message.author.bot) return;
         if(message.channel.type === 'dm') return;

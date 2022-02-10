@@ -27,7 +27,7 @@ module.exports = {
         if (interaction.member.voice.channel.type == "GUILD_STAGE_VOICE" && interaction.member.voice.suppress == true) return interaction.reply({content: `${client.emotes.error} | Bạn đang ở trong kênh Sân khấu. Để dùng lệnh này trong kênh sân khấu, bạn phải **ở trên Sân khấu** (trở thành Người nói) trước`, ephemeral: true})
 
         try {
-            client.distube.playVoiceChannel(interaction.member.voice.channel, option[0].value, {
+            client.distube.play(interaction.member.voice.channel, option[0].value, {
                 textChannel: interaction.channel,
                 member: interaction.member
             })
