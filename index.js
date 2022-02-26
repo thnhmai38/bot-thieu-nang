@@ -101,12 +101,12 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
             //    url: "https://www.twitch.tv/thanhgaming5550"
             //})
         
-            client.guilds.cache.forEach(async guild => {
-                if (guild.memberCount<=5) {
+            /*client.guilds.cache.forEach(async guild => {
+                if (guild.members.cache.filter(member => !member.user.bot).size <= 5) {
                     console.log(`${guild.name} (${guild.id}) có ${guild.memberCount} người, bot tự rời`);
                     //await guild.leave()
                 }
-            })
+            })*/
         
         console.log(colors.bold(colors.green(`Logged in as ${client.user.tag}!`)));
         console.log(colors.green(`Online`));
