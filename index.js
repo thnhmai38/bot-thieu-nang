@@ -122,7 +122,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
         leaveOnFinish: true,
         leaveOnStop: true,
         savePreviousSongs: true,
-        youtubeDL: false,
+        youtubeDL: true,
         nsfw: true,
         plugins: [new SoundCloudPlugin(), new YtDlpPlugin(), new SpotifyPlugin()],
     })
