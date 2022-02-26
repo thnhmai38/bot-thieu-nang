@@ -102,7 +102,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
             //})
         
             client.guilds.cache.forEach(async guild => {
-                if (guild.members.cache.filter(member => !member.user.bot).size <= 5) {
+                if (guild.memberCount<=5) {
                     console.log(`${guild.name} (${guild.id}) có ${guild.memberCount} người, bot tự rời`);
                     //await guild.leave()
                 }
