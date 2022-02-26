@@ -68,7 +68,7 @@
     "random-words": "^1.1.2",
     "reconlx": "^2.5.2",
     "semver-regex": "^4.0.2",
-    "simply-djs": "^2.5.2",
+    "simply-djs": "^2.0.97",
     "tar": "^6.1.11",
     "tz": "^0.1.1",
     "util": "^0.12.4",
