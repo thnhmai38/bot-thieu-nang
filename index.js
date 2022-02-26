@@ -116,7 +116,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
         savePreviousSongs: true,
         youtubeDL: false,
         nsfw: true,
-        plugins: [new SoundCloudPlugin(), new YtDlpPlugin(), new SpotifyPlugin()],
+        plugins: [new SoundCloudPlugin(), new YtDlpPlugin()],
     })
     client.distube
         .on("error", (channel, error) => {
