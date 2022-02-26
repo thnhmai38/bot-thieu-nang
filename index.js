@@ -100,14 +100,14 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
             //    type: "STREAMING",
             //    url: "https://www.twitch.tv/thanhgaming5550"
             //})
-        setInterval(() => {
+        
             client.guilds.cache.forEach(async guild => {
                 if (guild.members.cache.filter(member => !member.user.bot).size <= 5) {
                     console.log(`${guild.name} (${guild.id}) có ${guild.memberCount} người, bot tự rời`);
                     //await guild.leave()
                 }
             })
-        }, 600000000)
+        
         console.log(colors.bold(colors.green(`Logged in as ${client.user.tag}!`)));
         console.log(colors.green(`Online`));
         console.log(`Bot hiện đang ở ${client.guilds.cache.size} máy chủ, theo dõi ${client.channels.cache.size} kênh và phục vụ ${cmdcount} lệnh chữ và ${slscount} lệnh gạch chéo cho ${client.users.cache.size} người dùng`);
