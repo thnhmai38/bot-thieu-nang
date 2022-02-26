@@ -14,6 +14,7 @@ const { SpotifyPlugin } = require('@distube/spotify');
 client.slash = new Discord.Collection()
 const { Routes } = require("discord-api-types/v9")
 const { REST } = require("@discordjs/rest")
+const { YtDlpPlugin } = require("@distube/yt-dlp");
 
     console.log(colors.bold(colors.cyan('Preparing and Running...')));
 
@@ -113,9 +114,9 @@ const { REST } = require("@discordjs/rest")
         leaveOnFinish: true,
         leaveOnStop: true,
         savePreviousSongs: true,
-        youtubeDL: true,
+        youtubeDL: false,
         nsfw: true,
-        plugins: [new SoundCloudPlugin(), new SpotifyPlugin()],
+        plugins: [new SoundCloudPlugin(), new YtDlpPlugin(), new SpotifyPlugin()],
     })
     client.distube
         .on("error", (channel, error) => {
