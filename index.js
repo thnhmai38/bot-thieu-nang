@@ -129,7 +129,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
         leaveOnFinish: true,
         leaveOnStop: true,
         savePreviousSongs: true,
-        youtubeDL: true,
+        youtubeDL: false,
         nsfw: true,
         plugins: [new SoundCloudPlugin(), new YtDlpPlugin(), new SpotifyPlugin()],
     })
@@ -160,6 +160,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
                 .addField('Tự động phát', `${queue.autoplay ? "Bật" : "Tắt"}`, true)
                 .addField('Filter', `\`${queue.filters.length === 0 ? "Tắt" : queue.filters.join(", ")}\``, true)
                 .setTimestamp()
+            console.log(colors.yellow(queue.id +` | Thêm bài "${song.name}"/${song.url}`));
             queue.textChannel.send({embeds : [exampleEmbed]});
         })
         .on("playSong", (queue, song) => {
@@ -179,6 +180,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
                 .addField('Tự động phát', `${queue.autoplay ? "Bật" : "Tắt"}`, true)
                 .addField('Filter', `\`${queue.filters.length === 0 ? "Tắt" : queue.filters.join(", ")}\``, true)
                 .setTimestamp()
+            console.log(colors.blue(queue.id +` | Phát bài "${song.name}"/${song.url} | Queue có ${(queue.song === undefined ? 0 : queue.song.length())+1} bài`));
             queue.textChannel.send({
                 embeds: [exampleEmbed]
             });
@@ -199,6 +201,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
                 .addField('Tổng thời lượng', `${playlist.formattedDuration}`, true)
                 .addField('Yêu cầu bởi', `${playlist.user}`, true)
                 .setTimestamp()
+            console.log(colors.yellow(queue.id +` | Thêm Playlist "${playlist.name}"/${playlist.url}`));
             queue.textChannel.send({embeds : [exampleEmbed]});
         })
         
@@ -222,10 +225,21 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
         .on('finish', queue => {
             queue.textChannel.send(`${client.emotes.success} | Đã phát xong`)
         })
-        .on('finishSong', queue => queue.textChannel.send(`${client.emotes.success} | Đã phát xong bài`))
-        .on('disconnect', queue => queue.textChannel.send(`${client.emotes.success} | Đã thoát kênh`))
-        .on('empty', queue => queue.textChannel.send(`${client.emotes.queue} | Danh sách chờ đã Trống. Tự động thoát kênh sau 60s trống người`))
-        .on('deleteQueue', queue => queue.textChannel.send(`${client.emotes.queue} | Đã xóa danh sách chờ`))
+        .on('finishSong', (queue, song) => {
+            queue.textChannel.send(`${client.emotes.success} | Đã phát xong bài`)
+            console.log(colors.blue(queue.id +` | Phát xong bài "${song.name}" | Còn ${(queue.song === undefined ? 1 : queue.song.length())-1} bài`));
+        })
+        .on('disconnect', queue => {
+            queue.textChannel.send(`${client.emotes.success} | Đã thoát kênh`)
+            console.log(colors.green(queue.id +` | Thoát kênh`));
+        })
+        .on('empty', (queue) => {
+            queue.textChannel.send(`${client.emotes.queue} | Danh sách chờ đã Trống. Tự động thoát kênh sau 60s trống người`)
+        })
+        .on('deleteQueue', queue => {
+            queue.textChannel.send(`${client.emotes.queue} | Đã xóa danh sách chờ`);
+            console.log(colors.green(`${queue.id} | Xóa danh sách chờ`));
+        })
         .on("noRelated", queue => queue.textChannel.send(`${client.emotes.error} | Không tìm thấy bài liên quan`));
     client.on("messageCreate", async (message) => {
         if(message.author.bot) return;
