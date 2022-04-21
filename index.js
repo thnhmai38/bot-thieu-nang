@@ -4,7 +4,7 @@ const fs = require('fs');
 module.exports = client;
 const { readdirSync } = require('fs');
 const { join } = require('path')
-require('log-timestamp');
+require('log-timestamp')(function() { return "[" + new Date().toLocaleString(`en-GB`,  { timeZone: 'Asia/Ho_Chi_Minh' }) + "] "});
 require("dotenv").config();
 const colors = require("colors");
 const package = require('./package.json')
