@@ -36,6 +36,6 @@ module.exports = {
             }
             //interaction.editReply({content: `**[SimSimi]** ` + response.success + `${response.noti !== "nope" ? `\n\`${response.noti}\`` : ``}`})
             //API Bảo trì
-            interaction.editReply({content: `**[SimSimi]** ` + JSON.parse(response.response)})
+            interaction.editReply({content: `**[SimSimi]** ` + response.response})
     }
 }
