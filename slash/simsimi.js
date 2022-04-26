@@ -25,10 +25,11 @@ module.exports = {
             // API bảo trì
             const url = `https://tuanxuong.com/api/simsimi/index.php?text=${encodeURIComponent(text)}`
             await interaction.reply({content: "*Đang đợi SimSimi trả lời...*"});
-            let response
+            let response, cmt;
             try {
-                response = await fetch(url).then(res => res)
-                response = JSON.parse(response).json();
+                response = await fetch(url).then(res => res.json())
+                cmt = JSON.stringify(response);
+                response = JSON.parse(cmt);
             }
             catch (e) {
                 return interaction.editReply({content: 'Đã có lỗi xảy ra, vui lòng thử lại.'})

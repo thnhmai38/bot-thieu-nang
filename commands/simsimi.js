@@ -10,10 +10,11 @@ module.exports = {
             const url = `https://tuanxuong.com/api/simsimi/index.php?text=${encodeURIComponent(text)}`;
             var msg;
             message.reply({content: "*Đang đợi SimSimi trả lời...*"}).then((m) => msg=m);
-            let response
+            let response, cmt;
             try{
-                response = await fetch(url).then(res => res);
-                response = JSON.parse(response).json();
+                response = await fetch(url).then(res => res.json())
+                cmt = JSON.stringify(response);
+                response = JSON.parse(cmt);
             }
             catch(e) {
                 return msg.edit('Đã có lỗi xảy ra, vui lòng thử lại.')
