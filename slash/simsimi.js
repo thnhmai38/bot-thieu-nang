@@ -21,15 +21,20 @@ module.exports = {
     */
      async run (client, interaction, option) {
             const text = option[0].value;
-            const url = `https://api.simsimi.net/v2/?text=${encodeURIComponent(text)}&lc=vn&cf=false`
+            // const url = `https://api.simsimi.net/v2/?text=${encodeURIComponent(text)}&lc=vn&cf=false`
+            // API bảo trì
+            const url = `https://tuanxuong.com/api/simsimi/index.php?text=${encodeURIComponent(text)}`
             await interaction.reply({content: "*Đang đợi SimSimi trả lời...*"});
             let response
             try {
-                response = await fetch(url).then(res => res.json())
+                response = await fetch(url).then(res => res)
+                response = JSON.parse(response).json();
             }
             catch (e) {
                 return interaction.editReply({content: 'Đã có lỗi xảy ra, vui lòng thử lại.'})
             }
-            interaction.editReply({content: `**[SimSimi]** ` + response.success + `${response.noti !== "nope" ? `\n\`${response.noti}\`` : ``}`})
+            //interaction.editReply({content: `**[SimSimi]** ` + response.success + `${response.noti !== "nope" ? `\n\`${response.noti}\`` : ``}`})
+            //API Bảo trì
+            interaction.editReply({content: `**[SimSimi]** ` + JSON.parse(response.response)})
     }
 }
