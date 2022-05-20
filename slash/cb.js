@@ -21,7 +21,7 @@ module.exports = {
     */
      async run (client, interaction, option) {
         let name = client.user.username;
-        let developer = 'thanhgaming5550#5550';
+        let developer = 'thanhgaming5550#5126';
         await interaction.reply({content: "*Đang chờ Bot trả lời...*"})
         fetch(`https://api.affiliateplus.xyz/api/chatbot?message=${option[0].value}&botname=${name}&ownername=${developer}&user=${interaction.user.id}`)
             .then(res => res.json())

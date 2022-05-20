@@ -7,7 +7,7 @@ module.exports = {
 
     async run(client, message, args) {
         let name = client.user.username
-        let developer = 'thanhgaming5550#5550'
+        let developer = 'thanhgaming5550#5126'
         var msg;
         message.reply({content: "*Đang chờ Bot trả lời...*"}).then((m) => {msg=m})
         fetch(`https://api.affiliateplus.xyz/api/chatbot?message=${args.join(' ')}&botname=${name}&ownername=${developer}&user=${message.author.id}`)
