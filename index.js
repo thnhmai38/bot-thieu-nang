@@ -139,7 +139,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
             const exampleEmbed = new Discord.MessageEmbed()
                 .setColor('RED')
                 .setAuthor({name: `${client.emotes.error} | Đã xảy ra lỗi`})
-                .setDescription(`\n\`${error}\`\n\n \*Vui lòng thử lại sau!\*`)
+                .setDescription(`\n${error}\n\`Hãy thử lại một lần nữa hoặc đợi một lúc rồi thử lại! Nếu vấn đề vẫn chưa được khắc phục, liên hệ với chủ Bot bằng */>support*\``)
                 .setTimestamp()
             channel.send({embeds : [exampleEmbed]});
         })
