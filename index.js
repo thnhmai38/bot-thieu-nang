@@ -86,7 +86,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
         setInterval(() => {
             let activities = [`v${package.version}`,`/>help`,`/>invite`,`/>changelog`,`/>support`,`${client.guilds.cache.size} máy chủ`,`${client.channels.cache.size} kênh`,`${cmdcount} lệnh chữ`, `${slscount} lệnh gạch chéo`, `${client.users.cache.size} người dùng`]
             client.user.setActivity(`${activities[i ++ % activities.length]}`, {
-                type: "PLAYING",
+                type: "LISTENING",
             })
             /*
             client.user.setActivity(`${activities[i ++ % activities.length]}`, {

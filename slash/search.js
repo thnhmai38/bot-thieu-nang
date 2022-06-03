@@ -25,7 +25,10 @@ module.exports = {
             .setColor('RANDOM')
             .setDescription(`🔍 Đang tìm kiếm trên YouTube...`)
             .setTitle(query)
-            .setFooter({name: `Tìm kiếm trên Youtube bởi ${interaction.user.tag}`, iconURL:"https://www.iconpacks.net/icons/2/free-youtube-logo-icon-2431-thumb.png"})
+            .setFooter({
+                text: `Tìm kiếm trên Youtube bởi ${interaction.user.tag}`,
+                iconURL: "https://www.iconpacks.net/icons/2/free-youtube-logo-icon-2431-thumb.png"
+            })
             .setTimestamp();
         interaction.reply({embeds : [start]});
         const res = await ytsr(query).catch(e => {
