@@ -9,31 +9,31 @@ function demsansang(readylist) {
     }    
     return dem;
 }
-function diem(vitri, vt2, array, hs) {
-    var dem = 0;
-    if (vitri !== -1 && vt2 !== -1) {
+function diem(vt1, vt2, luachon, hs) { //hs=7, Tính điểm cho vt1 
         //Hòa  
-        if (array[vitri] == array[vt2] && dem==0) return 1 
+        if (vt1 == vt2) {return 1}
         //Thắng
+        else if (vt2-vt1<=hs) {return 2} //Theo quy tắc
+        else return 0; //Bất quy tắc = Thua
+        /*
         else for (dem = 1; dem < hs+1; dem++) {
-            if (vitri+dem <= array.length) {
+            if (vt1+dem <= luachon.length) {
             //Theo Quy tắc
-                if (array[vitri+dem] == array[vt2]) return 2;
+                if (luachon[vt1+dem] == luachon[vt2]) return 2;
             } else {
             //Bất Quy Tắc
 
-            //Giảm liên tục (đến chết)
-            function giam(bien, array) {
+            //Giảm liên tục
+            function giam(bien, luachon) {
                 let dem = bien;
-                if (dem > array.length) {dem = dem - array.length}
-                if (dem > array.length) {dem = giam(dem, array)} else return dem;
+                if (dem > luachon.length) {dem = dem - luachon.length}
+                if (dem > luachon.length) {dem = giam(dem, luachon)} else return dem;
             }
 
-                if (array[giam(vitri+dem, array)] == array[vt2]) return 2;
+                if (luachon[giam(vt1+dem, luachon)] == luachon[vt2]) return 2;
             }
         }
-    } 
-    return 0; // Thua
+        */
 }
 
 module.exports = {
@@ -41,9 +41,7 @@ module.exports = {
     description: "keo bua bao",
 
     async run(client, message, args) {
-        
-        
-        if (message.mentions.users.size < 2) return message.reply(`Thật buồn khi ta không được chơi với ai...`)
+        if (message.mentions.users.size < 2) return message.reply(`Trò chơi yêu cầu tối thiểu 2 người tham gia chơi`)
         //Cấu hình
         let readylist = []
         let ready = []
@@ -52,10 +50,13 @@ module.exports = {
         var savetext = []
         var save = []
         var score = []
-        var kt = false
         var scoredata = []
         var scoretext = []
         var ingame = false;
+        var ready_time=60; //Thời gian chờ Ready (s)
+        var play_time=90; //Thời gian để người chơi chọn
+        var kt=false; //Điều kiện kết thúc trò chơi
+        var timeout_started=false; //Timeout Play đã bắt đầu chưa? (Config ở phần Timeout Play)
 
         let i = 0
         message.mentions.users.forEach(user => {
@@ -79,7 +80,7 @@ module.exports = {
 
         //chuẩn bị các biến
         var list = new Discord.MessageEmbed()
-            .setTitle("Đang chờ người chơi sẵn sàng...")
+            .setTitle(ready_time + "s để người chơi sẵn sàng...")
             .setDescription(`Danh sách người chơi:
             ${ready.join("\n")}`)
             .setAuthor({name: 'Oản tù tì Phiên bản Mở rộng'})
@@ -170,16 +171,33 @@ module.exports = {
 
         
         //Phần ready và đợi
-        message.reply({embeds : [list], components : [readybutton]}).then((msg)=> {
+            message.reply({embeds : [list], components : [readybutton]}).then((msg)=> {
             const filter = (interaction) => {
                 for (let k = 0; k < player.length; k++) {
                     if (interaction.user.id == player[k].id) return true;
                 }
             }
             const collector = msg.createMessageComponentCollector({componentType: 'BUTTON', filter})
+            setTimeout(function() {
+                if (demsansang(readylist) !== readylist.length) {
+                    var cancelbyready = new Discord.MessageEmbed()
+                        .setTitle(`Trò chơi bị hủy do có người chơi chưa sẵn sàng`)
+                        .setDescription(`Danh sách người chơi:
+                        ${ready.join("\n")}`)
+                        .setAuthor({name: 'Oản tù tì Phiên bản Mở rộng'})
+                        .setFooter({text: `${demsansang(readylist)}/${readylist.length} sẵn sàng`})
+                        .setThumbnail(`https://photo-cms-viettimes.zadn.vn/w666/Uploaded/2021/firns/2019_03_11/7ea25208ab4942171b58.jpg`)
+                        .setColor("RED")
+                        .setTimestamp()
+                    msg.edit({embeds : [cancelbyready], components : []})
+                    kt=true;
+                    return;
+                }
+            }, ready_time*1000);
             collector.on("collect", interaction => {
                 interaction.deferUpdate();
              //Ready
+                if (kt == true) return collector.stop();
                 if (interaction.customId === 'ready') {
                     var find;    
                     for (let k = 0; k < player.length; k++) {
@@ -188,7 +206,7 @@ module.exports = {
                     readylist[find] = true
                     ready[find] = `${player[find]} - ${readylist[find] ? "✅" : "❌"}`
                     var list = new Discord.MessageEmbed()
-                        .setTitle("Đang chờ người chơi sẵn sàng...")
+                        .setTitle(ready_time+"s để người chơi sẵn sàng...")
                         .setDescription(`Danh sách người chơi:
                         ${ready.join("\n")}`)
                         .setAuthor({name: 'Oản tù tì Phiên bản Mở rộng'})
@@ -198,6 +216,7 @@ module.exports = {
                         .setTimestamp()
                     msg.edit({embeds : [list]})
                 }
+                if (kt == true) return collector.stop();
                 if (interaction.customId === 'unready') {
                     var find;    
                     for (let k = 0; k < player.length; k++) {
@@ -206,7 +225,7 @@ module.exports = {
                     readylist[find] = false 
                     ready[find] = `${player[find]} - ${readylist[find] ? "✅" : "❌"}`
                     var list = new Discord.MessageEmbed()
-                        .setTitle("Đang chờ người chơi sẵn sàng...")
+                        .setTitle(ready_time + "s để người chơi sẵn sàng...")
                         .setDescription(`Danh sách người chơi:
                         ${ready.join("\n")}`)
                         .setAuthor({name: 'Oản tù tì Phiên bản Mở rộng'})
@@ -216,6 +235,7 @@ module.exports = {
                         .setTimestamp()
                     msg.edit({embeds : [list]})
                 }
+                if (kt == true) return collector.stop();
              //Wait 15s
                 if (demsansang(readylist) == readylist.length && kt==false) {
                     if (ingame == false) {
@@ -225,32 +245,57 @@ module.exports = {
                         .setDescription(`**Luật chơi:**
                         Thắng sẽ được 2 điểm
                         Hòa sẽ được 1 điểm
-                        Thua sẽ không được điểm`)
+                        Thua sẽ không được điểm
+                        
+                        ***Chú ý: Bạn không thể chọn 2 lần**`)
                         .setImage(`https://photo-cms-viettimes.zadn.vn/w666/Uploaded/2021/firns/2019_03_11/7ea25208ab4942171b58.jpg`)
                         .setColor("YELLOW")
                         .setTimestamp()
                         msg.edit({embeds : [list], components : []})
                     }
-                        setTimeout(function(){
-                            if (kt == true) return;
-                            var start = new Discord.MessageEmbed()
-                                .setAuthor({name: "Oản tù tì phiên bản Mở rộng"})
-                                .setTitle(`Oản tù tì, ra cái gì, ra cái...`)
-                                .setDescription(`**Luật chơi:**
-                            Thắng sẽ được 2 điểm
-                            Hòa sẽ được 1 điểm
-                            Thua sẽ không được điểm`)
-                                .setThumbnail(`https://photo-cms-viettimes.zadn.vn/w666/Uploaded/2021/firns/2019_03_11/7ea25208ab4942171b58.jpg`)
-                                .setColor("YELLOW")
-                                .setTimestamp()
-                            msg.edit({embeds : [start], components : [luachon1,luachon2,luachon3]})
+                        setTimeout(function() {
+                            if (kt == true) return collector.stop();
+                            if (timeout_started == false) {
+                                var start = new Discord.MessageEmbed()
+                                    .setAuthor({name: "Oản tù tì phiên bản Mở rộng"})
+                                    .setTitle(`Oản tù tì, ra cái gì, ra cái...`)
+                                    .setDescription(`**Luật chơi:**
+                                Thắng sẽ được 2 điểm
+                                Hòa sẽ được 1 điểm
+                                Thua sẽ không được điểm
+                                
+                                ***Chú ý: Bạn không thể chọn 2 lần**`)
+                                    .setThumbnail(`https://photo-cms-viettimes.zadn.vn/w666/Uploaded/2021/firns/2019_03_11/7ea25208ab4942171b58.jpg`)
+                                    .setColor("YELLOW")
+                                    .setTimestamp()
+                                    .setFooter({text: `Chưa có ai đã chọn | ${play_time}s để chọn`})
+                                msg.edit({embeds : [start], components : [luachon1,luachon2,luachon3]});
+                                timeout_started = true;
+                                setTimeout(function() { //Timeout Play
+                                    if (demsansang(savelist) !== savelist.length) {
+                                        var cancelbytimeout = new Discord.MessageEmbed()
+                                            .setTitle(`Trò chơi bị hủy do có người chơi chưa chọn`)
+                                            .setDescription(`Danh sách người chơi đã chọn: \n${savetext.join("\n")}`)
+                                            .setAuthor({name: 'Oản tù tì Phiên bản Mở rộng'})
+                                            .setFooter({text: `${demsansang(readylist)}/${readylist.length} sẵn sàng`})
+                                            .setThumbnail(`https://photo-cms-viettimes.zadn.vn/w666/Uploaded/2021/firns/2019_03_11/7ea25208ab4942171b58.jpg`)
+                                            .setColor("RED")
+                                            .setTimestamp()
+                                        msg.edit({embeds : [cancelbytimeout], components : []})
+                                        kt=true;
+                                        return;
+                                    }
+                                }, play_time*1000);
+                                return;
+                            }
                         },15000)
                     ingame = true;
                  //Phần chính
-
+                 if (kt == true) return collector.stop();
                     if (luachon.includes(interaction.customId) && kt==false) {
                         var lcid = luachon.indexOf(interaction.customId)
                         var findk;    
+                        if (kt == true) return collector.stop();
                         for (let k = 0; k < player.length; k++) {
                             if (interaction.user.id == player[k].id) {findk = k}
                         }
@@ -259,6 +304,7 @@ module.exports = {
                             savetext[findk] = `${player[findk]} - ✅`
                             save[findk] = lcid;
                         } // Chống chọn 2 lần
+                        if (kt == true) return collector.stop();
                         var start = new Discord.MessageEmbed()
                             .setAuthor({name: "Oản tù tì phiên bản Mở rộng"})
                             .setTitle(`Oản tù tì, ra cái gì, ra cái...`)
@@ -266,18 +312,18 @@ module.exports = {
                             ${savetext.join("\n")}`)
                             .setThumbnail(`https://photo-cms-viettimes.zadn.vn/w666/Uploaded/2021/firns/2019_03_11/7ea25208ab4942171b58.jpg`)
                             .setColor("YELLOW")
-                            .setFooter({text: `${demsansang(savelist)}/${savelist.length} đã chọn`})
+                            .setFooter({text: `${demsansang(savelist)}/${savelist.length} đã chọn | ${play_time}s để chọn`})
                             .setTimestamp()
-                        if (kt == true) return;
+                        if (kt == true) return collector.stop();
                         msg.edit({embeds : [start]})
-
+                        if (kt == true) return collector.stop();
                         if (demsansang(savelist) == savelist.length) {
                          //Tính điểm
                             for (let i = 0; i < save.length; i++) {
                                 for (let j = 0; j < save.length; j++) {
                                     if (i !== j) {
-                                        score[i] = score[i] + diem(save[i], save[j], luachon, 7)
-                                        scoredata[i][1] = score[i]
+                                        score[i] = score[i] + diem(save[i], save[j], luachon, 7);
+                                        scoredata[i][1] = score[i];
                                         scoredata[i][0] = i; //Đặt lại thứ tự do bên trên đặt sai
                                         if (diem(save[i], save[j], luachon, 7) == 2) {scoredata[i][2]++}
                                         else if (diem(save[i], save[j], luachon, 7) == 1) {scoredata[i][3]++}
@@ -285,6 +331,7 @@ module.exports = {
                                     }
                                 } 
                             }
+                            if (kt == true) return collector.stop();
                          //Sắp xếp Rank
                             var tam = [];
                             for (i = 0; i < scoredata.length - 1; i++) {
@@ -297,13 +344,14 @@ module.exports = {
                                     }
                                 }
                             }
+                            if (kt == true) return collector.stop();
                             for (i = 0; i < scoredata.length; i++) {
                                 if (i==0) {scoretext[i] = `**🥇Hạng ${i+1} : ${player[scoredata[i][0]]} : ${scoredata[i][1]} điểm (${scoredata[i][2]}/${scoredata[i][3]}/${scoredata[i][4]}) ** (Chọn *${name[save[scoredata[i][0]]]}*)`}
                                 else if (i==1) {scoretext[i] = `**🥈Hạng ${i+1} : ${player[scoredata[i][0]]} : ${scoredata[i][1]} điểm (${scoredata[i][2]}/${scoredata[i][3]}/${scoredata[i][4]})** (Chọn *${name[save[scoredata[i][0]]]}*)`}
                                 else if (i==2) {scoretext[i] = `**🥉Hạng ${i+1} : ${player[scoredata[i][0]]} : ${scoredata[i][1]} điểm (${scoredata[i][2]}/${scoredata[i][3]}/${scoredata[i][4]})** (Chọn *${name[save[scoredata[i][0]]]}*)`}
                                 else {scoretext[i] = `${i+1}. ${player[scoredata[i][0]]} : ${scoredata[i][1]} điểm (${scoredata[i][2]}/${scoredata[i][3]}/${scoredata[i][4]}) (Chọn *${name[save[scoredata[i][0]]]}*)`}
                             }
-
+                            if (kt == true) return collector.stop();
                             var end = new Discord.MessageEmbed()
                                 .setAuthor({name: "Oản tù tì phiên bản Mở rộng"})
                                 .setTitle(`Trò chơi kết thúc!`)
@@ -313,15 +361,40 @@ module.exports = {
                                 .setColor("GREEN")
                                 .setTimestamp()
                             msg.edit({embeds : [end], components : []})
+                            if (kt == true) return collector.stop();
                             kt = true; // Anti-Repeat
-                            if (kt == true) return;
+                            if (kt == true) return collector.stop();
                         }
+                        if (kt == true) return collector.stop();
+                        if (kt == true) return collector.stop();
+                        if (kt == true) return collector.stop();
+                        if (kt == true) return collector.stop();
+                        if (kt == true) return collector.stop();
+                        if (kt == true) return collector.stop();
                     }
+                    if (kt == true) return collector.stop();
+                    if (kt == true) return collector.stop();
+                    if (kt == true) return collector.stop();
+                    if (kt == true) return collector.stop();
+                    if (kt == true) return collector.stop();
+                    if (kt == true) return collector.stop();
+                    if (kt == true) return collector.stop();
                 }
-                if (kt == true) return;
+                if (kt == true) return collector.stop();
+                if (kt == true) return collector.stop();
+                if (kt == true) return collector.stop();
+                if (kt == true) return collector.stop();
+                if (kt == true) return collector.stop();
+                if (kt == true) return collector.stop();
             })
-            if (kt == true) return;
+            if (kt == true) return collector.stop();
+            if (kt == true) return collector.stop();
+            if (kt == true) return collector.stop();
+            if (kt == true) return collector.stop();
+            if (kt == true) return collector.stop();
+            if (kt == true) return collector.stop();
+            //you suck gay lmao
         })
-        if (kt == true) return;
+        if (kt == true) return; //End Process
     }
 }
