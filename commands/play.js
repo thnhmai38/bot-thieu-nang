@@ -14,7 +14,19 @@ module.exports = {
         if (message.member.voice.channel.type == "GUILD_STAGE_VOICE" && message.member.voice.suppress == true) return message.reply(`${client.emotes.error} | Bạn đang ở trong kênh Sân khấu. Để dùng lệnh này trong kênh sân khấu, bạn phải **ở trên Sân khấu** (trở thành Người nói) trước`)
 
         try {
-            client.distube.play(message, args.join(' '));
+            var queue = client.distube.getQueue(message);
+            var kt = 0;
+            if (!queue) {kt = 1;}
+            await client.distube.play(message, args.join(' '));
+            if (kt===1) {
+                const queue = client.distube.getQueue(message);
+                if (queue) {
+                    queue.owner = message.author;
+                    queue.isAllowSystemOn = false;
+                    queue.allowList = [];
+                    message.reply(`${client.emotes.queue} | **${queue.owner} sẽ là chủ của Hàng đợi**`);
+                }
+            }
             function loop(client, message) {
                 if (message.member.voice.channel.type == "GUILD_STAGE_VOICE") {
                     setTimeout(function () {
@@ -23,7 +35,7 @@ module.exports = {
                                 message.guild.me.voice.setSuppressed(false)
                             } catch (e) {
                                 message.guild.me.voice.setRequestToSpeak(true);
-                                message.reply(`${client.emotes.success} | Đã gửi **Đề nghị Nói**. \n*Nếu Bot chưa xuất hiện trên Sân khấu, hãy mời Bot lên Sân khấu (trở thành Người nói) ngay để tránh việc nhạc phát khi Bot chưa lên Sân khấu*`)
+                                message.reply(`${client.emotes.success} | Đã gửi **Đề nghị Nói**. \n*Nếu Bot chưa xuất hiện trên Sân khấu, hãy mời Bot lên Sân khấu (trở thành Người nói) ngay để tránh việc nhạc tự phát khi Bot chưa lên Sân khấu*`)
                             };
                             return;
                         } else loop(client, message)

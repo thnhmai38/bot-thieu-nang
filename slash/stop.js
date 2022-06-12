@@ -19,7 +19,15 @@ module.exports = {
 
         const queue = client.distube.getQueue(interaction)
         if (!queue) return interaction.reply({content: `${client.emotes.error} | Chả có gì đang phát cả`, ephemeral: true})
-        queue.stop()
-        interaction.reply(`${client.emotes.stop} | Đã dừng!`)
+        const owner = queue.owner;
+        function stop() {
+            queue.stop();
+            interaction.reply(`${client.emotes.stop} | Đã dừng nhạc!`)
+        }
+        if (interaction.user.id === owner.id || queue.voiceChannel.permissionsFor(interaction.user.id).has("MUTE_MEMBERS") || queue.voiceChannel.permissionsFor(interaction.user.id).has("MOVE_MEMBERS")) {
+            stop();
+        } else {
+            interaction.reply(`${client.emotes.error} | Bạn không có đủ quyền hạn để dừng nhạc`);
+        }
     }
 }

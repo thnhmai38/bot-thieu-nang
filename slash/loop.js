@@ -18,11 +18,11 @@ module.exports = {
                     value: "1"
                 },
                 {
-                    name: "Đơn bài",
+                    name: "🔂 Đơn bài",
                     value: "2"
                 },
                 {
-                    name: "Tất cả",
+                    name: "🔁 Tất cả",
                     value: "3"
                 },
                 {

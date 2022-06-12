@@ -27,25 +27,38 @@ module.exports = {
         if (interaction.member.voice.channel.type == "GUILD_STAGE_VOICE" && interaction.member.voice.suppress == true) return interaction.reply({content: `${client.emotes.error} | Bạn đang ở trong kênh Sân khấu. Để dùng lệnh này trong kênh sân khấu, bạn phải **ở trên Sân khấu** (trở thành Người nói) trước`, ephemeral: true})
 
         try {
-            client.distube.play(interaction.member.voice.channel, option[0].value, {
+            var queue = client.distube.getQueue(interaction);
+            var kt = 0;
+            if (!queue) {kt = 1;}
+            interaction.reply({content: `${client.emotes.success}`+" | Đã nhận được lệnh phát nhạc!"});
+            await client.distube.play(interaction.member.voice.channel, option[0].value, {
                 textChannel: interaction.channel,
                 member: interaction.member
             })
+            if (kt===1) {
+                const queue = client.distube.getQueue(interaction);
+                if (queue) {
+                    queue.owner = interaction.user;
+                    queue.isAllowSystemOn = false;
+                    queue.allowList = [];
+                    interaction.channel.send(`${client.emotes.queue} | **${queue.owner} sẽ là chủ của Hàng đợi**`);
+                }
+            }
+            
             function loop(client, interaction) {
                 if (interaction.member.voice.channel.type == "GUILD_STAGE_VOICE") {
                     setTimeout(function () {
                         if (client.distube.getQueue(interaction)) {
                             try {
-                                interaction.reply({content: `${client.emotes.success}`+" | Đã nhận được lệnh phát nhạc!"});
                                 interaction.guild.me.voice.setSuppressed(false)
                             } catch (e) {
                                 interaction.guild.me.voice.setRequestToSpeak(true);
-                                interaction.reply(`${client.emotes.success} | Đã gửi **Đề nghị Nói**. \n*Nếu Bot chưa xuất hiện trên Sân khấu, hãy mời Bot lên Sân khấu (trở thành Người nói) ngay để tránh việc nhạc phát khi Bot chưa lên Sân khấu*`)
+                                interaction.reply(`${client.emotes.success} | Đã gửi **Đề nghị Nói**. \n*Nếu Bot chưa xuất hiện trên Sân khấu, hãy mời Bot lên Sân khấu (trở thành Người nói) ngay để tránh việc nhạc tự phát khi Bot chưa lên Sân khấu*`)
                             };
                             return;
                         } else loop(client, interaction)
                     }, 2000)
-                } else return interaction.reply({content: `${client.emotes.success}`+" | Đã nhận được lệnh phát nhạc!"});
+                }
             }
             loop(client, interaction);
         } catch (e) {

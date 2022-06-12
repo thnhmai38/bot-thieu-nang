@@ -9,18 +9,12 @@ module.exports = {
         {
             type: 1,
             name: "1",
-            description: "Nhắn tin thay bạn tại kênh khác",
+            description: "Nhắn tin thay bạn tại kênh khác (Có thể ở Server khác miễn là bạn có quyền)",
             options: [
-                {
-                    name: "idg",
-                    type: 3,
-                    description: "ID máy chủ bạn muốn gửi tin",
-                    required: true
-                },
                 {
                     name: "idc",
                     type: 3,
-                    description: "ID Kênh thoại bạn muốn gửi tin",
+                    description: "ID Kênh bạn muốn gửi tin",
                     required: true
                 },
                 {
@@ -54,7 +48,7 @@ module.exports = {
     */
     async run (client, interaction, option) {
         if (interaction.options.getSubcommand() === "0") {
-            if (interaction.member.permissions.has("MANAGE_MESSAGES")) {
+            if (interaction.channel.permissionsFor(interaction.user.id).has("MANAGE_MESSAGES")) {
                 console.log(option)
                 const txt = option[0].options[0].value;
                 try {
@@ -63,20 +57,17 @@ module.exports = {
                 } catch {
                     interaction.reply({content: 'Bot không thể gửi tin nhắn đấy vào kênh này', ephemeral: true})
                 }
-            } else interaction.reply({content: 'BẠN KHÔNG ĐỦ THẨM QUYỀN ĐỂ THỰC HIỆN LỆNH NÀY', ephemeral: true})
+            } else interaction.reply({content: 'Bạn không đủ quyền để thực hiện lệnh này', ephemeral: true})
         } else {
-                const guild = option[0].options[0].value
-                const channelId = option[0].options[1].value
-                const msgr = option[0].options[2].value
-                const userId = interaction.user.id;
-                if (isNaN(Number(guild)) || isNaN(Number(channelId))) return interaction.reply({content: 'Vui lòng nhập đúng giá trị cấu hình', ephemeral: true});
+                const channelId = option[0].options[0].value
+                const msgr = option[0].options[1].value
+                if (isNaN(Number(channelId))) return interaction.reply({content: 'Vui lòng nhập đúng giá trị cấu hình', ephemeral: true});
                 try {
-                    const guild2 = await client.guilds.fetch(guild)
-                    const guild2Member = await guild2.members.fetch(userId)
-                    if (guild2Member.permissions.has("MANAGE_MESSAGES")) {
-                        client.channels.cache.get(channelId).send(msgr);
-                        interaction.reply("**DONE!**")
-                } else interaction.reply({content: 'BẠN KHÔNG ĐỦ THẨM QUYỀN ĐỂ THỰC HIỆN LỆNH NÀY', ephemeral: true});
+                    const channelneed = await client.channels.cache.get(channelId);
+                    if (channelneed.permissionsFor(interaction.user.id).has("MANAGE_MESSAGES")) {
+                        channelneed.send(msgr);
+                        interaction.reply(`**Đã gửi tin nhắn đến \`${channelneed.name}\`!**`)
+                } else interaction.reply({content: 'Bạn không đủ quyền để thực hiện lệnh này', ephemeral: true});
             } catch {interaction.reply({content: "Bạn hoặc Bot không ở máy chủ đó hoặc Bot không thể truy cập kênh đó hoặc Bot không thể gửi được tin nhắn đấy ở đó.", ephemeral: true})}
         }
     }

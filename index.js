@@ -130,7 +130,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
         leaveOnStop: true,
         savePreviousSongs: true,
         youtubeDL: false,
-        nsfw: true,
+        nsfw: false,
         plugins: [new SoundCloudPlugin(), new YtDlpPlugin(), new SpotifyPlugin()],
     })
     client.distube
@@ -139,7 +139,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
             const exampleEmbed = new Discord.MessageEmbed()
                 .setColor('RED')
                 .setAuthor({name: `${client.emotes.error} | Đã xảy ra lỗi`})
-                .setDescription(`\n${error}\n\`Hãy thử lại một lần nữa hoặc đợi một lúc rồi thử lại! Nếu vấn đề vẫn chưa được khắc phục, liên hệ với chủ Bot bằng */>support*\``)
+                .setDescription(`\n${error}\n\n\`Hãy thử lại một lần nữa hoặc đợi một lúc rồi thử lại! Nếu vấn đề vẫn chưa được khắc phục, liên hệ với chủ Bot bằng />support để được giúp đỡ\``)
                 .setTimestamp()
             channel.send({embeds : [exampleEmbed]});
         })
@@ -227,6 +227,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
         })
         .on('finishSong', (queue, song) => {
             queue.textChannel.send(`${client.emotes.success} | Đã phát xong bài`)
+            delete song.voteskip; //Thuyết Kiến tạo mảng
             console.log(colors.blue(queue.id +` | Phát xong bài "${song.name}" | Còn ${(queue.song === undefined ? 1 : queue.song.length())-1} bài`));
         })
         .on('disconnect', queue => {

@@ -5,13 +5,13 @@ module.exports = {
     description: "queue track",
     aliases: ["q", "np"],
 
-    async run (client, message, args) {
-        
+    async run(client, message, args) {
+
 
         //if (!message.member.voice.channel) return message.reply(`${client.emotes.error} | Bạn phải ở trong một kênh nói`);
         //if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.reply(`${client.emotes.error} | Bạn phải ở cùng kênh nói với Bot`); 
-    
-        const queue = client.distube.getQueue(message)
+
+        var queue = client.distube.getQueue(message)
         if (!queue) return message.reply(`${client.emotes.error} | Chả có gì đang phát cả`);
         /*/
         const currentTrack = queue.current;
@@ -34,17 +34,27 @@ module.exports = {
         var giaystr = `${giay}s`
         var time = giostr + phutstr + giaystr
         /*/
-        const q = queue.songs.map((song, i) => `${i === 0 ? "**Đang phát:" : `${i}.`} [${song.name}](${song.url}) - \`${i === 0 ? queue.formattedCurrentTime + " / " :""}${song.formattedDuration}\` ${i===0 ? "**" : ""}`).join("\n")
+
+        const q = queue.songs.map((song, i) => `${i === 0 ? "**Đang phát:" : `${i}.`} [${song.name}](${song.url}) (${song.member}) ${song.age_restricted==true?`(*) `:''}- \`${i === 0 ? queue.formattedCurrentTime + " / " :""}${song.formattedDuration}\` ${i===0 ? "**" : ""}`).join("\n")
+        const allowList = queue.allowList.length==0 ? `*Không ai*` : queue.allowList.map((value) => `<@${value}>`).join(", ");
         const exampleEmbed = new Discord.MessageEmbed()
-            .setColor('WHITE')
-            .setTitle(`${client.emotes.queue} | Danh sách chờ`)
-            .setDescription(`${q}`)
-            .addField('Tổng thời gian', `${queue.formattedDuration}`, true)
-            .addField('Âm lượng', `${queue.volume}%`, true)
-            .addField('Lặp', `${queue.repeatMode ? queue.repeatMode === 2 ? "Tất cả" : "Đơn bài" : "Tắt"}`, true)
-            .addField('Tự động phát', `${queue.autoplay ? "Bật" : "Tắt"}`, true)
-            .addField('Filter', `\`${queue.filters.length === 0 ? "Tắt" : queue.filters.join(", ")}\``, true)
-            .setTimestamp()
-        message.reply({embeds : [exampleEmbed]});
+        .setColor('WHITE')
+        .setTitle(`${client.emotes.queue} | Danh sách chờ`)
+        .setDescription(`${q}`)
+        .addField('Tổng thời gian', `${queue.formattedDuration}`, true)
+        .addField('Âm lượng', `${queue.volume}%`, true)
+        .addField('Filter', `\`${queue.filters.length === 0 ? "Tắt" : queue.filters.join(", ")}\``, true)
+        .addField('Tự động phát', `${queue.autoplay ? "Bật" : "Tắt"}`, true)
+        .addField('Lặp', `${queue.repeatMode ? queue.repeatMode === 2 ? "Tất cả" : "Đơn bài" : "Tắt"}`, true)
+        .addField('Chủ Hàng đợi', `${queue.owner}`, true)
+        .addField('Danh sách Cho phép', allowList, true)
+        .setThumbnail(queue.songs[0].thumbnail)
+        .setFooter({
+            text: `(*) là Nội dung Giới hạn độ tuổi`
+        })
+        .setTimestamp()
+        message.reply({
+            embeds: [exampleEmbed]
+        });
     }
 }
