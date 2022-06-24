@@ -1,1 +1,1 @@
-ok ncct rip
+ok ncct
