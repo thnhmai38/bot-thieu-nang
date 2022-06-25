@@ -298,6 +298,6 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
 
     client.login(process.env.TOKEN).then((token) => {
         client.user.setPresence({
-        status: 'online',
+            status: 'online',
         });
     });
