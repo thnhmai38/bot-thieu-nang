@@ -53,7 +53,8 @@ module.exports = {
                 const txt = option[0].options[0].value;
                 try {
                     interaction.channel.send(txt)
-                    interaction.reply({content: '**DONE!**', ephemeral: true});
+						.then(interaction.reply({content: '**DONE!**', ephemeral: true}))
+						.catch(interaction.reply({content: 'Bot không thể gửi tin nhắn đấy vào kênh này', ephemeral: true}));
                 } catch {
                     interaction.reply({content: 'Bot không thể gửi tin nhắn đấy vào kênh này', ephemeral: true})
                 }
@@ -65,8 +66,9 @@ module.exports = {
                 try {
                     const channelneed = await client.channels.cache.get(channelId);
                     if (channelneed.permissionsFor(interaction.user.id).has("MANAGE_MESSAGES")) {
-                        channelneed.send(msgr);
-                        interaction.reply(`**Đã gửi tin nhắn đến \`${channelneed.name}\`!**`)
+                        channelneed.send(msgr)
+                            .then(interaction.reply(`**Đã gửi tin nhắn đến \`${channelneed.name}\`!**`))
+                            .catch(interaction.reply({content: 'Bot không thể gửi tin nhắn đấy vào kênh này. Có thể là do Bot không có quyền hoặc không có mặt tại kênh này.', ephemeral: true}))
                 } else interaction.reply({content: 'Bạn không đủ quyền để thực hiện lệnh này', ephemeral: true});
             } catch {interaction.reply({content: "Bạn hoặc Bot không ở máy chủ đó hoặc Bot không thể truy cập kênh đó hoặc Bot không thể gửi được tin nhắn đấy ở đó.", ephemeral: true})}
         }

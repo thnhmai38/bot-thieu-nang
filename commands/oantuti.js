@@ -393,7 +393,6 @@ module.exports = {
             if (kt == true) return collector.stop();
             if (kt == true) return collector.stop();
             if (kt == true) return collector.stop();
-            //you suck gay lmao
         })
         if (kt == true) return; //End Process
     }

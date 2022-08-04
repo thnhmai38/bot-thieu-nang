@@ -13,6 +13,7 @@ if (args[0] == 0) {
         message.delete()
         const txt = args.slice(1).join(" ")
         message.channel.send(txt)
+            .catch(message.reply('Bot không thể gửi tin nhắn vào kênh này.'))
     } else message.reply('Bạn không đủ thẩm quyền để thực hiện lệnh này');}
 } else {
     if (args[0] == 1) {
@@ -28,8 +29,9 @@ if (args[0] == 0) {
         try {
             const channelneed = await client.channels.cache.get(channelId);
             if (channelneed.permissionsFor(message.author.id).has("MANAGE_MESSAGES")) {
-                channelneed.send(msgr);
-                message.reply(`**Đã gửi tin nhắn đến \`${channelneed.name}\`!**`)
+                channelneed.send(msgr)
+                    .then(message.reply(`**Đã gửi tin nhắn đến \`${channelneed.name}\`!**`))
+                    .catch(message.reply('Bot không thể gửi tin nhắn vào kênh này. . Có thể là do Bot không có quyền hoặc không có mặt tại kênh này.'))
             } else message.reply('Bạn không đủ thẩm quyền để thực hiện lệnh này');
         } catch {message.reply("Bạn hoặc Bot không ở máy chủ đó hoặc Bot không thể truy cập kênh đó hoặc Bot không gửi được tin nhắn ở đó.")}
     }
