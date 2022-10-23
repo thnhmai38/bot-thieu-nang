@@ -21,8 +21,8 @@ module.exports = {
     */
      async run (client, interaction, option) {
         const query = option[0].value;
-        const start = new DiscordJS.MessageEmbed()
-            .setColor('RANDOM')
+        const start = new DiscordJS.EmbedBuilder()
+            .setColor('Random')
             .setDescription(`🔍 Đang tìm kiếm trên YouTube...`)
             .setTitle(query)
             .setFooter({
@@ -60,8 +60,8 @@ module.exports = {
             var match = url.match(regExp);
             return (match&&match[7].length==11)? match[7] : false;
         }
-        const embed = new DiscordJS.MessageEmbed()
-            .setColor('RANDOM')
+        const embed = new DiscordJS.EmbedBuilder()
+            .setColor('Random')
             .setDescription(`${arr}`)
             .setTitle(query)
             .setThumbnail(`https://img.youtube.com/vi/${youtube_parser(video.url)}/default.jpg`)

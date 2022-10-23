@@ -17,8 +17,8 @@ module.exports = {
 
         const img = await randomPuppy(random);
 
-        const embed = new Discord.MessageEmbed()
-            .setColor("RANDOM")
+        const embed = new Discord.EmbedBuilder()
+            .setColor("Random")
             .setImage(img)
             .setTitle(`Meme`)
             .setFooter({text: `Từ r/${random}`})

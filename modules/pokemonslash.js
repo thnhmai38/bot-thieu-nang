@@ -21,36 +21,42 @@ class Pokemon {
         .then(res => res.json())
         .then(data => {
           
-    const pok = new Discord.MessageEmbed()
+    const pok = new Discord.EmbedBuilder()
         .setTitle(`Đây là Pokemon gì?`)
-        .addField(`Thể loại:`,`${data.Data.Type}`, true)
-        .addField(`Năng lực:`, `${data.Data.abilities}`)
+        .addFields([
+            {name: `Thể loại:`, value:`${data.Data.Type}`, inline:true},
+            {name: `Năng lực:`, value: `${data.Data.abilities}`},
+        ])
         .setImage(data.question)
         .setFooter({text: `Nhập stop để dừng chơi`})
-        .setColor("RANDOM")
+        .setColor("Random")
         .setTimestamp()
 
-    const right = new Discord.MessageEmbed()
+    const right = new Discord.EmbedBuilder()
         .setTitle(`Bạn đã đoán đúng!`)
         .setAuthor(this.interaction.user.tag)
         .setURL(data.Data.Link)
         .setDescription(`Nó là ${data.Data.name}`)
         .setImage(data.answer)
-        .setColor("RANDOM")
-        .addField(`Thể loại:`,`${data.Data.Type}`, true)
-        .addField(`Năng lực:`, `${data.Data.abilities}`)
+        .setColor("Random")
+        .addFields([
+            {name: `Thể loại:`, value:`${data.Data.Type}`, inline:true},
+            {name: `Năng lực:`, value: `${data.Data.abilities}`},
+        ])
         .setTimestamp()
    
 
-    const wrong = new Discord.MessageEmbed()
+    const wrong = new Discord.EmbedBuilder()
     .setTitle(`Bạn đã thua!`)
     .setAuthor(this.interaction.user.tag)
     .setURL(data.Data.Link)
     .setDescription(`Nó là ${data.Data.name}`)
     .setImage(data.answer)
-    .setColor("RANDOM")
-    .addField(`Thể loại:`,`${data.Data.Type}`, true)
-    .addField(`Năng lực:`, `${data.Data.abilities}`)
+    .setColor("Random")
+    .addFields([
+        {name: `Thể loại:`, value:`${data.Data.Type}`, inline:true},
+        {name: `Năng lực:`, value: `${data.Data.abilities}`},
+    ])
     .setTimestamp()
     
 

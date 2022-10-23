@@ -45,7 +45,7 @@ class ConnectFour {
             { member: oppenent, playerColor: "🟡"}
         ]
 
-        const initial = new discord.MessageEmbed()
+        const initial = new discord.EmbedBuilder()
             .setTitle(`🔴 Lượt của ${interaction.user.username}`)
             .setDescription(initialState)
             .setFooter({text: `${gameData[0].playerColor}${challenger.username} vs ${gameData[1].playerColor}${oppenent.username}`})
@@ -187,11 +187,11 @@ class ConnectFour {
                     
                     if(tieCheck()) {
                         gameMessage.reactions.removeAll()
-                        const TieEmbed = new discord.MessageEmbed()
+                        const TieEmbed = new discord.EmbedBuilder()
                         .setTitle(`HÒA!`)
                         .setDescription(renderBoard(board))
                         .setFooter({text: `${gameData[0].playerColor}${challenger.username} vs ${gameData[1].playerColor}${oppenent.username}`})
-                        .addField('Lí do:', `Hòa theo luật`, true)
+                        .addFields([{name:'Lí do:', value:`Hòa theo luật`}])
                         .setTimestamp()
                         gameCollector.stop("Hòa")
                         ended=true;
@@ -204,11 +204,11 @@ class ConnectFour {
                         if(data) {
                             gameMessage.reactions.removeAll()
                             
-                            const WinEmbed = new discord.MessageEmbed()
+                            const WinEmbed = new discord.EmbedBuilder()
                             .setTitle(`${gameData[player].playerColor} ${gameData[player].member.username} dành chiến thắng!`)
                             .setDescription(renderBoard(board))
                             .setFooter({text: `${gameData[0].playerColor}${challenger.username} vs ${gameData[1].playerColor}${oppenent.username}`})
-                            .addField('Lí do:', `${gameData[player].member.username} thắng theo luật`, true)
+                            .addFields([{name: 'Lí do:', value: `${gameData[player].member.username} thắng theo luật`}])
                             .setTimestamp()
                             gameCollector.stop(`${gameData[player].member.id} thắng theo luật`);
                             ended=true;
@@ -225,11 +225,11 @@ class ConnectFour {
                             else {var winner = gameData[0].member.username; kt=0;}
                             
                             gameMessage.reactions.removeAll()
-                            const WinEmbed = new discord.MessageEmbed()
+                            const WinEmbed = new discord.EmbedBuilder()
                             .setTitle(`${gameData[kt].playerColor} ${winner} dành chiến thắng!`)
                             .setDescription(renderBoard(board))
                             .setFooter({text: `${gameData[0].playerColor}${challenger.username} vs ${gameData[1].playerColor}${oppenent.username}`})
-                            .addField('Lí do:', `${winner} thắng do đối phương bỏ cuộc`, true)
+                            .addFields([{name:'Lí do:', value:`${winner} thắng do đối phương bỏ cuộc`}])
                             .setTimestamp()
                             ended=true;
                             gameCollector.stop(`${winner} thắng do đối phương bỏ cuộc`);
@@ -238,7 +238,7 @@ class ConnectFour {
                     }
                     if (ended==true) return;
 
-                    const newEmbed = new discord.MessageEmbed()
+                    const newEmbed = new discord.EmbedBuilder()
                     .setTitle(`${gameData[player].playerColor} Lượt của ${gameData[player].member.username}`)
                     .setDescription(renderBoard(board))
                     .setFooter({text: `${gameData[0].playerColor}${challenger.username} vs ${gameData[1].playerColor}${oppenent.username}`})
@@ -253,11 +253,11 @@ class ConnectFour {
                         else {var winner = gameData[0].member.username; kt=0;}
                         
                         gameMessage.reactions.removeAll()
-                        const WinEmbed = new discord.MessageEmbed()
+                        const WinEmbed = new discord.EmbedBuilder()
                         .setTitle(`${gameData[kt].playerColor} ${winner} dành chiến thắng!`)
                         .setDescription(renderBoard(board))
                         .setFooter({text: `${gameData[0].playerColor}${challenger.username} vs ${gameData[1].playerColor}${oppenent.username}`})
-                        .addField('Lí do:', `${winner} thắng do đối phương bỏ cuộc`, true)
+                        .addFields([{name: 'Lí do:', value: `${winner} thắng do đối phương bỏ cuộc`}])
                         .setTimestamp()
                         ended=true;
                         gameCollector.stop(`${winner} thắng do đối phương bỏ cuộc`);

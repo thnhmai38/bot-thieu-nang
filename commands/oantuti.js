@@ -1,6 +1,7 @@
 const luachon = ["bua", "lua", "keo", "ran", "nguoi", "cay", "soi", "botbien", "bao", "khongkhi", "nuoc", "rong", "acquy", "samchop", "sung"]
 const name = ["Búa", "Lửa", "Kéo", "Rắn", "Người", "Cây", "Sói", "Bọt biển", "Bao", "Không Khí", "Nước", "Rồng", "Ác quỷ", "Sấm chớp", "Súng"]
 const Discord = require("discord.js")
+const { ButtonStyle, ComponentType} = require('discord.js');
 const { MessageActionRow, MessageButton } = require('discord.js');
 function demsansang(readylist) {
     var dem = 0;
@@ -15,25 +16,6 @@ function diem(vt1, vt2, luachon, hs) { //hs=7, Tính điểm cho vt1
         //Thắng
         else if (vt2-vt1<=hs) {return 2} //Theo quy tắc
         else return 0; //Bất quy tắc = Thua
-        /*
-        else for (dem = 1; dem < hs+1; dem++) {
-            if (vt1+dem <= luachon.length) {
-            //Theo Quy tắc
-                if (luachon[vt1+dem] == luachon[vt2]) return 2;
-            } else {
-            //Bất Quy Tắc
-
-            //Giảm liên tục
-            function giam(bien, luachon) {
-                let dem = bien;
-                if (dem > luachon.length) {dem = dem - luachon.length}
-                if (dem > luachon.length) {dem = giam(dem, luachon)} else return dem;
-            }
-
-                if (luachon[giam(vt1+dem, luachon)] == luachon[vt2]) return 2;
-            }
-        }
-        */
 }
 
 module.exports = {
@@ -79,94 +61,94 @@ module.exports = {
         }
 
         //chuẩn bị các biến
-        var list = new Discord.MessageEmbed()
+        var list = new Discord.EmbedBuilder()
             .setTitle(ready_time + "s để người chơi sẵn sàng...")
             .setDescription(`Danh sách người chơi:
             ${ready.join("\n")}`)
             .setAuthor({name: 'Oản tù tì Phiên bản Mở rộng'})
             .setFooter({text: `${demsansang(readylist)}/${readylist.length} sẵn sàng`})
             .setThumbnail(`https://photo-cms-viettimes.zadn.vn/w666/Uploaded/2021/firns/2019_03_11/7ea25208ab4942171b58.jpg`)
-            .setColor("BLUE")
+            .setColor("Blue")
             .setTimestamp()
-        let readybutton = new MessageActionRow()
+        let readybutton = new ActionRowBuilder()
         .addComponents(
-            new MessageButton()
+            new ButtonBuilder()
                 .setCustomId('ready')
                 .setLabel('Sẵn sàng!')
-                .setStyle('PRIMARY'),
-            new MessageButton()
+                .setStyle(ButtonStyle.Primary),
+            new ButtonBuilder()
                 .setCustomId('unready')
                 .setLabel('Hủy sẵn sàng')
-                .setStyle('SECONDARY'),
+                .setStyle(ButtonStyle.Secondary),
         );
-        let luachon1 = new MessageActionRow()
+        let luachon1 = new ActionRowBuilder()
         .addComponents(
-            new MessageButton()
+            new ButtonBuilder()
                 .setCustomId('bua')
                 .setLabel('Búa')
-                .setStyle('PRIMARY'),
-            new MessageButton()
+                .setStyle(ButtonStyle.Primary),
+            new ButtonBuilder()
                 .setCustomId('lua')
                 .setLabel('Lửa')
-                .setStyle('PRIMARY'),
-            new MessageButton()
+                .setStyle(ButtonStyle.Primary),
+            new ButtonBuilder()
                 .setCustomId('keo')
                 .setLabel('Kéo')
-                .setStyle('PRIMARY'),
-            new MessageButton()
+                .setStyle(ButtonStyle.Primary),
+            new ButtonBuilder()
                 .setCustomId('ran')
                 .setLabel('Rắn')
-                .setStyle('PRIMARY'),
-                new MessageButton()
+                .setStyle(ButtonStyle.Primary),
+                new ButtonBuilder()
                 .setCustomId('nguoi')
                 .setLabel('Người')
-                .setStyle('PRIMARY'),
+                .setStyle(ButtonStyle.Primary),
         );
-        let luachon2 = new MessageActionRow()
+        let luachon2 = new ActionRowBuilder()
         .addComponents(
-            new MessageButton()
+            new ButtonBuilder()
                 .setCustomId('cay')
                 .setLabel('Cây')
-                .setStyle('PRIMARY'),
-            new MessageButton()
+                .setStyle(ButtonStyle.Primary),
+            new ButtonBuilder()
                 .setCustomId('soi')
                 .setLabel('Sói')
-                .setStyle('PRIMARY'),
-            new MessageButton()
+                .setStyle(ButtonStyle.Primary),
+            new ButtonBuilder()
                 .setCustomId('botbien')
                 .setLabel('Bọt Biển')
-                .setStyle('PRIMARY'),
-            new MessageButton()
+                .setStyle(ButtonStyle.Primary),
+            new ButtonBuilder()
                 .setCustomId('bao')
                 .setLabel('Bao')
-                .setStyle('PRIMARY'),
-                new MessageButton()
+                .setStyle(ButtonStyle.Primary),
+                new ButtonBuilder()
                 .setCustomId('khongkhi')
                 .setLabel('Không Khí')
-                .setStyle('PRIMARY'),
+                .setStyle(ButtonStyle.Primary),
         );
-        let luachon3 = new MessageActionRow()
+        let luachon3 = new ActionRowBuilder()
         .addComponents(
-            new MessageButton()
+            new ButtonBuilder()
                 .setCustomId('nuoc')
                 .setLabel('Nước')
-                .setStyle('PRIMARY'),
-            new MessageButton()
+                .setStyle(ButtonStyle.Primary),
+            new ButtonBuilder()
                 .setCustomId('rong')
                 .setLabel('Rồng')
-                .setStyle('PRIMARY'),
-            new MessageButton()
+                .setStyle(ButtonStyle.Primary),
+            new ButtonBuilder()
                 .setCustomId('acquy')
                 .setLabel('Ác Quỷ')
-                .setStyle('PRIMARY'),
-            new MessageButton()
+                .setStyle(ButtonStyle.Primary),
+            new ButtonBuilder()
                 .setCustomId('samchop')
                 .setLabel('Sấm Chớp')
-                .setStyle('PRIMARY'),
-            new MessageButton()
+                .setStyle(ButtonStyle.Primary),
+            new ButtonBuilder()
                 .setCustomId('sung')
                 .setLabel('Súng')
-                .setStyle('PRIMARY'),
+                .setStyle(ButtonStyle.Primary),
         );
 
         
@@ -177,17 +159,17 @@ module.exports = {
                     if (interaction.user.id == player[k].id) return true;
                 }
             }
-            const collector = msg.createMessageComponentCollector({componentType: 'BUTTON', filter})
+            const collector = msg.createMessageComponentCollector({componentType: ComponentType.Button, filter})
             setTimeout(function() {
                 if (demsansang(readylist) !== readylist.length) {
-                    var cancelbyready = new Discord.MessageEmbed()
+                    var cancelbyready = new Discord.EmbedBuilder()
                         .setTitle(`Trò chơi bị hủy do có người chơi chưa sẵn sàng`)
                         .setDescription(`Danh sách người chơi:
                         ${ready.join("\n")}`)
                         .setAuthor({name: 'Oản tù tì Phiên bản Mở rộng'})
                         .setFooter({text: `${demsansang(readylist)}/${readylist.length} sẵn sàng`})
                         .setThumbnail(`https://photo-cms-viettimes.zadn.vn/w666/Uploaded/2021/firns/2019_03_11/7ea25208ab4942171b58.jpg`)
-                        .setColor("RED")
+                        .setColor("Red")
                         .setTimestamp()
                     msg.edit({embeds : [cancelbyready], components : []})
                     kt=true;
@@ -205,14 +187,14 @@ module.exports = {
                     }
                     readylist[find] = true
                     ready[find] = `${player[find]} - ${readylist[find] ? "✅" : "❌"}`
-                    var list = new Discord.MessageEmbed()
+                    var list = new Discord.EmbedBuilder()
                         .setTitle(ready_time+"s để người chơi sẵn sàng...")
                         .setDescription(`Danh sách người chơi:
                         ${ready.join("\n")}`)
                         .setAuthor({name: 'Oản tù tì Phiên bản Mở rộng'})
                         .setFooter({text: `${demsansang(readylist)}/${readylist.length} sẵn sàng`})
                         .setThumbnail(`https://photo-cms-viettimes.zadn.vn/w666/Uploaded/2021/firns/2019_03_11/7ea25208ab4942171b58.jpg`)
-                        .setColor("BLUE")
+                        .setColor("Blue")
                         .setTimestamp()
                     msg.edit({embeds : [list]})
                 }
@@ -224,14 +206,14 @@ module.exports = {
                     }
                     readylist[find] = false 
                     ready[find] = `${player[find]} - ${readylist[find] ? "✅" : "❌"}`
-                    var list = new Discord.MessageEmbed()
+                    var list = new Discord.EmbedBuilder()
                         .setTitle(ready_time + "s để người chơi sẵn sàng...")
                         .setDescription(`Danh sách người chơi:
                         ${ready.join("\n")}`)
                         .setAuthor({name: 'Oản tù tì Phiên bản Mở rộng'})
                         .setFooter({text: `${demsansang(readylist)}/${readylist.length} sẵn sàng`})
                         .setThumbnail(`https://photo-cms-viettimes.zadn.vn/w666/Uploaded/2021/firns/2019_03_11/7ea25208ab4942171b58.jpg`)
-                        .setColor("BLUE")
+                        .setColor("Blue")
                         .setTimestamp()
                     msg.edit({embeds : [list]})
                 }
@@ -239,7 +221,7 @@ module.exports = {
              //Wait 15s
                 if (demsansang(readylist) == readylist.length && kt==false) {
                     if (ingame == false) {
-                        var list = new Discord.MessageEmbed()
+                        var list = new Discord.EmbedBuilder()
                         .setAuthor({name: "Oản tù tì phiên bản Mở rộng"})
                         .setTitle(`Trò chơi sẽ bắt đầu sau 15s`)
                         .setDescription(`**Luật chơi:**
@@ -249,14 +231,14 @@ module.exports = {
                         
                         ***Chú ý: Bạn không thể chọn 2 lần**`)
                         .setImage(`https://photo-cms-viettimes.zadn.vn/w666/Uploaded/2021/firns/2019_03_11/7ea25208ab4942171b58.jpg`)
-                        .setColor("YELLOW")
+                        .setColor("Yellow")
                         .setTimestamp()
                         msg.edit({embeds : [list], components : []})
                     }
                         setTimeout(function() {
                             if (kt == true) return collector.stop();
                             if (timeout_started == false) {
-                                var start = new Discord.MessageEmbed()
+                                var start = new Discord.EmbedBuilder()
                                     .setAuthor({name: "Oản tù tì phiên bản Mở rộng"})
                                     .setTitle(`Oản tù tì, ra cái gì, ra cái...`)
                                     .setDescription(`**Luật chơi:**
@@ -266,20 +248,20 @@ module.exports = {
                                 
                                 ***Chú ý: Bạn không thể chọn 2 lần**`)
                                     .setThumbnail(`https://photo-cms-viettimes.zadn.vn/w666/Uploaded/2021/firns/2019_03_11/7ea25208ab4942171b58.jpg`)
-                                    .setColor("YELLOW")
+                                    .setColor("Yellow")
                                     .setTimestamp()
                                     .setFooter({text: `Chưa có ai đã chọn | ${play_time}s để chọn`})
                                 msg.edit({embeds : [start], components : [luachon1,luachon2,luachon3]});
                                 timeout_started = true;
                                 setTimeout(function() { //Timeout Play
                                     if (demsansang(savelist) !== savelist.length) {
-                                        var cancelbytimeout = new Discord.MessageEmbed()
+                                        var cancelbytimeout = new Discord.EmbedBuilder()
                                             .setTitle(`Trò chơi bị hủy do có người chơi chưa chọn`)
                                             .setDescription(`Danh sách người chơi đã chọn: \n${savetext.join("\n")}`)
                                             .setAuthor({name: 'Oản tù tì Phiên bản Mở rộng'})
                                             .setFooter({text: `${demsansang(readylist)}/${readylist.length} sẵn sàng`})
                                             .setThumbnail(`https://photo-cms-viettimes.zadn.vn/w666/Uploaded/2021/firns/2019_03_11/7ea25208ab4942171b58.jpg`)
-                                            .setColor("RED")
+                                            .setColor("Red")
                                             .setTimestamp()
                                         msg.edit({embeds : [cancelbytimeout], components : []})
                                         kt=true;
@@ -305,13 +287,13 @@ module.exports = {
                             save[findk] = lcid;
                         } // Chống chọn 2 lần
                         if (kt == true) return collector.stop();
-                        var start = new Discord.MessageEmbed()
+                        var start = new Discord.EmbedBuilder()
                             .setAuthor({name: "Oản tù tì phiên bản Mở rộng"})
                             .setTitle(`Oản tù tì, ra cái gì, ra cái...`)
                             .setDescription(`Danh sách người chơi đã chọn:
                             ${savetext.join("\n")}`)
                             .setThumbnail(`https://photo-cms-viettimes.zadn.vn/w666/Uploaded/2021/firns/2019_03_11/7ea25208ab4942171b58.jpg`)
-                            .setColor("YELLOW")
+                            .setColor("Yellow")
                             .setFooter({text: `${demsansang(savelist)}/${savelist.length} đã chọn | ${play_time}s để chọn`})
                             .setTimestamp()
                         if (kt == true) return collector.stop();
@@ -329,7 +311,7 @@ module.exports = {
                                         else if (diem(save[i], save[j], luachon, 7) == 1) {scoredata[i][3]++}
                                         else if (diem(save[i], save[j], luachon, 7) == 0) {scoredata[i][4]++}
                                     }
-                                } 
+                                }
                             }
                             if (kt == true) return collector.stop();
                          //Sắp xếp Rank
@@ -352,13 +334,13 @@ module.exports = {
                                 else {scoretext[i] = `${i+1}. ${player[scoredata[i][0]]} : ${scoredata[i][1]} điểm (${scoredata[i][2]}/${scoredata[i][3]}/${scoredata[i][4]}) (Chọn *${name[save[scoredata[i][0]]]}*)`}
                             }
                             if (kt == true) return collector.stop();
-                            var end = new Discord.MessageEmbed()
+                            var end = new Discord.EmbedBuilder()
                                 .setAuthor({name: "Oản tù tì phiên bản Mở rộng"})
                                 .setTitle(`Trò chơi kết thúc!`)
                                 .setDescription(`Danh sách điểm:
                                 ${scoretext.join("\n")}`)
                                 .setThumbnail(`https://photo-cms-viettimes.zadn.vn/w666/Uploaded/2021/firns/2019_03_11/7ea25208ab4942171b58.jpg`)
-                                .setColor("GREEN")
+                                .setColor("Green")
                                 .setTimestamp()
                             msg.edit({embeds : [end], components : []})
                             if (kt == true) return collector.stop();
@@ -366,34 +348,13 @@ module.exports = {
                             if (kt == true) return collector.stop();
                         }
                         if (kt == true) return collector.stop();
-                        if (kt == true) return collector.stop();
-                        if (kt == true) return collector.stop();
-                        if (kt == true) return collector.stop();
-                        if (kt == true) return collector.stop();
-                        if (kt == true) return collector.stop();
                     }
-                    if (kt == true) return collector.stop();
-                    if (kt == true) return collector.stop();
-                    if (kt == true) return collector.stop();
-                    if (kt == true) return collector.stop();
-                    if (kt == true) return collector.stop();
-                    if (kt == true) return collector.stop();
                     if (kt == true) return collector.stop();
                 }
                 if (kt == true) return collector.stop();
-                if (kt == true) return collector.stop();
-                if (kt == true) return collector.stop();
-                if (kt == true) return collector.stop();
-                if (kt == true) return collector.stop();
-                if (kt == true) return collector.stop();
             })
             if (kt == true) return collector.stop();
-            if (kt == true) return collector.stop();
-            if (kt == true) return collector.stop();
-            if (kt == true) return collector.stop();
-            if (kt == true) return collector.stop();
-            if (kt == true) return collector.stop();
         })
-        if (kt == true) return; //End Process
+        if (kt == true) return; //End
     }
 }

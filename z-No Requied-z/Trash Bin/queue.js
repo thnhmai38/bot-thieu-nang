@@ -35,14 +35,14 @@ module.exports = {
         if (phut>0) {var phutstr = `${phut}m`} else var phutstr = ""
         var giaystr = `${giay}s`
         var time = giostr + phutstr + giaystr
-        const list = new Discord.MessageEmbed()
+        const list = new Discord.EmbedBuilder()
             .setTitle("Hàng đợi")
             .setDescription(`${tracks.join("\n")}${
                 queue.tracks.length > tracks.length
                     ? `\n...${queue.tracks.length - tracks.length === 1 ? `${queue.tracks.length - tracks.length} bài nữa` : `${queue.tracks.length - tracks.length} bài nữa`}`
                     : ""
             }`)
-            .setColor("RANDOM")
+            .setColor("Random")
             .addFields(
                 { name: "Đang phát", value: `🎶 | **${currentTrack.title}** ([link](${currentTrack.url}))` }
             )

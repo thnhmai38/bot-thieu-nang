@@ -33,16 +33,16 @@ module.exports = {
             .then(res => res.json())
             .then(data => {
 
-                const que = new Discord.MessageEmbed()
+                const que = new Discord.EmbedBuilder()
                     .setTitle(`ĐOÁN CỜ!`)
-                    .addField(`Thủ đô: `, `${data.Data.capital}`)
+                    .addFields([{name: `Thủ đô: `, value: `${data.Data.capital}`}])
                     .setColor(questionColor || "RANDOM")
                     .setImage(data.flag)
                     .setFooter({text: questionFooter})
                     .setTimestamp()
 
 
-                const right = new Discord.MessageEmbed()
+                const right = new Discord.EmbedBuilder()
                     .setTitle(`Bạn đã đoán đúng!`)
                     .setAuthor({name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL({dynamic : true})})
                     .setColor(winColor || "RANDOM")
@@ -52,7 +52,7 @@ module.exports = {
                     .setTimestamp()
 
 
-                const wrong = new Discord.MessageEmbed()
+                const wrong = new Discord.EmbedBuilder()
                     .setTitle(`Bạn đã thua!`)
                     .setColor(lostColor || "RANDOM")
                     .setAuthor({name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL({dynamic : true})})

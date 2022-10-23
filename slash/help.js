@@ -11,13 +11,13 @@ module.exports = {
         * @param {Object[]} option //{ name: 'id', type: 'INTEGER', value: 69 }
         */
         async run (client, interaction, option) {
-                const help = new Discord.MessageEmbed()
+                const help = new Discord.EmbedBuilder()
                         .setTitle(`**-> NHẤN VÀO ĐỂ XEM HƯỚNG DẪN SỬ DỤNG <-**`)
                         .setDescription(`Hướng dẫn sử dụng Bot Thieu Nang`)
                         .setThumbnail('https://i.imgur.com/gfnBgbS.png')
                         .setURL(`https://bit.ly/btnguide`)
                         .setTimestamp()
-                        .setColor("RANDOM")
+                        .setColor("Random")
                 interaction.reply({embeds : [help], ephemeral: true});
         }
 } 

@@ -23,8 +23,8 @@ module.exports = {
                     returnType: 'emoji',
                 })
                 const data = minesweeper.start().toString();
-                const embed = new Discord.MessageEmbed()
-                    .setColor('RANDOM')
+                const embed = new Discord.EmbedBuilder()
+                    .setColor('Random')
                     .setTitle(`Đào mìn 9x9, số lượng mìn 10`)
                     .setDescription(data)
                     .setTimestamp()
@@ -56,7 +56,7 @@ module.exports = {
                         content: `Không thể khởi tạo Đào mìn ${row}x${col}, số lượng mìn ${mine}`
                     })
                 } else {
-                        let embed = new Discord.MessageEmbed({
+                        let embed = new Discord.EmbedBuilder({
                             color: "RANDOM",
                             title: `Đào mìn ${row}x${col}, số lượng mìn ${mine}`,
                             description: ms,

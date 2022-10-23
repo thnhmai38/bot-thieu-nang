@@ -14,7 +14,7 @@ module.exports = {
     async run (client, interaction, option) {
         
         if (!interaction.member.voice.channel) return interaction.reply({content: `${client.emotes.error} |  Bạn phải ở trong một kênh nói`, ephemeral: true});
-        if (interaction.guild.me.voice.channel && interaction.member.voice.channel.id !== interaction.guild.me.voice.channel.id) return interaction.reply({content: `${client.emotes.error} |  Bạn phải ở cùng kênh nói với Bot`, ephemeral: true}); 
+        if (interaction.guild.members.me.voice.channel && interaction.member.voice.channel.id !== interaction.guild.members.me.voice.channel.id) return interaction.reply({content: `${client.emotes.error} |  Bạn phải ở cùng kênh nói với Bot`, ephemeral: true}); 
 
         const queue = client.distube.getQueue(interaction)
         if (!queue) return interaction.reply({content: `${client.emotes.error} | Chả có gì đang phát cả`, ephemeral: true})
@@ -33,7 +33,9 @@ module.exports = {
                     }
                 }
             } catch (e) {
-                interaction.reply({content: `${client.emotes.error} | Lỗi: ${e}`, ephemeral: true})
+                    interaction.reply({content: `${client.emotes.error} | Lỗi: ${e}`, ephemeral: true})
+                        .catch(interaction.editReply({content: `${client.emotes.error} | Lỗi: **${e}**`, ephemeral: true}))
+
             }
         }
         if (interaction.user.id === owner.id || queue.voiceChannel.permissionsFor(interaction.user.id).has("MUTE_MEMBERS") || queue.voiceChannel.permissionsFor(interaction.user.id).has("MOVE_MEMBERS")) {

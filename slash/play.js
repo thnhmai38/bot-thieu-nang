@@ -1,5 +1,7 @@
 const Discord = require('discord.js')
 const { MessageActionRow, MessageButton, Client, CommandInteraction } = require("discord.js");
+const ChannelType = Discord.ChannelType;
+
 module.exports = {
     name: "play",
     description: "Phát một bài hát",
@@ -23,8 +25,8 @@ module.exports = {
     async run (client, interaction, option) {
 
         if (!interaction.member.voice.channel) return interaction.reply({content: `${client.emotes.error} |  Bạn phải ở trong một kênh nói`, ephemeral: true});
-        if (interaction.guild.me.voice.channel && interaction.member.voice.channel.id !== interaction.guild.me.voice.channel.id) return interaction.reply({content: `${client.emotes.error} |  Bạn phải ở cùng kênh nói với Bot`, ephemeral: true}); 
-        if (interaction.member.voice.channel.type == "GUILD_STAGE_VOICE" && interaction.member.voice.suppress == true) return interaction.reply({content: `${client.emotes.error} | Bạn đang ở trong kênh Sân khấu. Để dùng lệnh này trong kênh sân khấu, bạn phải **ở trên Sân khấu** (trở thành Người nói) trước`, ephemeral: true})
+        if (interaction.guild.members.me.voice.channel && interaction.member.voice.channel.id !== interaction.guild.members.me.voice.channel.id) return interaction.reply({content: `${client.emotes.error} |  Bạn phải ở cùng kênh nói với Bot`, ephemeral: true}); 
+        if (interaction.member.voice.channel.type == ChannelType.GuildStageVoice && interaction.member.voice.suppress == true) return interaction.reply({content: `${client.emotes.error} | Bạn đang ở trong kênh Sân khấu. Để dùng lệnh này trong kênh sân khấu, bạn phải **ở trên Sân khấu** (trở thành Người nói) trước`, ephemeral: true})
 
         try {
             var queue = client.distube.getQueue(interaction);
@@ -46,13 +48,13 @@ module.exports = {
             }
             
             function loop(client, interaction) {
-                if (interaction.member.voice.channel.type == "GUILD_STAGE_VOICE") {
+                if (interaction.member.voice.channel.type == ChannelType.GuildStageVoice) {
                     setTimeout(function () {
                         if (client.distube.getQueue(interaction)) {
                             try {
-                                interaction.guild.me.voice.setSuppressed(false)
+                                interaction.guild.members.me.voice.setSuppressed(false)
                             } catch (e) {
-                                interaction.guild.me.voice.setRequestToSpeak(true);
+                                interaction.guild.members.me.voice.setRequestToSpeak(true);
                                 interaction.reply(`${client.emotes.success} | Đã gửi **Đề nghị Nói**. \n*Nếu Bot chưa xuất hiện trên Sân khấu, hãy mời Bot lên Sân khấu (trở thành Người nói) ngay để tránh việc nhạc tự phát khi Bot chưa lên Sân khấu*`)
                             };
                             return;
@@ -62,7 +64,8 @@ module.exports = {
             }
             loop(client, interaction);
         } catch (e) {
-            interaction.reply({content: `${client.emotes.error} | Lỗi: **${e}**`, ephemeral: true})
+                interaction.reply({content: `${client.emotes.error} | Lỗi: **${e}**`, ephemeral: true})
+                    .catch(interaction.editReply({content: `${client.emotes.error} | Lỗi: **${e}**`, ephemeral: true}))
         }
     }
 }

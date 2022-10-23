@@ -1,4 +1,5 @@
-const Discord = require('discord.js')
+const Discord = require('discord.js');
+const ChannelType = Discord.ChannelType;
 
 module.exports = {
     name: "play",
@@ -11,13 +12,13 @@ module.exports = {
         if (!message.member.voice.channel) return message.reply(`${client.emotes.error} |  Bạn phải ở trong một kênh nói`);
         if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.reply(`${client.emotes.error} |  Bạn phải ở cùng kênh nói với Bot`); 
         if (!args.join(' ')) return message.reply(`${client.emotes.error} | Bạn không muốn phát bài gì cả`)
-        if (message.member.voice.channel.type == "GUILD_STAGE_VOICE" && message.member.voice.suppress == true) return message.reply(`${client.emotes.error} | Bạn đang ở trong kênh Sân khấu. Để dùng lệnh này trong kênh sân khấu, bạn phải **ở trên Sân khấu** (trở thành Người nói) trước`)
+        if (message.member.voice.channel.type == ChannelType.GuildStageVoice && message.member.voice.suppress == true) return message.reply(`${client.emotes.error} | Bạn đang ở trong kênh Sân khấu. Để dùng lệnh này trong kênh sân khấu, bạn phải **ở trên Sân khấu** (trở thành Người nói) trước`)
 
         try {
             var queue = client.distube.getQueue(message);
             var kt = 0;
             if (!queue) {kt = 1;}
-            await client.distube.play(message, args.join(' '));
+            await client.distube.play(message.member.voice.channel, args.join(' '), { message, member: message.member });
             if (kt===1) {
                 const queue = client.distube.getQueue(message);
                 if (queue) {
@@ -28,7 +29,7 @@ module.exports = {
                 }
             }
             function loop(client, message) {
-                if (message.member.voice.channel.type == "GUILD_STAGE_VOICE") {
+                if (message.member.voice.channel.type == ChannelType.GuildStageVoice) {
                     setTimeout(function () {
                         if (client.distube.getQueue(message)) {
                             try {

@@ -20,10 +20,10 @@ module.exports = {
                     const mat = JSON.parse(string);
 
                     try {
-                        const data = new Discord.MessageEmbed()
+                        const data = new Discord.EmbedBuilder()
                             .setDescription(`**${mat.slip.advice}**`)
                             .setFooter({text: `Lời khuyên mã ${mat.slip.id}`})
-                            .setColor("RANDOM")
+                            .setColor("Random")
                         message.reply({embeds : [data]})
                     } catch {
                         message.reply(`Không có lời khuyên mã **${args[0]}**`)
@@ -35,10 +35,10 @@ module.exports = {
             const main = await fetch("https://api.adviceslip.com/advice");
             const mat = await main.json();
 
-            const data = new Discord.MessageEmbed()
+            const data = new Discord.EmbedBuilder()
                 .setDescription(`**${mat.slip.advice}**`)
                 .setFooter({text: `Lời khuyên mã ${mat.slip.id}`})
-                .setColor("RANDOM")
+                .setColor("Random")
             message.reply({embeds : [data]})
         }
     }

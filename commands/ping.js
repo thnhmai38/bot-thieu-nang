@@ -6,9 +6,9 @@ module.exports = {
 
     async run (client, message, args) {
         
-        const ping = new Discord.MessageEmbed()
+        const ping = new Discord.EmbedBuilder()
         .setTitle('**🏓 PING PONG! 🏓**')
-        .setColor("RANDOM")
+        .setColor("Random")
         .addFields(
             { name: 'Độ trễ của Bot', value: `${Date.now() - message.createdTimestamp}ms`, inline: true  },
             { name: 'Độ trễ của API', value: `${Math.round(client.ws.ping)}ms`, inline: true },

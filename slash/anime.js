@@ -155,8 +155,8 @@ module.exports = {
                 json = await images_api.nsfw.lesbian()
             }
             url = json.image;
-            content = new Discord.MessageEmbed()
-                    .setColor("RANDOM")
+            content = new Discord.EmbedBuilder()
+                    .setColor("Random")
                     .setTitle(`Ảnh Anime ${input}`)
                     .setImage(url)
                     .setURL(url)
@@ -168,8 +168,8 @@ module.exports = {
             .then(response => response.json())
             .then(data => {
                 url = data.url
-                content = new Discord.MessageEmbed()
-                    .setColor("RANDOM")
+                content = new Discord.EmbedBuilder()
+                    .setColor("Random")
                     .setTitle(`Ảnh Anime ${input}`)
                     .setImage(url)
                     .setURL(url)

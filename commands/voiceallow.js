@@ -50,11 +50,11 @@ module.exports = {
                 break;  
             case "list": 
                 const allowList = queue.allowList.length==0 ? `***Không có ai***` : queue.allowList.map((value) => `<@${value}>`).join(", ");
-                const Embed = new Discord.MessageEmbed()
-                    .setColor('BLUE')
+                const Embed = new Discord.EmbedBuilder()
+                    .setColor('Blue')
                     .setTitle(`${client.emotes.queue} | Danh sách Cho Phép`)
                     .setDescription('Chủ Hàng chờ: <@'+ queue.owner +'>')
-                    .addField('Danh sách', `${allowList}`, true)
+                    .addFields([{name:'Danh sách', value:`${allowList}`}])
                     .setThumbnail(queue.songs[0].thumbnail)
                     .setTimestamp()
                 message.reply({

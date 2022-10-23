@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js')
+const { EmbedBuilder } = require('discord.js')
 const fs = require('fs');
 const dir = './commands';
 const slsdir = './slash';
@@ -27,8 +27,8 @@ module.exports = {
         var cmdcount = files.length;
         fs.readdir(slsdir, (err, files) => {
           var slscount = files.length;
-      const embed = new MessageEmbed()
-        .setColor("RANDOM")
+      const embed = new EmbedBuilder()
+        .setColor("Random")
         .setAuthor({
           name: `Thông tin về ${client.user.username}`,
           iconURL: client.user.displayAvatarURL()

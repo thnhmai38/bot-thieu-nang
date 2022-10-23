@@ -8,7 +8,7 @@ module.exports = {
 
 	//example : https://i.imgur.com/GyChaXg.png
     async run (client, message, args) {
-	const exampleEmbed = new Discord.MessageEmbed()
+	const exampleEmbed = new Discord.EmbedBuilder()
 		.setColor('#0099ff')
 		.setTitle('Some title')
 		.setURL('https://discord.js.org/')
@@ -21,7 +21,7 @@ module.exports = {
 			{ name: 'Inline field title 2', value: 'Some value here', inline: true },
 			{ name: 'Inline field title 3', value: 'Some value here', inline: true },
 		)
-		.addField('Inline field title', 'Some value here', true)
+		.addFields([{name: 'Inline field title', value: 'Some value here'}])
 		.setImage('https://i.imgur.com/wSTFkRM.png')
 		.setTimestamp()
 		.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');

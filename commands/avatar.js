@@ -11,10 +11,10 @@ module.exports = {
         let member = message.mentions.users.first() || message.author
         //avatar
         let avatar = member.displayAvatarURL({dynamic : true})
-        const avt = new Discord.MessageEmbed()
+        const avt = new Discord.EmbedBuilder()
             .setTitle(`Ảnh đại diện của **${member.username}**`)
             .setImage(`${avatar}?size=1024`)
-            .setColor("RANDOM")
+            .setColor("Random")
             .setURL(`${avatar}?size=1024`)
         
         //banner
@@ -59,10 +59,10 @@ module.exports = {
             message.reply({content: `**${member.username}** không có Ảnh Biểu ngữ :(`, embed: avt})
         }
         else {
-            const br = new Discord.MessageEmbed()
+            const br = new Discord.EmbedBuilder()
                 .setTitle(`Ảnh biểu ngữ của **${member.username}**`)
                 .setImage(bnn)
-                .setColor("RANDOM")
+                .setColor("Random")
                 .setURL(bnn)
         message.reply({embeds : [br, avt]})
         }

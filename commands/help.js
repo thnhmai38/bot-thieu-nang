@@ -6,13 +6,13 @@ module.exports = {
 
         async run(client, message, args) {
         
-        const help = new Discord.MessageEmbed()
+        const help = new Discord.EmbedBuilder()
                 .setTitle(`**-> NHẤN VÀO ĐỂ XEM HƯỚNG DẪN SỬ DỤNG <-**`)
                 .setDescription(`Hướng dẫn sử dụng Bot Thieu Nang`)
                 .setThumbnail('https://i.imgur.com/gfnBgbS.png')
                 .setURL(`https://bit.ly/btnguide`)
                 .setTimestamp()
-                .setColor("RANDOM")
+                .setColor("Random")
         message.reply({embeds : [help]});
    }
 } 

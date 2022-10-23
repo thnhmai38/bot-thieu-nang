@@ -14,13 +14,13 @@ module.exports = {
 
         const queue = client.distube.getQueue(message)
         if (!queue) return message.reply(`${client.emotes.error} | Chả có gì đang phát cả!`);
-        if (!args[0]) return message.reply(`${client.emotes.filter} Filter : **${queue.filters.length === 0 ? "`Tắt`" : "`" + queue.filters.join(", ") + "`"}**`)
+        if (!args[0]) return message.reply(`${client.emotes.filter} Filter : **${queue.filters.collection.size === 0 ? "`Tắt`" : "`" + queue.filters.collection.join(", ") + "`"}**`)
         else if (args[0].toLowerCase() === "off" && queue.filters?.length) {
-            queue.setFilter(false)
+            queue.filters.clear();
             message.reply(`${client.emotes.filter} | **\`Tắt toàn bộ Filter\`** \n*Vui lòng đợi một lát để áp dụng thay đổi*`)
         }
         else if (Object.keys(client.distube.filters).includes(args[0].toLowerCase())) {
-            const filter = queue.setFilter(args[0])
+            const filter = queue.filters.add(args[0])
             let status;
             if (filter.includes(args[0])) {status = "`Bật`"} else {status = "`Tắt`"} 
             message.reply(`${client.emotes.filter} | **${args[0]}: ${status}** \n*Vui lòng đợi một lát để áp dụng thay đổi*`);

@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
-const client = new Discord.Client({intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "GUILD_VOICE_STATES"]});
+const ChannelType = Discord.ChannelType;
+const client = new Discord.Client({intents: ["Guilds", "GuildMessages", "GuildMessageReactions", "GuildVoiceStates"]});
 const fs = require('fs');
 module.exports = client;
 const { readdirSync } = require('fs');
@@ -129,56 +130,59 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
         leaveOnFinish: true,
         leaveOnStop: true,
         savePreviousSongs: true,
-        youtubeDL: false,
         nsfw: false,
-        plugins: [new SoundCloudPlugin(), new YtDlpPlugin(), new SpotifyPlugin()],
+        plugins: [new SoundCloudPlugin(), new YtDlpPlugin({ update: false }), new SpotifyPlugin()],
     })
     client.distube
         .on("error", (channel, error) => {
             console.log(colors.red(error));
-            const exampleEmbed = new Discord.MessageEmbed()
-                .setColor('RED')
+            const exampleEmbed = new Discord.EmbedBuilder()
+                .setColor('Red')
                 .setAuthor({name: `${client.emotes.error} | Đã xảy ra lỗi`})
                 .setDescription(`\n${error}\n\n\`Hãy thử lại một lần nữa hoặc đợi một lúc rồi thử lại! Nếu vấn đề vẫn chưa được khắc phục, liên hệ với chủ Bot bằng />support để được giúp đỡ\``)
                 .setTimestamp()
             channel.send({embeds : [exampleEmbed]});
         })
         .on("addSong", (queue, song) => {
-            const exampleEmbed = new Discord.MessageEmbed()
+            const exampleEmbed = new Discord.EmbedBuilder()
                 .setColor('#800080')
                 .setAuthor({name: `${client.emotes.success} | Đã thêm bài nhạc`})
                 .setTitle(`${song.name}`)
                 .setURL(`${song.url}`)
                 .setThumbnail(`${song.thumbnail}`)
-                .addField('Lượt xem', `${new Intl.NumberFormat('en-US').format(song.views)}`, true)
-                .addField('Lượt thích', `${new Intl.NumberFormat('en-US').format(song.likes)}`, true)
-                .addField('Yêu cầu bởi', `${song.user}`, true)
-                .addField('Người tải lên', `[${song.uploader.name}](${song.uploader.url})`, true)
-                .addField('Thời lượng', `${song.isLive ? "LIVE" : song.formattedDuration}`, true)
-                .addField('Âm lượng', `${queue.volume}%`, true)
-                .addField('Lặp', `${queue.repeatMode ? queue.repeatMode === 2 ? "Tất cả" : "Đơn bài" : "Tắt"}`, true)
-                .addField('Tự động phát', `${queue.autoplay ? "Bật" : "Tắt"}`, true)
-                .addField('Filter', `\`${queue.filters.length === 0 ? "Tắt" : queue.filters.join(", ")}\``, true)
+                .addFields([
+                    {name:'Lượt xem', value: `${new Intl.NumberFormat('en-US').format(song.views)}`, inline: true},
+                    {name:'Lượt thích', value: `${new Intl.NumberFormat('en-US').format(song.likes)}`, inline: true},
+                    {name:'Yêu cầu bởi', value: `${song.user}`, inline: true},
+                    {name:'Người tải lên', value: `[${song.uploader.name}](${song.uploader.url})`, inline: true},
+                    {name:'Thời lượng', value: `${song.isLive ? "LIVE" : song.formattedDuration}`, inline: true},
+                    {name:'Âm lượng', value: `${queue.volume}%`, inline: true},
+                    {name:'Lặp', value: `${queue.repeatMode ? queue.repeatMode === 2 ? "Tất cả" : "Đơn bài" : "Tắt"}`, inline: true},
+                    {name:'Tự động phát', value: `${queue.autoplay ? "Bật" : "Tắt"}`, inline: true},
+                    {name:'Filter', value: `\`${queue.filters.collection.size === 0 ? "Tắt" : queue.filters.collection.join(", ")}\``, inline: true},
+                ])
                 .setTimestamp()
             console.log(colors.yellow(queue.id +` | Thêm bài "${song.name}"/${song.url}`));
             queue.textChannel.send({embeds : [exampleEmbed]});
         })
         .on("playSong", (queue, song) => {
-            const exampleEmbed = new Discord.MessageEmbed()
-                .setColor('BLUE')
+            const exampleEmbed = new Discord.EmbedBuilder()
+                .setColor('Blue')
                 .setAuthor({name: `${client.emotes.success} | Bắt đầu phát bài nhạc`})
                 .setTitle(`${song.name}`)
                 .setURL(`${song.url}`)
                 .setThumbnail(`${song.thumbnail}`)
-                .addField('Lượt xem', `${new Intl.NumberFormat('en-US').format(song.views)}`, true)
-                .addField('Lượt thích', `${new Intl.NumberFormat('en-US').format(song.likes)}`, true)
-                .addField('Yêu cầu bởi', `${song.user}`, true)
-                .addField('Người tải lên', `[${song.uploader.name}](${song.uploader.url})`, true)
-                .addField('Thời lượng', `${song.isLive ? "LIVE" : song.formattedDuration}`, true)
-                .addField('Âm lượng', `${queue.volume}%`, true)
-                .addField('Lặp', `${queue.repeatMode ? queue.repeatMode === 2 ? "Tất cả" : "Đơn bài" : "Tắt"}`, true)
-                .addField('Tự động phát', `${queue.autoplay ? "Bật" : "Tắt"}`, true)
-                .addField('Filter', `\`${queue.filters.length === 0 ? "Tắt" : queue.filters.join(", ")}\``, true)
+                .addFields([
+                    {name: 'Lượt xem', value: `${new Intl.NumberFormat('en-US').format(song.views)}`, inline:true},
+                    {name: 'Lượt thích', value: `${new Intl.NumberFormat('en-US').format(song.likes)}`, inline:true},
+                    {name: 'Yêu cầu bởi', value: `${song.user}`, inline:true},
+                    {name: 'Người tải lên', value: `[${song.uploader.name}](${song.uploader.url})`, inline:true},
+                    {name: 'Thời lượng', value: `${song.isLive ? "LIVE" : song.formattedDuration}`, inline:true},
+                    {name: 'Âm lượng', value: `${queue.volume}%`, inline:true},
+                    {name: 'Lặp', value: `${queue.repeatMode ? queue.repeatMode === 2 ? "Tất cả" : "Đơn bài" : "Tắt"}`, inline:true},
+                    {name: 'Tự động phát', value:`${queue.autoplay ? "Bật" : "Tắt"}`, inline:true},
+                    {name: 'Filter', value:`\`${queue.filters.collection.size === 0 ? "Tắt" : queue.filters.collection.join(", ")}\``, inline:true},
+                ])
                 .setTimestamp()
             console.log(colors.blue(queue.id +` | Phát bài "${song.name}"/${song.url} | Queue có ${(queue.song === undefined ? 0 : queue.song.length())+1} bài`));
             queue.textChannel.send({
@@ -191,15 +195,17 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
                 songlist[i] = `${i+1}. [${playlist.songs[i].name}](${playlist.songs[i].url})` + " -** `" + playlist.songs[i].formattedDuration + "`**";
             }
             const song = songlist.join('\n');
-            const exampleEmbed = new Discord.MessageEmbed()
+            const exampleEmbed = new Discord.EmbedBuilder()
                 .setColor('#800080')
                 .setAuthor({name: `${client.emotes.success} | Đã thêm danh sách phát`})
                 .setTitle(`${playlist.name}`)
                 .setURL(`${playlist.url}`)
                 .setThumbnail(`${playlist.thumbnail}`)
                 .setDescription(`**Gồm các bài:** \n${song}\n`)
-                .addField('Tổng thời lượng', `${playlist.formattedDuration}`, true)
-                .addField('Yêu cầu bởi', `${playlist.user}`, true)
+                .addFields([
+                    {name: 'Tổng thời lượng', value:`${playlist.formattedDuration}`, inline: true},
+                    {name: 'Yêu cầu bởi', value:`${playlist.user}`, inline: true},
+                ])
                 .setTimestamp()
             console.log(colors.yellow(queue.id +` | Thêm Playlist "${playlist.name}"/${playlist.url}`));
             queue.textChannel.send({embeds : [exampleEmbed]});
@@ -207,8 +213,8 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
         
         .on("searchResult", (message, results, query) => {
             let i = 0;
-            const exampleEmbed = new Discord.MessageEmbed()
-                .setColor(`GREEN`)
+            const exampleEmbed = new Discord.EmbedBuilder()
+                .setColor('Green')
                 .setTimestamp()
                 .setAuthor({name: `${client.emotes.search} | Kết quả tìm kiếm cho "${query}"`})
                 .setTitle(`Gửi số thứ tự bài bạn muốn phát tương ứng`)
@@ -244,7 +250,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
         .on("noRelated", queue => queue.textChannel.send(`${client.emotes.error} | Không tìm thấy bài liên quan`));
     client.on("messageCreate", async (message) => {
         if(message.author.bot) return;
-        if(message.channel.type === 'dm') return;
+        if(message.channel.type === ChannelType.DM) return;
         if(message.content.startsWith(prefix)) {
             const args = message.content.slice(prefix.length).trim().split(/ +/);
             const command = args.shift().toLowerCase();

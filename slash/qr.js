@@ -18,8 +18,8 @@ module.exports = {
     * @param {Object[]} option //{ name: 'id', type: 'INTEGER', value: 69 }
     */
     async run (client, interaction, option) {
-        const embed = new Discord.MessageEmbed()
-            .setColor('RANDOM')
+        const embed = new Discord.EmbedBuilder()
+            .setColor('Random')
             .setTitle('Đã tạo xong mã QR')
             .setImage(`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(option[0].value)}`)
             .setFooter({text: `Tạo bởi ${interaction.user.tag}`})

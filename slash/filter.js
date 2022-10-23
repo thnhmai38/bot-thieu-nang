@@ -94,18 +94,18 @@ module.exports = {
     async run (client, interaction, option) {
         
         if (!interaction.member.voice.channel) return interaction.reply({content: `${client.emotes.error} |  Bạn phải ở trong một kênh nói`, ephemeral: true});
-        if (interaction.guild.me.voice.channel && interaction.member.voice.channel.id !== interaction.guild.me.voice.channel.id) return interaction.reply({content: `${client.emotes.error} |  Bạn phải ở cùng kênh nói với Bot`, ephemeral: true}); 
+        if (interaction.guild.members.me.voice.channel && interaction.member.voice.channel.id !== interaction.guild.members.me.voice.channel.id) return interaction.reply({content: `${client.emotes.error} |  Bạn phải ở cùng kênh nói với Bot`, ephemeral: true}); 
 
         const queue = client.distube.getQueue(interaction)
         if (!queue) return interaction.reply({content: `${client.emotes.error} | Chả có gì đang phát cả!`, ephemeral: true});
         
-        if (option[0].value == "none") return interaction.reply(`${client.emotes.filter} Filter : **${queue.filters.length === 0 ? "`Tắt`" : "`" + queue.filters.join(", ") + "`"}**`)
+        if (option[0].value == "none") return interaction.reply(`${client.emotes.filter} Filter : **${queue.filters.collection.size === 0 ? "`Tắt`" : "`" + queue.filters.collection.join(", ") + "`"}**`)
         else if (option[0].value.toLowerCase() === "off" && queue.filters?.length) {
-            queue.setFilter(false)
+            queue.filters.clear();
             interaction.reply(`${client.emotes.filter} | **\`Tắt toàn bộ Filter\`** \n*Vui lòng đợi một lát để áp dụng thay đổi*`)
         }
         else {
-            const filter = queue.setFilter(option[0].value)
+            const filter = queue.filters.add(option[0].value)
             let status;
             if (filter.includes(option[0].value)) {status = "`Bật`"} else {status = "`Tắt`"} 
             interaction.reply(`${client.emotes.filter} | **${option[0].value}: ${status}** \n*Vui lòng đợi một lát để áp dụng thay đổi*`);

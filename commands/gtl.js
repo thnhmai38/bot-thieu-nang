@@ -29,17 +29,19 @@ module.exports = {
             .then(res => res.json())
             .then(data => {
 
-                const que = new Discord.MessageEmbed()
+                const que = new Discord.EmbedBuilder()
                     .setTitle(`Đoán Logo!`)
-                    .addField(`Mô tả: `, `${data.clue ? data.clue : "Không có"}`, true)
-                    .addField(`Gợi ý: `, `${data.hint}`)
+                    .addFields([
+                        {name: `Mô tả: `, value: `${data.clue ? data.clue : "Không có"}`},
+                        {name: `Gợi ý: `, value: `${data.hint}`}
+                    ])
                     .setColor(questionColor || "RANDOM")
                     .setImage(data.question)
                     .setFooter({text: questionFooter})
                     .setTimestamp()
 
 
-                const right = new Discord.MessageEmbed()
+                const right = new Discord.EmbedBuilder()
                     .setTitle(`Bạn đã đoán đúng!`)
                     .setAuthor({name: message.author.tag, iconURL:message.author.displayAvatarURL({dynamic : true})})
                     .setColor(winColor || "RANDOM")
@@ -47,10 +49,10 @@ module.exports = {
                     .setImage(data.answer)
                     .setFooter({text: winFooter})
                     .setTimestamp()
-                    .addField(`Mô tả: `, `${data.clue ? data.clue : "Không có"}`, true)
+                    .addFields([{name: `Mô tả: `, value: `${data.clue ? data.clue : "Không có"}`}])
 
 
-                const wrong = new Discord.MessageEmbed()
+                const wrong = new Discord.EmbedBuilder()
                     .setTitle(`Bạn đã thua!`)
                     .setColor(lostColor || "RANDOM")
                     .setAuthor({name: message.author.tag, iconURL: message.author.displayAvatarURL({dynamic : true})})
@@ -58,7 +60,7 @@ module.exports = {
                     .setImage(data.answer)
                     .setFooter({text: lostFooter})
                     .setTimestamp()
-                    .addField(`Mô tả: `, `${data.clue ? data.clue : "Không có"}`, true)
+                    .addFields([{name: `Mô tả: `, value: `${data.clue ? data.clue : "Không có"}`}])
 
 
                 message.reply({embeds : [que]})

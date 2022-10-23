@@ -34,34 +34,36 @@ module.exports = {
             .then(res => res.json())
             .then(data => {
 
-                const que = new Discord.MessageEmbed()
+                const que = new Discord.EmbedBuilder()
                     .setTitle(`Đoán Logo!`)
-                    .addField(`Mô tả: `, `${data.clue ? data.clue : "Không có"}`, true)
-                    .addField(`Gợi ý: `, `${data.hint}`)
+                    .addFields([
+                        {name: `Mô tả: `,value: `${data.clue ? data.clue : "Không có"}`, inline:true},
+                        {name: `Gợi ý: `,value: `${data.hint}`}
+                    ])
                     .setColor(questionColor || "RANDOM")
                     .setImage(data.question)
                     .setFooter({text: questionFooter})
                     .setTimestamp()
 
-                const right = new Discord.MessageEmbed()
+                const right = new Discord.EmbedBuilder()
                     .setTitle(`Bạn đã đoán đúng!`)
                     .setAuthor({name: interaction.user.tag, iconURL:interaction.user.displayAvatarURL({dynamic : true})})
                     .setColor(winColor || "RANDOM")
                     .setDescription(`Đây là Logo của **${data.brand}**`)
                     .setImage(data.answer)
                     .setFooter({text: winFooter})
-                    .addField(`Mô tả: `, `${data.clue ? data.clue : "Không có"}`, true)
+                    .addFields([{name: `Mô tả: `, value: `${data.clue ? data.clue : "Không có"}`}])
                     .setTimestamp()
 
 
-                const wrong = new Discord.MessageEmbed()
+                const wrong = new Discord.EmbedBuilder()
                     .setTitle(`Bạn đã thua!`)
                     .setColor(lostColor || "RANDOM")
                     .setAuthor({name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL({dynamic : true})})
                     .setDescription(`Đây là Logo của **${data.brand}**`)
                     .setImage(data.answer)
                     .setFooter({text: lostFooter})
-                    .addField(`Mô tả: `, `${data.clue ? data.clue : "Không có"}`, true)
+                    .addFields([{name: `Mô tả: `, value: `${data.clue ? data.clue : "Không có"}`}])
                     .setTimestamp()
 
 

@@ -21,17 +21,19 @@ module.exports = {
         var current = result[0].current;
         var location = result[0].location;
 
-        const weatherinfo = new Discord.MessageEmbed()
+        const weatherinfo = new Discord.EmbedBuilder()
         .setDescription(`**${current.skytext}**`)
         .setAuthor({name: `DỰ BÁO THỜI TIẾT Ở ${current.observationpoint}`})
         .setThumbnail(current.imageUrl)
         .setColor(0x111111)
-        .addField('Múi giờ', `UTC${location.timezone}`, true)
-        .addField('Đơn vị đo', 'Độ Celsius (°C)', true)
-        .addField('Nhiệt độ', `${current.temperature}°`, true)
-        .addField('Gió', current.winddisplay, true)
-        .addField('Cảm nhận thấy', `${current.feelslike}°`, true)
-        .addField('Độ ẩm', `${current.humidity}%`, true)
+        .addFields([
+            {name: 'Múi giờ', value: `UTC${location.timezone}`, inline:true},
+            {name: 'Đơn vị đo', value: 'Độ Celsius (°C)', inline:true},
+            {name: 'Nhiệt độ', value: `${current.temperature}°`, inline:true},
+            {name: 'Gió', value: current.winddisplay, inline:true},
+            {name: 'Cảm nhận thấy', value: `${current.feelslike}°`, inline:true},
+            {name: 'Độ ẩm', value: `${current.humidity}%`, inline:true},
+        ])
 
         message.reply({embeds : [weatherinfo]})
         })        
