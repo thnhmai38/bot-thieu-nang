@@ -1,6 +1,6 @@
 const discord = require("discord.js");
 const menu = require("../modules/menu.js")
-const { MessageActionRow, MessageButton, Client, CommandInteraction } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, Client, CommandInteraction } = require("discord.js");
 
 
 module.exports = {

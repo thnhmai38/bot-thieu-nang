@@ -1,6 +1,6 @@
 const DiscordJS = require('discord.js')
 const ytsr = require('ytsr')
-const { MessageActionRow, MessageButton, Client, CommandInteraction } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, Client, CommandInteraction } = require("discord.js");
 
 module.exports = {
     name : 'search',

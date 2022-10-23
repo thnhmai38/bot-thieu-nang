@@ -2,7 +2,7 @@ const fs = require('fs');
 const { PokemonSlash } = require("../modules/menu.js")
 require("dotenv").config();
 const Discord = require('discord.js')
-const { MessageActionRow, MessageButton, Client, CommandInteraction } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, Client, CommandInteraction } = require("discord.js");
 
 module.exports = {
     name: "pokemon",

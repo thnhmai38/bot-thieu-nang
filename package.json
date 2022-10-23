@@ -4,8 +4,8 @@
   "description": "Bot thieu nang Discord",
   "main": "index.js",
   "scripts": {
-    "debug": "node index.js",
-    "start": "node --max-old-space-size=4096 index.js"
+    "debug": "node --max-old-space-size=2048 index.js",
+    "start": "node index.js"
   },
   "author": "thanhgaming5550",
   "license": "ISC",

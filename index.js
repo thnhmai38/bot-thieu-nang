@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const ChannelType = Discord.ChannelType;
-const client = new Discord.Client({intents: ["Guilds", "GuildMessages", "GuildMessageReactions", "GuildVoiceStates"]});
+const client = new Discord.Client({intents: ["Guilds", "GuildMessages", "GuildMessageReactions", "GuildVoiceStates", "MessageContent"]});
 const fs = require('fs');
 module.exports = client;
 const { readdirSync } = require('fs');
@@ -267,7 +267,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
     });
 
     client.on("interactionCreate", async (interaction) => {
-        if (interaction.isCommand() || interaction.isContextMenu()) {
+        if (interaction.isCommand() || interaction.isContextMenuCommand()) {
             if (!interaction.guild) return;
             const command = client.slash.get(interaction.commandName);
             try {

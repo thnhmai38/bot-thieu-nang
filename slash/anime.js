@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const fetch = require("node-fetch")
 const Anime_Images = require('anime-images-api')
 const images_api = new Anime_Images()
-const { MessageActionRow, MessageButton, Client, CommandInteraction } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, Client, CommandInteraction } = require("discord.js");
 
 module.exports = {
     name: "anime",

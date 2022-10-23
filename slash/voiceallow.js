@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-const { MessageActionRow, MessageButton, Client, CommandInteraction } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, Client, CommandInteraction } = require("discord.js");
 module.exports = {
     name: "voiceallow",
     description: "Hệ thống cho phép (Người trong danh sách có thể />stop, />skip)",

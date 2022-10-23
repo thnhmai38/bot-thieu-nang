@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 const fs = require('fs');
 const fetch = require("node-fetch")
 require("dotenv").config();
-const { MessageActionRow, MessageButton, Client, CommandInteraction } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, Client, CommandInteraction } = require("discord.js");
 
 module.exports = {
     name: "gtf",

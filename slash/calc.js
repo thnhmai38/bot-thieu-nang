@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const simplydjs = require('simply-djs')
-const { MessageActionRow, MessageButton, Client, CommandInteraction } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, Client, CommandInteraction } = require("discord.js");
 
 module.exports = {
     name: "calc",

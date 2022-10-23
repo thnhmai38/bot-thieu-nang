@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const randomPuppy = require('random-puppy');
-const { MessageActionRow, MessageButton, Client, CommandInteraction } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, Client, CommandInteraction } = require("discord.js");
 
 module.exports = {
     name: "meme",

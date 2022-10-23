@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { MessageActionRow, MessageButton, Message, Client } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, Message, Client } = require('discord.js');
 
 module.exports = {
     name: "voiceallow",

@@ -9,7 +9,7 @@ const totalRAM = os.totalmem();
 const gitCommitInfo = require('git-commit-info');
 const commit = gitCommitInfo();
 const Discord = require('discord.js')
-const { MessageActionRow, MessageButton, Client, CommandInteraction } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, Client, CommandInteraction } = require("discord.js");
 
 module.exports = {
     name: "info",
@@ -76,7 +76,7 @@ module.exports = {
         },
           {
               name: 'Người tạo ra',
-              value: "thanhgaming5550",//"<@384282911479693313>",
+              value: config.author.name,
               inline: true  
           },
           {

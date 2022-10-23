@@ -67,6 +67,30 @@ module.exports = {
                     name: "Ocho",
                     value: "ocho"
                 },
+                {
+                    name: "Puttpartyqa",
+                    value: "puttpartyqa"
+                }, 
+                {
+                    name: "Sketchyartist",
+                    value: "sketchyartist"
+                },
+                {
+                    name: "Land",
+                    value: "land"
+                },
+                {
+                    name:"Meme",
+                    value: "meme"
+                }, 
+                {
+                    name: "Askaway",
+                    value: "askaway"
+                }, 
+                {
+                    name: "Bobble",
+                    value: "bobble"
+                }
             ]
         }
     ],

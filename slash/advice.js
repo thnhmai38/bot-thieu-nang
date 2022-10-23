@@ -6,7 +6,7 @@ function isNaturalNumber(n) {
         n2 = parseInt(n, 10);
     return !isNaN(n1) && n2 === n1 && n1.toString() === n;
 }
-const { MessageActionRow, MessageButton, Client, CommandInteraction } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, Client, CommandInteraction } = require("discord.js");
 
 module.exports = {
     name: "advice",

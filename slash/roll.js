@@ -4,7 +4,7 @@ function randomXToY(minVal,maxVal)
   var randVal = (minVal+(Math.random()*(maxVal-minVal))).toString();
   return Math.round(randVal);
 }
-const { MessageActionRow, MessageButton, Client, CommandInteraction } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, Client, CommandInteraction } = require("discord.js");
 
 module.exports = {
     name: "roll",

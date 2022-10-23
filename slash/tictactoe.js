@@ -1,6 +1,6 @@
 const simplydjs = require('simply-djs')
 const Discord = require('discord.js')
-const { MessageActionRow, MessageButton, Client, CommandInteraction } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, Client, CommandInteraction } = require("discord.js");
 
 module.exports = {
     name: 'tictactoe',

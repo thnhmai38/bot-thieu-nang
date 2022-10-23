@@ -8,8 +8,8 @@ function isNaturalNumber(n) {
 }
 const Discord = require('discord.js')
 const {
-    MessageActionRow,
-    MessageButton,
+    ActionRowBuilder,
+    ButtonBuilder,
     Client,
     CommandInteraction
 } = require("discord.js");

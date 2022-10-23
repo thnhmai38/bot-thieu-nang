@@ -1,7 +1,7 @@
 const weather = require('weather-js');
 const Discord = require('discord.js');
 const colors = require('colors');
-const { MessageActionRow, MessageButton, Client, CommandInteraction } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, Client, CommandInteraction } = require("discord.js");
 
 module.exports = {
     name: "weather",
