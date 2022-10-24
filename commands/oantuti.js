@@ -1,3 +1,4 @@
+//Waste 8 hours to code and debug :(
 const Discord = require('discord.js');
 const { ActionRowBuilder, ButtonBuilder, Message, Client } = require('discord.js');
 const luachon = ["bua", "lua", "keo", "ran", "nguoi", "cay", "soi", "botbien", "bao", "khongkhi", "nuoc", "rong", "acquy", "samchop", "sung"]

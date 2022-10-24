@@ -22,7 +22,6 @@ module.exports = {
         var on = queue.isAllowSystemOn;
         if (message.author.id === queue.owner.id) {owner = true;}
         if (owner == true || queue.allowList.includes(message.author.id)) {allowed = true;}
-        newewnemwewe
         /*======================*/
         switch (args[0]) {
             case "add": // />voiceallow add <user>
