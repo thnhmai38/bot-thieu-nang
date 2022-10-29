@@ -9,7 +9,7 @@ module.exports = {
 
 
         //if (!message.member.voice.channel) return message.reply(`${client.emotes.error} | Bạn phải ở trong một kênh nói`);
-        //if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.reply(`${client.emotes.error} | Bạn phải ở cùng kênh nói với Bot`); 
+        //if (message.guild.members.me.voice.channel && message.member.voice.channel.id !== message.guild.members.me.voice.channel.id) return message.reply(`${client.emotes.error} | Bạn phải ở cùng kênh nói với Bot`); 
 
         var queue = client.distube.getQueue(message)
         if (!queue) return message.reply(`${client.emotes.error} | Chả có gì đang phát cả`);

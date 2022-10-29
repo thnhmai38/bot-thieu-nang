@@ -13,7 +13,7 @@ module.exports = {
     */
     async run (client, message, args) {
         if (!message.member.voice.channel) return message.reply(`${client.emotes.error} | Bạn phải ở trong một kênh nói`);
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.reply(`${client.emotes.error} | Bạn phải ở cùng kênh nói với Bot`); 
+        if (message.guild.members.me.voice.channel && message.member.voice.channel.id !== message.guild.members.me.voice.channel.id) return message.reply(`${client.emotes.error} | Bạn phải ở cùng kênh nói với Bot`); 
 
         var queue = client.distube.getQueue(message);
         if (!queue) return message.reply(`${client.emotes.error} | Chưa có hàng chờ nào được tạo trong máy chủ`);
@@ -32,7 +32,7 @@ module.exports = {
                     if (user.id === message.author.id) return message.reply(`${client.emotes.error} | Bạn không thể tự thêm chính mình`)
                     if (queue.allowList.includes(user.id)) return message.reply(`${client.emotes.error} | Người này đã được thêm vào rồi`);
                     let user_guild = await message.guild.members.cache.get(user.id);
-                    if (user_guild.voice.channel.id !== message.guild.me.voice.channel.id) return message.reply(`${client.emotes.error} | Người này không ở trong kênh nói này`);
+                    if (user_guild.voice.channel.id !== message.guild.members.me.voice.channel.id) return message.reply(`${client.emotes.error} | Người này không ở trong kênh nói này`);
                     queue.allowList.push(user.id);
                     message.reply(`${client.emotes.success} | Đã thêm \`${user.username}\` vào danh sách Cho phép`);
                 } else message.reply(`${client.emotes.error} | Chỉ Chủ Hàng đợi mới có thể sử dụng lệnh này`)
@@ -63,7 +63,7 @@ module.exports = {
             case "claim":
                 if (message.author.id === queue.owner.id) return message.reply(`${client.emotes.error} | Bạn đã là chủ hàng đợi rồi :sweat_smile:`)
                 let user = message.guild.members.cache.get(queue.owner.id);
-                if (user.voice.channelId !== message.guild.me.voice.channel.id) {
+                if (user.voice.channelId !== message.guild.members.me.voice.channel.id) {
                     if (queue.allowList.includes(message.author.id)) {queue.allowList.splice(queue.allowList.indexOf(message.author.id), 1);}
                     message.reply(`${client.emotes.success} | Bạn đã lấy được quyền Chủ hàng đợi thành công từ **\`${queue.owner.username}\`**`)
                     queue.owner = message.author;

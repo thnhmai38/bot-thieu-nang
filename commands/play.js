@@ -10,7 +10,7 @@ module.exports = {
     async run (client, message, args) {
 
         if (!message.member.voice.channel) return message.reply(`${client.emotes.error} |  Bạn phải ở trong một kênh nói`);
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.reply(`${client.emotes.error} |  Bạn phải ở cùng kênh nói với Bot`); 
+        if (message.guild.members.me.voice.channel && message.member.voice.channel.id !== message.guild.members.me.voice.channel.id) return message.reply(`${client.emotes.error} |  Bạn phải ở cùng kênh nói với Bot`); 
         if (!args.join(' ')) return message.reply(`${client.emotes.error} | Bạn không muốn phát bài gì cả`)
         if (message.member.voice.channel.type == ChannelType.GuildStageVoice && message.member.voice.suppress == true) return message.reply(`${client.emotes.error} | Bạn đang ở trong kênh Sân khấu. Để dùng lệnh này trong kênh sân khấu, bạn phải **ở trên Sân khấu** (trở thành Người nói) trước`)
 
