@@ -44,7 +44,7 @@ module.exports = {
         .addFields([
             {name: 'Tổng thời gian', value: `${queue.formattedDuration}`, inline: true},
             {name: 'Âm lượng', value: `${queue.volume}%`, inline: true},
-            {name: 'Filter', value:`\`${queue.filters.collection.size === 0 ? "Tắt" : queue.filters.collection.join(", ")}\``, inline: true},
+            {name: 'Filter', value:`\`${queue.filters.size === 0 ? "Tắt" : queue.filters.names.join(", ")}\``, inline: true},
             {name: 'Tự động phát', value: `${queue.autoplay ? "Bật" : "Tắt"}`, inline: true},
             {name: 'Lặp', value: `${queue.repeatMode ? queue.repeatMode === 2 ? "Tất cả" : "Đơn bài" : "Tắt"}`, inline: true},
             {name: 'Chủ Hàng đợi', value: `${queue.owner}`, inline: true},

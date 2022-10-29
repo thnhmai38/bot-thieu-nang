@@ -159,7 +159,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
                     {name:'Âm lượng', value: `${queue.volume}%`, inline: true},
                     {name:'Lặp', value: `${queue.repeatMode ? queue.repeatMode === 2 ? "Tất cả" : "Đơn bài" : "Tắt"}`, inline: true},
                     {name:'Tự động phát', value: `${queue.autoplay ? "Bật" : "Tắt"}`, inline: true},
-                    {name:'Filter', value: `\`${queue.filters.collection.size === 0 ? "Tắt" : queue.filters.collection.join(", ")}\``, inline: true},
+                    {name:'Filter', value: `\`${queue.filters.size === 0 ? "Tắt" : queue.filters.names.join(", ")}\``, inline: true},
                 ])
                 .setTimestamp()
             console.log(colors.yellow(queue.id +` | Thêm bài "${song.name}"/${song.url}`));
@@ -181,7 +181,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
                     {name: 'Âm lượng', value: `${queue.volume}%`, inline:true},
                     {name: 'Lặp', value: `${queue.repeatMode ? queue.repeatMode === 2 ? "Tất cả" : "Đơn bài" : "Tắt"}`, inline:true},
                     {name: 'Tự động phát', value:`${queue.autoplay ? "Bật" : "Tắt"}`, inline:true},
-                    {name: 'Filter', value:`\`${queue.filters.collection.size === 0 ? "Tắt" : queue.filters.collection.join(", ")}\``, inline:true},
+                    {name: 'Filter', value:`\`${queue.filters.size === 0 ? "Tắt" : queue.filters.names.join(", ")}\``, inline:true},
                 ])
                 .setTimestamp()
             console.log(colors.blue(queue.id +` | Phát bài "${song.name}"/${song.url} | Queue có ${(queue.song === undefined ? 0 : queue.song.length())+1} bài`));

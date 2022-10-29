@@ -99,16 +99,15 @@ module.exports = {
         const queue = client.distube.getQueue(interaction)
         if (!queue) return interaction.reply({content: `${client.emotes.error} | Chả có gì đang phát cả!`, ephemeral: true});
         
-        if (option[0].value == "none") return interaction.reply(`${client.emotes.filter} Filter : **${queue.filters.collection.size === 0 ? "`Tắt`" : "`" + queue.filters.collection.join(", ") + "`"}**`)
-        else if (option[0].value.toLowerCase() === "off" && queue.filters?.length) {
+        if (option[0].value == "none") return interaction.reply(`${client.emotes.filter} Filter : **${queue.filters.size === 0 ? "`Tắt`" : "`" + queue.filters.names.join(", ") + "`"}**`)
+        else if (option[0].value.toLowerCase() === "off") {
             queue.filters.clear();
             interaction.reply(`${client.emotes.filter} | **\`Tắt toàn bộ Filter\`** \n*Vui lòng đợi một lát để áp dụng thay đổi*`)
         }
         else {
-            const filter = queue.filters.add(option[0].value)
-            let status;
-            if (filter.includes(option[0].value)) {status = "`Bật`"} else {status = "`Tắt`"} 
-            interaction.reply(`${client.emotes.filter} | **${option[0].value}: ${status}** \n*Vui lòng đợi một lát để áp dụng thay đổi*`);
+            const filter = (queue.filters.names.includes(option[0].value.toLowerCase()) ? queue.filters.remove(option[0].value.toLowerCase()) : queue.filters.add(option[0].value.toLowerCase()))
+            let status; if (filter.names.includes(option[0].value.toLowerCase())) {status = "`Bật`"} else {status = "`Tắt`"} 
+            interaction.reply(`${client.emotes.filter} | **${option[0].value.toLowerCase()}: ${status}** \n*Vui lòng đợi một lát để áp dụng thay đổi*`);
         }
     }
 }
