@@ -33,9 +33,9 @@ module.exports = {
                     setTimeout(function () {
                         if (client.distube.getQueue(message)) {
                             try {
-                                message.guild.me.voice.setSuppressed(false)
+                                message.guild.members.me.voice.setSuppressed(false)
                             } catch (e) {
-                                message.guild.me.voice.setRequestToSpeak(true);
+                                message.guild.members.me.voice.setRequestToSpeak(true);
                                 message.reply(`${client.emotes.success} | Đã gửi **Đề nghị Nói**. \n*Nếu Bot chưa xuất hiện trên Sân khấu, hãy mời Bot lên Sân khấu (trở thành Người nói) ngay để tránh việc nhạc tự phát khi Bot chưa lên Sân khấu*`)
                             };
                             return;
