@@ -6,8 +6,7 @@ const config = require('../config.json')
 const package = require('../package.json')
 const os = require('os');
 const totalRAM = os.totalmem();
-const gitCommitInfo = require('git-commit-info');
-const commit = gitCommitInfo();
+
 const Discord = require('discord.js')
 const { ActionRowBuilder, ButtonBuilder, Client, CommandInteraction } = require("discord.js");
 
