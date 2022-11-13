@@ -76,7 +76,7 @@ module.exports = {
         //check
         if (exactly == 0 || WordPerString == 0 || !isNaturalNumber(exactly) || !isNaturalNumber(WordPerString) || !isNaturalNumber(maxLength)) return interaction.reply(`Vui lòng bỏ hoặc nhập đúng giá trị tùy chỉnh`)
         //run
-        if (exactly*WordPerString > 30) {if (interaction.member.permissions.has("MANAGE_MESSAGES")) {
+        if (exactly*WordPerString > 30) {if (interaction.member.permissions.has("ManageMessages")) {
             if (maxLength == 0) {interaction.reply(randomWords({exactly: exactly, wordsPerString: WordPerString, join: ' - ' }))} else {
                 interaction.reply(randomWords({exactly: exactly, wordsPerString: WordPerString, maxLength: maxLength, join: ' - ' }))
             }

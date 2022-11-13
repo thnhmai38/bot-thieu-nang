@@ -23,7 +23,7 @@ module.exports = {
                 var y = Number(args[1])
                 var roll = randomXToY(x, y)
                 message.reply(`🎲 ${message.author} xúc ra **${roll}** điểm`);
-            } else if (message.member.permissions.has(`MANAGE_MESSAGES`)) {
+            } else if (message.member.permissions.has(`ManageMessages`)) {
                 var x = Number(args[0])
                 var y = Number(args[1])
                 var roll = randomXToY(x, y)

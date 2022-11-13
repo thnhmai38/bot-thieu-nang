@@ -23,7 +23,7 @@ module.exports = {
         if  (isNaN(exactly) || isNaN(WordPerString) || isNaN(maxLength)) return message.reply(`Vui lòng bỏ hoặc nhập đúng giá trị tùy chỉnh`)
         if (exactly == 0 || WordPerString == 0 || !isNaturalNumber(exactly) || !isNaturalNumber(WordPerString) || !isNaturalNumber(maxLength)) return message.reply(`Vui lòng bỏ hoặc nhập đúng giá trị tùy chỉnh`)
         //run
-        if (exactly*WordPerString > 30) {if (message.member.permissions.has("MANAGE_MESSAGES")) {
+        if (exactly*WordPerString > 30) {if (message.member.permissions.has("ManageMessages")) {
             if (maxLength == 0) {message.reply(randomWords({exactly: exactly, wordsPerString: WordPerString, join: ' - ' }))} else {
                 message.reply(randomWords({exactly: exactly, wordsPerString: WordPerString, maxLength: maxLength, join: ' - ' }))
             }

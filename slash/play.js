@@ -43,6 +43,7 @@ module.exports = {
                     queue.owner = interaction.user;
                     queue.isAllowSystemOn = false;
                     queue.allowList = [];
+                    queue.isAllowListEnabled = true;
                     interaction.channel.send(`${client.emotes.queue} | **${queue.owner} sẽ là chủ của Hàng đợi**`);
                 }
             }

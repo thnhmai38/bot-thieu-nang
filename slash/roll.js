@@ -43,7 +43,7 @@ module.exports = {
                 var y = Number(args[1])
                 var roll = randomXToY(x, y)
                 interaction.reply(`🎲 ${interaction.user} xúc ra **${roll}** điểm`);
-            } else if (interaction.member.permissions.has(`MANAGE_MESSAGES`)) {
+            } else if (interaction.member.permissions.has(`ManageMessages`)) {
                 var x = Number(args[0])
                 var y = Number(args[1])
                 var roll = randomXToY(x, y)

@@ -24,7 +24,7 @@ module.exports = {
             queue.stop();
             interaction.reply(`${client.emotes.stop} | Đã dừng nhạc!`)
         }
-        if (interaction.user.id === owner.id || queue.voiceChannel.permissionsFor(interaction.user.id).has("MUTE_MEMBERS") || queue.voiceChannel.permissionsFor(interaction.user.id).has("MOVE_MEMBERS")) {
+        if (interaction.user.id === owner.id || queue.voiceChannel.permissionsFor(interaction.user.id).has("MuteMembers") || queue.voiceChannel.permissionsFor(interaction.user.id).has("MoveMembers") || (queue.isAllowListEnabled && queue.allowList.includes(interaction.user.id))) {
             stop();
         } else {
             interaction.reply(`${client.emotes.error} | Bạn không có đủ quyền hạn để dừng nhạc`);

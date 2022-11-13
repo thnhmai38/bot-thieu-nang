@@ -38,7 +38,7 @@ module.exports = {
 
             }
         }
-        if (interaction.user.id === owner.id || queue.voiceChannel.permissionsFor(interaction.user.id).has("MUTE_MEMBERS") || queue.voiceChannel.permissionsFor(interaction.user.id).has("MOVE_MEMBERS")) {
+        if (interaction.user.id === owner.id || queue.voiceChannel.permissionsFor(interaction.user.id).has("MuteMembers") || queue.voiceChannel.permissionsFor(interaction.user.id).has("MoveMembers") || (queue.isAllowListEnabled && queue.allowList.includes(interaction.user.id))) {
             skip(1)
         } else {
             const count = queue.voiceChannel.members.filter(member => !member.user.bot).size;

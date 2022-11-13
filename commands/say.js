@@ -9,7 +9,7 @@ module.exports = {
 // />say vl Text
 if (args[0] == 0) {
     if (!args[1]) {message.reply("Gửi cái gì cơ?")} else {
-    if (message.channel.permissionsFor(message.author.id).has("MANAGE_MESSAGES")) {
+    if (message.channel.permissionsFor(message.author.id).has("ManageMessages")) {
         message.delete()
         const txt = args.slice(1).join(" ")
         message.channel.send(txt)
@@ -28,7 +28,7 @@ if (args[0] == 0) {
         const msgr = args.slice(2).join(" ");
         try {
             const channelneed = await client.channels.cache.get(channelId);
-            if (channelneed.permissionsFor(message.author.id).has("MANAGE_MESSAGES")) {
+            if (channelneed.permissionsFor(message.author.id).has("ManageMessages")) {
                 channelneed.send(msgr)
                     .then(message.reply(`**Đã gửi tin nhắn đến \`${channelneed.name}\`!**`))
                     .catch(message.reply('Bot không thể gửi tin nhắn vào kênh này. . Có thể là do Bot không có quyền hoặc không có mặt tại kênh này.'))

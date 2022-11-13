@@ -17,7 +17,7 @@ module.exports = {
         if (!queue) return interaction.reply({content: `${client.emotes.error} | Chả có gì đang phát cả!`, ephemeral: true});
         
         const q = queue.songs.map((song, i) => `${i === 0 ? "**Đang phát:" : `${i}.`} [${song.name}](${song.url}) (${song.member}) ${song.age_restricted==true?`(*) `:''}- \`${i === 0 ? queue.formattedCurrentTime + " / " :""}${song.formattedDuration}\` ${i===0 ? "**" : ""}`).join("\n")
-        const allowList = queue.allowList.length==0 ? `*Không ai*` : queue.allowList.map((value) => `<@${value}>`).join(", ");
+        //const allowList = queue.allowList.length==0 ? `*Không ai*` : queue.allowList.map((value) => `<@${value}>`).join(", ");
         const exampleEmbed = new Discord.EmbedBuilder()
             .setColor('White')
             .setTitle(`${client.emotes.queue} | Danh sách chờ`)
@@ -29,7 +29,8 @@ module.exports = {
                 {name: 'Tự động phát', value: `${queue.autoplay ? "Bật" : "Tắt"}`, inline:true},
                 {name: 'Lặp', value: `${queue.repeatMode ? queue.repeatMode === 2 ? "Tất cả" : "Đơn bài" : "Tắt"}`, inline:true},
                 {name: 'Chủ Hàng đợi', value: `${queue.owner}`, inline:true},
-                {name: 'Danh sách Cho phép', value: allowList, inline:true},
+                //{name: 'Danh sách Cho phép', value: allowList, inline:true},
+                {name: 'Danh sách Cho phép', value: (queue.isAllowListEnabled) ? "Bật" : "Tắt", inline: true},
             ])
             .setThumbnail(queue.songs[0].thumbnail)
             .setFooter({

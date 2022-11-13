@@ -57,7 +57,7 @@ module.exports = {
                     })
                 } else {
                         let embed = new Discord.EmbedBuilder({
-                            color: "RANDOM",
+                            color: "Random",
                             title: `Đào mìn ${row}x${col}, số lượng mìn ${mine}`,
                             description: ms,
                             footer: {

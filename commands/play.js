@@ -25,6 +25,7 @@ module.exports = {
                     queue.owner = message.author;
                     queue.isAllowSystemOn = false;
                     queue.allowList = [];
+                    queue.isAllowListEnabled = true;
                     message.reply(`${client.emotes.queue} | **${queue.owner} sẽ là chủ của Hàng đợi**`);
                 }
             }

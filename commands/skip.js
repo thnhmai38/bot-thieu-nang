@@ -30,7 +30,7 @@ module.exports = {
                 message.reply(`${client.emotes.error} | Lỗi : ${e}`)
             }
         }
-        if (message.author.id === owner.id || queue.voiceChannel.permissionsFor(message.author.id).has("MUTE_MEMBERS") || queue.voiceChannel.permissionsFor(message.author.id).has("MOVE_MEMBERS") || queue.allowList.includes(message.author.id)) {
+        if (message.author.id === owner.id || queue.voiceChannel.permissionsFor(message.author.id).has("MuteMembers") || queue.voiceChannel.permissionsFor(message.author.id).has("MoveMembers") || (queue.isAllowListEnabled && queue.allowList.includes(message.author.id))) {
             skip(1)
         } else {
             const count = queue.voiceChannel.members.filter(member => !member.user.bot).size;

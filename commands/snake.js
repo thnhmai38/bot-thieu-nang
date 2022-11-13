@@ -12,7 +12,7 @@ module.exports = {
         buttons: true, // If you want to use buttons || False if you want to use reactions
         snake: '🟩',
         apple: '🍎',
-        embedColor: 'RANDOM',
+        embedColor: 'Random',
         leftButton: '⬅️',
         rightButton: '➡️',
         upButton: '⬆️',

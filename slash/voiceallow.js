@@ -39,6 +39,16 @@ module.exports = {
             name: "claim",
             type: 1,
             description: "Lấy quyền Chủ hàng đợi",
+        },
+        {
+            name: "off",
+            type: 1,
+            description: "Tắt hàng đợi",
+        },
+        {
+            name: "on",
+            type: 1,
+            description: "Bật hàng đợi",
         }
     ],
 
@@ -84,11 +94,11 @@ module.exports = {
                 } else interaction.reply({content: `${client.emotes.error} | Chỉ Chủ Hàng đợi mới có thể sử dụng lệnh này`, ephemeral: true})
                 break;  
             case "list": 
-                const allowList = queue.allowList.length==0 ? `***Không có ai***` : queue.allowList.map((value) => `<@${value}>`).join(", ");
-                const Embed = new Discord.EmbedBuilder()
+                let allowList = queue.allowList.length==0 ? `***Không có ai***` : queue.allowList.map((value) => `<@${value}>`).join(", ");
+                let Embed = new Discord.EmbedBuilder()
                     .setColor('Blue')
                     .setTitle(`${client.emotes.queue} | Danh sách Cho Phép`)
-                    .setDescription('Chủ Hàng chờ: <@'+ queue.owner +'>')
+                    .setDescription(`Chủ Hàng chờ: ${queue.owner}\nAllowList hiện đang ${(queue.isAllowListEnabled) ? "**BẬT**" : "**TẮT**"}`)
                     .addFields([{name: 'Danh sách', value: `${allowList}`}])
                     .setThumbnail(queue.songs[0].thumbnail)
                     .setTimestamp()
@@ -106,6 +116,18 @@ module.exports = {
                     interaction.channel.send(`${client.emotes.queue} | **Chủ hàng đợi mới sẽ là ${interaction.user}**`)
                 } else interaction.reply({content: `${client.emotes.error} | Chủ hàng đợi vẫn còn đây, bạn không thể lấy được :angry:`, ephemeral: true})
                 break; 
+            case "on":
+                if (owner) {
+                    queue.isAllowListEnabled = true;
+                    interaction.reply(`${client.emotes.success} | Bạn đã **BẬT** Danh sách cho phép`)
+                } else interaction.reply(`${client.emotes.error} | Chỉ Chủ Hàng đợi mới có thể sử dụng lệnh này`);
+                break;    
+            case "off":
+                if (owner) {
+                    queue.isAllowListEnabled = false;
+                    interaction.reply(`${client.emotes.success} | Bạn đã **TẮT** Danh sách cho phép`)
+                } else interaction.reply(`${client.emotes.error} | Chỉ Chủ Hàng đợi mới có thể sử dụng lệnh này`);
+                break;    
             default:
                 break;
             }

@@ -17,7 +17,7 @@ module.exports = {
             queue.stop();
             message.reply(`${client.emotes.stop} | Đã dừng nhạc!`)
         }
-        if (message.author.id === owner.id || queue.voiceChannel.permissionsFor(message.author.id).has("MUTE_MEMBERS") || queue.voiceChannel.permissionsFor(message.author.id).has("MOVE_MEMBERS") || queue.allowList.includes(message.author.id)) {
+        if (message.author.id === owner.id || queue.voiceChannel.permissionsFor(message.author.id).has("MuteMembers") || queue.voiceChannel.permissionsFor(message.author.id).has("MoveMembers") || (queue.isAllowListEnabled && queue.allowList.includes(message.author.id))) {
             stop();
         } else {
             message.reply(`${client.emotes.error} | Bạn không có đủ quyền hạn để dừng nhạc`);

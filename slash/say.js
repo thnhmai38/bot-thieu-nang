@@ -48,8 +48,8 @@ module.exports = {
     */
     async run (client, interaction, option) {
         if (interaction.options.getSubcommand() === "0") {
-            if (interaction.channel.permissionsFor(interaction.user.id).has("MANAGE_MESSAGES")) {
-                console.log(option)
+            if (interaction.channel.permissionsFor(interaction.user.id).has("ManageMessages")) {
+                //console.log(option)
                 const txt = option[0].options[0].value;
                 try {
                     interaction.channel.send(txt)
@@ -65,7 +65,7 @@ module.exports = {
                 if (isNaN(Number(channelId))) return interaction.reply({content: 'Vui lòng nhập đúng giá trị cấu hình', ephemeral: true});
                 try {
                     const channelneed = await client.channels.cache.get(channelId);
-                    if (channelneed.permissionsFor(interaction.user.id).has("MANAGE_MESSAGES")) {
+                    if (channelneed.permissionsFor(interaction.user.id).has("ManageMessages")) {
                         channelneed.send(msgr)
                             .then(interaction.reply(`**Đã gửi tin nhắn đến \`${channelneed.name}\`!**`))
                             .catch(interaction.reply({content: 'Bot không thể gửi tin nhắn đấy vào kênh này. Có thể là do Bot không có quyền hoặc không có mặt tại kênh này.', ephemeral: true}))

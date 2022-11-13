@@ -13,10 +13,10 @@ module.exports = {
         const dagpiToken = process.env.DAGPITOKEN;
         const token = dagpiToken;
         const winFooter = "BẠN ĐÃ THẮNG!";
-        const winColor = "GREEN"
-        const lostColor = "RED";
+        const winColor = "Green"
+        const lostColor = "Red";
         const lostFooter = "BẠN ĐÃ THUA!";
-        const questionColor = "BLUE";
+        const questionColor = "Blue";
         const stopCommand = "stop"
         const questionFooter = `ĐÂY LÀ LOGO CỦA CÁI GÌ? Nhập ${stopCommand} để dừng chơi`;
 
@@ -35,7 +35,7 @@ module.exports = {
                         {name: `Mô tả: `, value: `${data.clue ? data.clue : "Không có"}`},
                         {name: `Gợi ý: `, value: `${data.hint}`}
                     ])
-                    .setColor(questionColor || "RANDOM")
+                    .setColor(questionColor || "Random")
                     .setImage(data.question)
                     .setFooter({text: questionFooter})
                     .setTimestamp()
@@ -44,7 +44,7 @@ module.exports = {
                 const right = new Discord.EmbedBuilder()
                     .setTitle(`Bạn đã đoán đúng!`)
                     .setAuthor({name: message.author.tag, iconURL:message.author.displayAvatarURL({dynamic : true})})
-                    .setColor(winColor || "RANDOM")
+                    .setColor(winColor || "Random")
                     .setDescription(`Đây là Logo của **${data.brand}**`)
                     .setImage(data.answer)
                     .setFooter({text: winFooter})
@@ -54,7 +54,7 @@ module.exports = {
 
                 const wrong = new Discord.EmbedBuilder()
                     .setTitle(`Bạn đã thua!`)
-                    .setColor(lostColor || "RANDOM")
+                    .setColor(lostColor || "Random")
                     .setAuthor({name: message.author.tag, iconURL: message.author.displayAvatarURL({dynamic : true})})
                     .setDescription(`Đây là Logo của **${data.brand}**`)
                     .setImage(data.answer)
