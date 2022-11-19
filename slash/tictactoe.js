@@ -1,4 +1,3 @@
-const simplydjs = require("simply-djs");
 const Discord = require("discord.js");
 const {
 	ActionRowBuilder,
