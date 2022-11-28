@@ -228,7 +228,7 @@ module.exports = {
                             .setTimestamp()
                             .setFooter({text: `0/${players.length} đã chọn`})
                         msg.edit({embeds: [content], components: [luachon1, luachon2, luachon3]})
-                        var choosecollector = msg.createMessageComponentCollector({componentType: ComponentType.Button, filter})
+                        var choosecollector = msg.createMessageComponentCollector({componentType: ComponentType.Button, filter: filter})
                         let chooseCounter = 0;
                         let RunningLastTenSec = false;
 
@@ -287,7 +287,7 @@ module.exports = {
                 }
 
                 //!Sự kiện Ready    
-                    var readycollector = msg.createMessageComponentCollector({componentType: ComponentType.Button, filter})
+                    var readycollector = msg.createMessageComponentCollector({componentType: ComponentType.Button, filter: filter})
                     let readyCounter = 0;
                     setTimeout(() => { //Tự động hủy khi người chơi không sẵn sàng hết
                     if (readyCounter !== players.length) {
