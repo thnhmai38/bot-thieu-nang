@@ -82,22 +82,28 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
 
     client.on ("error", console.error);
 
-    client.on('ready', () => {            
-        /*
-        console.log('=========================================================================================================');
-        client.guilds.cache.get("") // Leave Guild
-            .leave()
-            .then((g) => {console.log("Leaved "+g)})
+    client.on('ready', () => {
+        let i = 0;
+        setInterval(() => {
+            let activities = [`v${package.version}`,`/>help`,`/>invite`,`/>changelog`,`/>support`,`${client.guilds.cache.size} máy chủ`,`${client.channels.cache.size} kênh`,`${cmdcount} lệnh chữ`, `${slscount} lệnh gạch chéo`, `${client.users.cache.size} người dùng`]
+            client.user.setActivity(`${activities[i ++ % activities.length]}`, {type: ActivityType.Listening})
+        }, 30000)
             
-        client.guilds.cache.forEach(async guild => { // Check Guild and Member
-                {
-                    console.log(`Bot đang ở ${guild.name} (${guild.id}) có ${guild.memberCount} người`);
-                    //await guild.leave()
-                }
-            })
-        
-        console.log('=========================================================================================================');
-        */    
+            /*
+            console.log('=========================================================================================================');
+            client.guilds.cache.get("") // Leave Guild
+                .leave()
+                .then((g) => {console.log("Leaved "+g)})
+                
+            client.guilds.cache.forEach(async guild => { // Check Guild and Member
+                    {
+                        console.log(`Bot đang ở ${guild.name} (${guild.id}) có ${guild.memberCount} người`);
+                        //await guild.leave()
+                    }
+                })
+            
+            console.log('=========================================================================================================');
+            */    
         console.log(colors.bold(colors.green(`Logged in as ${client.user.tag}!`)));
         console.log(colors.green(`Online`));
         console.log(`Bot hiện đang ở ${client.guilds.cache.size} máy chủ, theo dõi ${client.channels.cache.size} kênh và phục vụ ${cmdcount} lệnh chữ và ${slscount} lệnh gạch chéo cho ${client.users.cache.size} người dùng`);
@@ -284,23 +290,8 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
 
     console.log(colors.bold(colors.cyan('Logging in...')));
 
-
-let activities = [
-    {name: `v${package.version}`, type: ActivityType.Playing}, 
-    {name: `/>help`, type: ActivityType.Listening}, 
-    {name: `/>invite`, type: ActivityType.Listening}, 
-    {name: `/>changelog`, type: ActivityType.Listening}, 
-    {name: `/>support`, type: ActivityType.Listening}, 
-    {name: `${client.guilds.cache.size} máy chủ`, type: ActivityType.Listening}, 
-    {name: `${client.channels.cache.size} kênh`, type: ActivityType.Listening},
-    {name: `${cmdcount} lệnh chữ`, type: ActivityType.Listening}, 
-    {name: `${slscount} lệnh gạch chéo`, type: ActivityType.Listening}, 
-    {name: `${client.users.cache.size} người dùng`, type: ActivityType.Listening}, 
-]
-
-    client.login(process.env.TOKEN).then(() => {
+    client.login(process.env.TOKEN).then((token) => {
         client.user.setPresence({
-            activities: activities,
             status: 'online',
         });
     });
