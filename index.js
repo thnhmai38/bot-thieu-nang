@@ -1,11 +1,11 @@
 const Discord = require('discord.js');
-const ChannelType = Discord.ChannelType;
+const { ActivityType, ChannelType } = require('discord.js')
 const client = new Discord.Client({intents: ["Guilds", "GuildMessages", "GuildMessageReactions", "GuildVoiceStates", "MessageContent"]});
 const fs = require('fs');
 module.exports = client;
 const { readdirSync } = require('fs');
 const { join } = require('path')
-// require('log-timestamp')(function() { return "[" + new Date().toLocaleString(`en-GB`,  { timeZone: 'Asia/Ho_Chi_Minh' }) + "] "});
+require('log-timestamp')(function() { return "[" + new Date().toLocaleString(`en-GB`,  { timeZone: 'Asia/Ho_Chi_Minh' }) + "] "});
 require("dotenv").config();
 const colors = require("colors");
 const package = require('./package.json')
@@ -86,21 +86,9 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
         let i = 0;
         setInterval(() => {
             let activities = [`v${package.version}`,`/>help`,`/>invite`,`/>changelog`,`/>support`,`${client.guilds.cache.size} máy chủ`,`${client.channels.cache.size} kênh`,`${cmdcount} lệnh chữ`, `${slscount} lệnh gạch chéo`, `${client.users.cache.size} người dùng`]
-            client.user.setActivity(`${activities[i ++ % activities.length]}`, {
-                type: "LISTENING",
-            })
-            /*
-            client.user.setActivity(`${activities[i ++ % activities.length]}`, {
-                type: "STREAMING",
-                url: "https://www.twitch.tv/thanhgaming5550",
-            })
-            */
+            client.user.setActivity(`${activities[i ++ % activities.length]}`, {type: ActivityType.Listening})
         }, 30000)
-            //client.user.setActivity({
-            //    name: "/>help ; />invite",
-            //    type: "STREAMING",
-            //    url: "https://www.twitch.tv/thanhgaming5550"
-            //})
+            
             /*
             console.log('=========================================================================================================');
             client.guilds.cache.get("") // Leave Guild
