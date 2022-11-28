@@ -82,10 +82,14 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
 
     client.on ("error", console.error);
 
+    var activities;
+
     client.on('ready', () => {
         let i = 0;
+        activities = [`v${package.version}`,`/>help`,`/>invite`,`/>changelog`,`/>support`,`${client.guilds.cache.size} máy chủ`,`${client.channels.cache.size} kênh`,`${cmdcount} lệnh chữ`, `${slscount} lệnh gạch chéo`, `${client.users.cache.size} người dùng`]
+        client.user.setActivity(`${activities[i ++ % activities.length]}`, {type: ActivityType.Listening})
         setInterval(() => {
-            let activities = [`v${package.version}`,`/>help`,`/>invite`,`/>changelog`,`/>support`,`${client.guilds.cache.size} máy chủ`,`${client.channels.cache.size} kênh`,`${cmdcount} lệnh chữ`, `${slscount} lệnh gạch chéo`, `${client.users.cache.size} người dùng`]
+            activities = [`v${package.version}`,`/>help`,`/>invite`,`/>changelog`,`/>support`,`${client.guilds.cache.size} máy chủ`,`${client.channels.cache.size} kênh`,`${cmdcount} lệnh chữ`, `${slscount} lệnh gạch chéo`, `${client.users.cache.size} người dùng`]
             client.user.setActivity(`${activities[i ++ % activities.length]}`, {type: ActivityType.Listening})
         }, 30000)
             
