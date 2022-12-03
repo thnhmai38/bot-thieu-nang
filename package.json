@@ -1,13 +1,13 @@
 {
   "name": "bot-thieu-nang",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "description": "Bot thieu nang Discord",
   "main": "index.js",
   "scripts": {
     "debug": "node --max-old-space-size=2048 index.js",
     "start": "node index.js",
     "update": "ncu -x node-fetch",
-    "production": "pm2 restart \"npm run start\" --cron-restart=\"0 23 * * *\"" 
+    "production": "pm2 restart \"npm run start\" --cron-restart=\"0 23 * * *\""
   },
   "author": "thanhgaming5550",
   "license": "ISC",
@@ -25,6 +25,7 @@
     "@distube/spotify": "^1.4.2",
     "@distube/yt-dlp": "^1.1.3",
     "@distube/ytdl-core": "^4.11.6",
+    "advanced-calculator": "^1.1.0",
     "anime-images-api": "^2.0.0",
     "axios": "^1.2.0",
     "colors": "^1.4.0",
@@ -33,7 +34,6 @@
     "discord.js": "^14.7.1",
     "discord.js-minesweeper": "^1.1.0",
     "distube": "^4.0.4",
-    "djs-games": "^2.1.10",
     "dotenv": "^16.0.3",
     "figlet": "^1.5.2",
     "libsodium-wrappers": "^0.7.10",

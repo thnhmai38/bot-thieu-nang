@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { MessageActionRow, MessageButton, BaseInteraction, Client } = require('discord.js');
+const { MessageActionRow, MessageButton, CommandInteraction, Client } = require('discord.js');
 var randomWords = require('random-words');
 
 
@@ -10,7 +10,7 @@ module.exports = {
     /**
     *
     * @param {Client} client
-    * @param {BaseInteraction} interaction
+    * @param {CommandInteraction} interaction
     * @param {Object[]} option
     */
     async run (client, interaction, option) {

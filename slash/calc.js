@@ -1,10 +1,21 @@
 const Discord = require('discord.js');
-const simplydjs = require('simply-djs')
-const { ActionRowBuilder, ButtonBuilder, Client, CommandInteraction } = require("discord.js");
-
+const fs = require('fs')
+const { MessageActionRow, MessageButton, Message, Client } = require('discord.js');
+const math = require('advanced-calculator');
+const config = JSON.parse(fs.readFileSync("./config.json"));
 module.exports = {
     name: "calc",
-    description: "Máy tính tiểu học bỏ túi",
+    description: "Tính phép toán",
+    options: [
+        // https://discord-api-types.dev/api/discord-api-types-v10/enum/ApplicationCommandOptionType
+        {
+            name: "data",
+            type: 3,
+            description: "Tính toán Phép toán (Có các phép tính sin, cos, tan, ln, log, sqrt, +, -, *, /, %, ^, max, min)",
+            required: true,
+        }
+    ],
+
     /**
     *
     * @param {Client} client
@@ -13,11 +24,15 @@ module.exports = {
     */
     async run (client, interaction, option) {
         await interaction.deferReply();
-    
-    simplydjs.calculator(interaction, {
-        embedColor: '#075FFF', //default: #075FFF
-        credit: false,
-        slash: true
-    })
-}
+        try {
+            var kq = math.evaluate(option[0].value);
+        } catch {
+            return interaction.editReply(`Đã xảy ra lỗi khi tính toán. Kiểm tra lại cú pháp phép tính.`)
+        }
+        try {
+            return interaction.editReply(`\`${option[0].value}\` = **${kq}**`);
+        } catch {
+            return interaction.editReply(`Kết quả : **${kq}**`)
+        }
+    }
 }
