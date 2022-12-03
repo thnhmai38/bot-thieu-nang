@@ -7,7 +7,7 @@
     "debug": "node --max-old-space-size=2048 index.js",
     "start": "node index.js",
     "update": "ncu -x node-fetch",
-    "production": "pm2 restart \"npm run start\" --cron-restart=\"0 23 * * *\"" 
+    "production": "npm install && pm2 restart \"npm run start\" --cron-restart=\"0 23 * * *\"" 
   },
   "author": "thanhgaming5550",
   "license": "ISC",
