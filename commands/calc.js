@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const fs = require('fs')
 const { MessageActionRow, MessageButton, Message, Client } = require('discord.js');
 const math = require('advanced-calculator');
-const config = JSON.parse(fs.readFileSync("./config.json"));
 
 module.exports = {
     name: "calc",

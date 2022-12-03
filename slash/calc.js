@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const fs = require('fs')
 const { MessageActionRow, MessageButton, Message, Client } = require('discord.js');
 const math = require('advanced-calculator');
-const config = JSON.parse(fs.readFileSync("./config.json"));
 module.exports = {
     name: "calc",
     description: "Tính phép toán",
@@ -11,7 +10,7 @@ module.exports = {
         {
             name: "data",
             type: 3,
-            description: "Tính toán Phép toán (Có các phép tính sin, cos, tan, ln, log, sqrt, +, -, *, /, %, ^, max, min)",
+            description: "Tính toán Biểu thức (Hỗ trợ sin, cos, tan, ln, log, sqrt, +, -, *, /, %, ^, max, min)",
             required: true,
         }
     ],
