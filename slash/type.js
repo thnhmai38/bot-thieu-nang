@@ -1,18 +1,19 @@
 const Discord = require('discord.js');
-const { MessageActionRow, MessageButton, Message, Client } = require('discord.js');
+const { MessageActionRow, MessageButton, BaseInteraction, Client } = require('discord.js');
 var randomWords = require('random-words');
+
 
 module.exports = {
     name: "type",
-    description: "Ai gõ nhanh hơn?",
+    description: "Trò chơi Ai gõ nhanh hơn?",
 
     /**
     *
     * @param {Client} client
-    * @param {Message} message
-    * @param {String[]} args
+    * @param {BaseInteraction} interaction
+    * @param {Object[]} option
     */
-    async run (client, message, args) {
+    async run (client, interaction, option) {
         const time = Math.round(3 + Math.random() * (15 - 3));
         const word = randomWords().toLowerCase();
         const waitTime = 30;
@@ -23,7 +24,7 @@ module.exports = {
             .setDescription("**` - `**")
             .setFooter({text: 'Gõ và gửi nhanh chóng từ sắp được hiện ra'})
             .setTimestamp()
-        var mainMsg = await message.reply({embeds: [main]});
+        interaction.reply({embeds: [main]});
 
         const filter = (m) => {
             return m.content.toLowerCase() == word;
@@ -35,8 +36,8 @@ module.exports = {
                 .setDescription(`**\`${word}\`**`)
                 .setFooter({text: "Gõ và gửi nhanh chóng từ trên"})
                 .setTimestamp()
-            mainMsg.edit({embeds: [main]});
-            const collector = mainMsg.channel.createMessageCollector({filter: filter, max:1, time: waitTime*1000})
+            interaction.editReply({embeds: [main]});
+            const collector = interaction.channel.createMessageCollector({filter: filter, max:1, time: waitTime*1000})
             const wait = setTimeout(() => {
                 main = new Discord.EmbedBuilder()
                     .setColor('Red')
@@ -44,7 +45,7 @@ module.exports = {
                     .setDescription(`Không có ai đã gửi **\`${word}\`** trong ${waitTime}s qua!`)
                     .setFooter({text: "Kết thúc!"})
                     .setTimestamp()
-                mainMsg.edit({embeds: [main]});
+                interaction.editReply({embeds: [main]});
                 return collector.stop();
             }, waitTime*1000)
             collector.on("collect", (m) => {
@@ -56,7 +57,7 @@ module.exports = {
                     .setDescription(`${m.author} đã gửi **\`${word}\`** nhanh nhất!`)
                     .setFooter({text: "Kết thúc!"})
                     .setTimestamp()
-                mainMsg.edit({embeds: [main]});
+                interaction.editReply({embeds: [main]});
                 return collector.stop();
             })
         }, time*1000)
