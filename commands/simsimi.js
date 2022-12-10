@@ -5,10 +5,7 @@ module.exports = {
     run: async(client, message, args) => {
             const text = args.join(' ')
             if(!text) return message.reply('Bạn nói như nói')
-            // const url = `https://api.simsimi.net/v2/?text=${encodeURIComponent(text)}&lc=vn&cf=false`
-            // API Bảo trì
-            const url = `https://tuanxuong.com/api/simsimi/index.php?text=${encodeURIComponent(text)}`;
-            var msg;
+            const url = `https://api.simsimi.net/v2/?text=${encodeURIComponent(text)}&lc=vn&cf=false`
             message.reply({content: "*Đang đợi SimSimi trả lời...*"}).then((m) => msg=m);
             let response, cmt;
             try{
@@ -19,8 +16,6 @@ module.exports = {
             catch(e) {
                 return msg.edit('Đã có lỗi xảy ra, vui lòng thử lại.')
             }
-            //msg.edit({content: `**[SimSimi]** ` + response.success + `${response.noti !== "nope" ? `\n\`${response.noti}\`` : ``}`})
-            //API Bảo trì
-            msg.edit({content: `**[SimSimi]** ` + response.response})
+            msg.edit({content: `**[SimSimi]** ` + response.success}) //  + `${response.noti !== "nope" ? `\n\`${response.noti}\`` : ``}`
     }
 }
