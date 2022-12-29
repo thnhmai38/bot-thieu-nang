@@ -7,10 +7,10 @@
     "debug": "node --max-old-space-size=2048 index.js",
     "start": "npm install && node index.js",
     "update": "ncu -x node-fetch",
-    "production": "pm2 restart \"npm run start\" --cron-restart=\"0 23 * * *\"" 
+    "production": "pm2 restart \"npm run start\" --cron-restart=\"0 23 * * *\""
   },
   "author": "thanhgaming5550",
-  "license": "ISC",
+  "license": "GPLV3",
   "bugs": {
     "url": "https://github.com/thanhgaming5550/bot-thieu-nang/issues"
   },
@@ -41,7 +41,6 @@
     "node-fetch": "2.x",
     "random-puppy": "^1.1.0",
     "random-words": "^1.2.0",
-    "simply-djs": "^3.0.2",
     "weather-js": "^2.0.0",
     "ytsr": "^3.8.0"
   },

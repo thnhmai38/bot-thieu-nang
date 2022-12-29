@@ -30,7 +30,7 @@ module.exports = {
                 response = JSON.parse(cmt);
             }
             catch (e) {
-                return interaction.editReply({content: 'Đã có lỗi xảy ra, vui lòng thử lại.'})
+                return interaction.editReply({content: 'Đã có lỗi xảy ra, vui lòng thử lại.', ephemeral: true})
             }
             interaction.editReply({content: `**[SimSimi]** ` + response.success}) // + `${response.noti !== "nope" ? `\n\`${response.noti}\`` : ``}`
     }
