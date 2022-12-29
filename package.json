@@ -1,13 +1,13 @@
 {
   "name": "bot-thieu-nang",
-  "version": "3.3.3",
-  "description": "Bot thieu nang Discord",
+  "version": "3.4.3",
+  "description": "Bot thieu nang - Entertainment Discord Bot",
   "main": "index.js",
   "scripts": {
     "debug": "node --max-old-space-size=2048 index.js",
-    "start": "node index.js",
+    "start": "npm install && node index.js",
     "update": "ncu -x node-fetch",
-    "production": "npm install && pm2 restart \"npm run start\" --cron-restart=\"0 23 * * *\"" 
+    "production": "pm2 restart \"npm run start\" --cron-restart=\"0 23 * * *\"" 
   },
   "author": "thanhgaming5550",
   "license": "ISC",

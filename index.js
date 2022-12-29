@@ -1,40 +1,42 @@
 const Discord = require('discord.js');
 const { ActivityType, ChannelType } = require('discord.js')
 const client = new Discord.Client({intents: ["Guilds", "GuildMessages", "GuildMessageReactions", "GuildVoiceStates", "MessageContent"]});
-const fs = require('fs');
 module.exports = client;
+const fs = require('fs');
 const { readdirSync } = require('fs');
 const { join } = require('path')
 require('log-timestamp')(function() { return "[" + new Date().toLocaleString(`en-GB`,  { timeZone: 'Asia/Ho_Chi_Minh' }) + "] "});
 require("dotenv").config();
 const colors = require("colors");
-const package = require('./package.json')
 const DisTube = require("distube")
 const { SoundCloudPlugin } = require("@distube/soundcloud");
 const { SpotifyPlugin } = require('@distube/spotify');
-client.slash = new Discord.Collection()
 const { Routes } = require("discord-api-types/v9")
 const { REST } = require("@discordjs/rest")
 const { YtDlpPlugin } = require("@distube/yt-dlp");
 
     console.log(colors.bold(colors.cyan('Preparing and Running...')));
 
-    const jsonString = fs.readFileSync("./config.json");
-    const config = JSON.parse(jsonString);
-    client.commands = new Discord.Collection();
+    const config = JSON.parse(fs.readFileSync("config.json"));
+    const package = JSON.parse(fs.readFileSync("package.json"));
 
     const prefix = config.prefix; 
     client.emotes = config.emoji;
+    const cmdFolder = config.source.command;
+    const slsFolder = config.source.slash;
 
-    const commandFiles = readdirSync(join(__dirname, "commands")).filter(file => file.endsWith(".js"));
+    client.commands = new Discord.Collection();
+    client.slash = new Discord.Collection();
+
+    const commandFiles = readdirSync(join(__dirname, cmdFolder)).filter(file => file.endsWith(".js"));
     
-    const cmdcount = fs.readdirSync('./commands').length;
-    const slscount = fs.readdirSync('./slash').length;
+    const cmdcount = fs.readdirSync(cmdFolder).length;
+    const slscount = fs.readdirSync(slsFolder).length;
     
     console.log(colors.bold(colors.yellow(`Starting load Commands...`)))
     var loaded = true; var count = 0;
     for (const file of commandFiles) {
-        const command = require(join(__dirname, "commands", `${file}`));
+        const command = require(join(__dirname, cmdFolder, `${file}`));
         try {
             client.commands.set(command.name, command) 
             count++;
@@ -51,10 +53,10 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
     const rest = new REST({ version: "9" }).setToken(process.env.TOKEN);
     count = 0;
     console.log(colors.bold(colors.yellow(`Starting load Slash Commands...`)))
-    const slashFiles = readdirSync(join(__dirname, "slash")).filter(file => file.endsWith(".js"));
+    const slashFiles = readdirSync(join(__dirname, slsFolder)).filter(file => file.endsWith(".js"));
     const arrayOfSlashCommands = [];
     for (const file of slashFiles) {
-        const command = require(join(__dirname, "slash", `${file}`));
+        const command = require(join(__dirname, slsFolder, `${file}`));
         try {
             client.slash.set(command.name, command)
             arrayOfSlashCommands.push(command);
