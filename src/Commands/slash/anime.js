@@ -252,7 +252,7 @@ module.exports = {
 	 */
 	async run(client, interaction, option) {
 		await interaction.deferReply();
-        let status;
+        let status = 500;
         async function sendIMG(type, nsfw) {
             try {
                 let status;
@@ -314,7 +314,6 @@ module.exports = {
                 sendIMG(query, false);
             break;
             case "quote":
-                
                 var result = await fetch(`https://katanime.vercel.app/api/getrandom`).then(res => {status = res.status; return res.json()})
                 if (status !== 200) {
                     return interaction.editReply({content: `API hiện không phản hồi. Vui lòng thử lại sau.`, ephemeral: true})
@@ -324,8 +323,7 @@ module.exports = {
                     .setDescription(`\`${result.result[0].english}\`\n`)
                     .addFields({name: `- ${result.result[0].character} -`, value: `*${result.result[0].anime}*`, inline: true})
                     .setColor("Random")
-                interaction.editReply({embeds : [data], ephemeral: false})
-                
+                interaction.editReply({embeds : [data], ephemeral: false}) 
             break;
             case "random":
                 var result = await fetch(`https://api.jikan.moe/v4/random/anime`).then(res => {status = res.status; return res.json()})
@@ -367,12 +365,12 @@ module.exports = {
                         .setDescription(`Không tìm thấy kết quả nào cho ảnh của bạn!`)
                         .setThumbnail(option[0].options[0].attachment.attachment)
                         .setTimestamp()
-                    return embed;
+                    return interaction.editReply({embeds: [embed]});
                 }
                 const embed = new Discord.EmbedBuilder()
                     .setColor('Random')
                     .setTitle(result.result[0].filename)
-                    .setAuthor({name: 'Đã tìm ra phân đoạn!'})
+                    .setAuthor({name: 'Đã tìm thấy phân đoạn!'})
                     .setImage(result.result[0].image)
                     .setThumbnail(option[0].options[0].attachment.attachment)
                     .addFields(
