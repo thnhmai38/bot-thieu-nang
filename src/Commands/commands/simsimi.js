@@ -10,8 +10,6 @@ module.exports = {
             let response, cmt;
             try{
                 response = await fetch(url).then(res => res.json())
-                cmt = JSON.stringify(response);
-                response = JSON.parse(cmt);
             }
             catch(e) {
                 return msg.edit('Đã có lỗi xảy ra, vui lòng thử lại.')

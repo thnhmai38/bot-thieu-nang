@@ -265,9 +265,9 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
             if (!interaction.guild) return;
             const command = client.slash.get(interaction.commandName);
             try {
-                 //{ name: 'id', type: 'INTEGER', value: 69 }
+                 //?{ name: 'id', type: 'INTEGER', value: 69 }
                 const option = [];
-                const output = [];
+                const output = []; //option.value
                 for (let opt of interaction.options.data) {
                     option.push(opt);
                     if (opt.type !== "SUB_COMMAND") {
@@ -282,7 +282,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
                 }
                 interaction.member = interaction.guild.members.cache.get(interaction.user.id);
                 command.run(client, interaction, option);
-                console.log(colors.yellow(`[Slash]   `) + `${interaction.user.tag} ${interaction.user} : /${interaction.commandName} ${output.join(" ")}`)
+                console.log(colors.yellow(`[Slash]   `) + `${interaction.user.tag} ${interaction.user} : /${interaction.commandName} ${JSON.stringify(option)}`)
             } catch (error) {
                 console.error(colors.red(error))
                 await interaction.reply({ content: "Đã xảy ra lỗi! Vui lòng thử lại.", ephemeral: true })

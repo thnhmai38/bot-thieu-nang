@@ -16,7 +16,7 @@ module.exports = {
         var max = 10
     }
     else if (!args[1] || isNaN(args[0]) || isNaN(args[1]) || Number(args[0]) >= Number(args[1]) || Number(args[0]) < 0) return message.channel.send("Vui lòng bỏ hoặc nhập đúng giá trị tùy chỉnh")
-    else if (args[1].length > 10) return message.channel.send("Chúa tể Ngẫu nhiên, Thần đồng Toán học, Ông tổ Thập phân, Chúa số, Con trai Thần, Newton 3")
+    else if (args[1].length > 10) return message.channel.send("Chúa tể Ngẫu nhiên, Thần Toán, Quái vật Thập phân, Vua Đoán số, Newton 3")
     else {var result = randomXToY(Number(args[0]), Number(args[1]))
     var min = Number(args[0])
     var max = Number(args[1])

@@ -36,7 +36,7 @@ module.exports = {
                 if (status !== 200) {
                     return msg.edit({content: `API hiện không phản hồi. Vui lòng thử lại sau.`})
                 }
-                result = JSON.parse(JSON.stringify(result))
+                
                 msg.edit({content: "", files:[result.url]}).then(msg => {msg.react("❤");});
             } 
             catch (e) {
@@ -95,7 +95,7 @@ module.exports = {
                 if (status !== 200) {
                     return msg.edit({content: `API hiện không phản hồi. Vui lòng thử lại sau.`})
                 }
-                result = JSON.parse(JSON.stringify(result))
+                
                 const data = new Discord.EmbedBuilder()
                     .setDescription(`\`${result.result[0].english}\`\n`)
                     .addFields({name: `- ${result.result[0].character} -`, value: `*${result.result[0].anime}*`, inline: true})
@@ -107,7 +107,7 @@ module.exports = {
                 if (status !== 200) {
                     return msg.edit({content: `API hiện không phản hồi. Vui lòng thử lại sau.`})
                 }
-                result = JSON.parse(JSON.stringify(result));
+                
                 msg.edit({content: "", embeds:[animeEmbed(result.data)]});
             break;
             case "hentai":
@@ -125,7 +125,7 @@ module.exports = {
                 if (status !== 200) {
                     return msg.edit({content: `API hiện không phản hồi. Vui lòng thử lại sau.`})
                 }
-                result = JSON.parse(JSON.stringify(result));
+                
                 msg.edit({content: `🔍 Tìm thấy **${result.pagination.items.total}** kết quả. ${result.pagination.items.total>1 ? "Hiển thị kết quả đầu tiên" : ""}`})
                 msg.edit({embeds:[animeEmbed(result.data[0], result.pagination, "search")]});
             break;
@@ -133,7 +133,7 @@ module.exports = {
                 if (message.attachments.size===0) return msg.edit("Vui lòng đưa một ảnh bạn muốn tìm kiếm")
                 let img = message.attachments.first().attachment;
                 var result = await fetch(`https://api.trace.moe/search?url=${encodeURIComponent(img)}`).then(res => res.json())
-                result = JSON.parse(JSON.stringify(result));
+                
                 if (result.result.size === 0) {
                     const embed = new Discord.EmbedBuilder()
                         .setColor('Red')

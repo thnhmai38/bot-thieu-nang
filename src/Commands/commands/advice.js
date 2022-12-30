@@ -14,10 +14,9 @@ module.exports = {
         
         if (isNaturalNumber(Number(args[0])) && Number(args[0])!==0) {
             fetch(`https://api.adviceslip.com/advice/${args[0]}`)
-                .then(response => response.text())
+                .then(response => response.json())
                 .then((response) => {
-                    const string = response
-                    const mat = JSON.parse(string);
+                    const mat = response;
 
                     try {
                         const data = new Discord.EmbedBuilder()

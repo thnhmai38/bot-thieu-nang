@@ -26,7 +26,6 @@
     "@distube/yt-dlp": "^1.1.3",
     "@distube/ytdl-core": "^4.11.7",
     "advanced-calculator": "^1.1.0",
-    "anime-images-api": "^2.0.0",
     "axios": "^1.2.1",
     "colors": "^1.4.0",
     "discord-api-types": "^0.37.21",
