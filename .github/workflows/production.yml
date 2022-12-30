@@ -1,0 +1,21 @@
+on:
+  pull_request:
+    branches:
+      - production
+  push:
+    branches:
+      - production
+  schedule:
+    - cron: "0 23 * * 1-5"
+jobs:
+  production:
+    name: Deloy to Production
+    runs-on: production
+    strategy:
+      matrix:
+        node_version: ['>=16.10.0']
+    steps:
+    - name: npm run start
+      run: |
+        npm install
+        npm run start
