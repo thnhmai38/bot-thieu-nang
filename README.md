@@ -26,7 +26,7 @@
 
 ## Contributing
 - B1: [Fork repository này](https://github.com/thanhgaming5550/bot-thieu-nang/fork)
-- B2: Clone repository vừa fork: `git clone https://github.com/[your_username]/bot-thieu-nang`
+- B2: Clone repository vừa fork: `git clone https://github.com/<your_username>/bot-thieu-nang`
 - B3: Tạo một Branch mới: `git checkout -b <branch_name>`
 - B4: Thực hiện các thay đổi, `git add <path>` và commit nó lại: `git commit -m "<commit_message>"`
 - B5: Đăng tải commit lên Remote: `git push -u origin <branch-name>`
@@ -36,7 +36,7 @@
 ## Chủ Sở hữu
 - [thanhgaming5550](https://github.com/thanhgaming5550)
 
-**Bot được phát triển từ 29/05/2021**
+**Bot được phát triển từ 29/05/2021. Chỉ hiển thị những commit từ 26/09/2021**
 
 ## Code License
 [GNU General Public License v3 (GPLv3)](https://github.com/thanhgaming5550/bot-thieu-nang/blob/v3/LICENSE)
