@@ -6,7 +6,7 @@
 <br>
 <b><a href="https://botthieunang.blogspot.com/">Website</a> - <a href="https://thanhgaming5550.gitbook.io/bot-thieu-nang-guide/">Guide</a> - <a href="https://top.gg/bot/848103224854315018/invite">Invite</a></b>
 <br>
-<b><a href="https://github.com/thanhgaming5550/bot-thieu-nang/blob/PRIVACY.md">Privacy Policy</a> - <a href="https://github.com/thanhgaming5550/bot-thieu-nang/blob/main/SERVICE.md">Terms of Service</a></b>
+<b><a href="https://github.com/thanhgaming5550/bot-thieu-nang/blob/v3/PRIVACY.md">Privacy Policy</a> - <a href="https://github.com/thanhgaming5550/bot-thieu-nang/blob/v3/SERVICE.md">Terms of Service</a></b>
 </p>
 
 ## Yêu cầu
@@ -38,7 +38,7 @@
 **Bot được phát triển từ 29/05/2021**
 
 ## Code License
-[GNU General Public License v3 (GPLv3)](https://github.com/thanhgaming5550/bot-thieu-nang/blob/main/LICENSE)
+[GNU General Public License v3 (GPLv3)](https://github.com/thanhgaming5550/bot-thieu-nang/blob/v3/LICENSE)
 <br><br>
 
 **Bot có sử dụng các dịch vụ của bên thứ ba để cung cấp các chức năng cho bot.**
