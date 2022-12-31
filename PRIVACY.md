@@ -4,11 +4,11 @@ Việc sử dụng ứng dụng này ("Bot") yêu cầu phải thu thập một 
 
 ## Truy cập Dữ liệu
 
-Dữ liệu Người dùng được chỉ được sử dụng cho và trong việc chạy, thử nghiệm và triển khai các Dịch vụ, Tính năng (Các "Câu Lệnh") của ứng dụng và chỉ thu thập trong phạm vi cần thiết, tức là những Dữ liệu ngoài khác sẽ không được thu thập. Dữ liệu sẽ không được bán hay cố ý chia sẻ cho bên thứ ba không nhằm mục đích phục vụ nhu cầu người dùng. Trong một số trường hợp, dữ liệu (cụ thể là đầu vào câu lệnh) mà người dùng chủ động gửi đi cho ứng dụng nhằm mục đích cung cấp đầu vào dịch vụ sẽ được chia sẻ cho bên thứ ba để xử lí dữ liệu và trả về kết quả (Dữ liệu sau khi xử lý) cho Người dùng (tức là chỉ nhằm mục đích cung cấp Dịch vụ của bên thứ ba).
+Dữ liệu Người dùng được chỉ được sử dụng cho và trong việc chạy, thử nghiệm và triển khai các Dịch vụ, Tính năng (Các "Câu Lệnh") của ứng dụng và chỉ thu thập trong phạm vi cần thiết, tức là những Dữ liệu ngoài khác sẽ không được thu thập. Dữ liệu sẽ không được bán cho bên thứ ba. Dữ liễu sẽ không được chia sẻ cho bên thứ ba mà không nhằm mục đích phục vụ dịch vụ mà người dùng yêu cầu. Trong một số trường hợp, dữ liệu (cụ thể là đầu vào câu lệnh) mà người dùng chủ động gửi đi cho ứng dụng nhằm mục đích cung cấp đầu vào dịch vụ sẽ được chia sẻ cho bên thứ ba để xử lí dữ liệu và trả về kết quả (Dữ liệu sau khi xử lý) cho Người dùng (tức là chỉ nhằm mục đích cung cấp Dịch vụ của bên thứ ba mà người dùng yêu cầu cho người dùng).
 
 ## Lưu trữ Dữ liệu
 
-Dữ liệu được lưu trữ là dữ liệu đầu vào dịch vụ mà người dùng chủ động gửi đến cho ứng dụng, chỉ phục vụ mục đích lưu nhật kí và sẽ tự động xóa sau khoảng thời gian nhất định. Dữ liệu sẽ được lưu trữ trên hệ thống triển khai ứng dụng, được bảo mật để ngăn chặn truy cập từ bên ngoài, tuy nhiên không có sự bảo đảm chắc chắn rằng dữ liệu hoàn toàn an toàn tuyệt đối và chủ sở hữu Ứng dụng không chịu bất kì trách nhiệm pháp lý đối với hành vi vi phạm Dữ liệu không cố ý hoặc cố ý. Trong trường hợp có quyền truy cập Dữ liệu trái phép, người dùng sẽ được thông báo thông qua Discord.
+Dữ liệu được lưu trữ là dữ liệu đầu vào dịch vụ mà người dùng chủ động gửi đến cho ứng dụng, chỉ phục vụ mục đích lưu nhật kí và cải thiện ứng dụng, được mã hóa nội dung và sẽ được tự động xóa sau khoảng thời gian nhất định. Dữ liệu sẽ được lưu trữ trên hệ thống triển khai ứng dụng, được bảo mật để ngăn chặn truy cập từ bên ngoài, tuy nhiên không có sự bảo đảm chắc chắn rằng dữ liệu hoàn toàn an toàn tuyệt đối và chủ sở hữu Ứng dụng không chịu bất kì trách nhiệm pháp lý đối với hành vi vi phạm Dữ liệu không cố ý hoặc cố ý. Trong trường hợp có quyền truy cập Dữ liệu trái phép, người dùng sẽ được thông báo thông qua Discord.
 
 ## Quyền của Người dùng về Dữ liệu
 

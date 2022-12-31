@@ -90,31 +90,16 @@ var crypto = require('crypto-js');
 
     client.on('ready', () => {
         let i = 0, activities;
-        activities = [`v${package.version}`,`/>help`,`/>invite`,`/>changelog`,`/>support`,`${client.guilds.cache.size} máy chủ`,`${client.channels.cache.size} kênh`,`${cmdcount} lệnh chữ`, `${slscount} lệnh gạch chéo`, `${client.users.cache.size} người dùng`]
+        activities = [`v${package.version}`,`/help`,`/invite`,`/changelog`,`/support`,`${client.guilds.cache.size} máy chủ`,`${cmdcount} lệnh chữ`, `${slscount} lệnh gạch chéo`]
         client.user.setActivity(`${activities[i ++ % activities.length]}`, {type: ActivityType.Listening})
         setInterval(() => {
-            activities = [`v${package.version}`,`/>help`,`/>invite`,`/>changelog`,`/>support`,`${client.guilds.cache.size} máy chủ`,`${client.channels.cache.size} kênh`,`${cmdcount} lệnh chữ`, `${slscount} lệnh gạch chéo`, `${client.users.cache.size} người dùng`]
+            activities = [`v${package.version}`,`/help`,`/invite`,`/changelog`,`/support`,`${client.guilds.cache.size} máy chủ`,`${cmdcount} lệnh chữ`, `${slscount} lệnh gạch chéo`]
             client.user.setActivity(`${activities[i ++ % activities.length]}`, {type: ActivityType.Listening})
         }, 30000)
             
-            /*
-            console.log('=========================================================================================================');
-            client.guilds.cache.get("") // Leave Guild
-                .leave()
-                .then((g) => {console.log("Leaved "+g)})
-                
-            client.guilds.cache.forEach(async guild => { // Check Guild and Member
-                    {
-                        console.log(`Bot đang ở ${guild.name} (${guild.id}) có ${guild.memberCount} người`);
-                        //await guild.leave()
-                    }
-                })
-            
-            console.log('=========================================================================================================');
-            */    
         console.log(colors.bold(colors.green(`Logged in as ${client.user.tag}!`)));
         console.log(colors.green(`Online`));
-        console.log(`Bot hiện đang ở ${client.guilds.cache.size} máy chủ, theo dõi ${client.channels.cache.size} kênh và phục vụ ${cmdcount} lệnh chữ và ${slscount} lệnh gạch chéo cho ${client.users.cache.size} người dùng`);
+        console.log(`Bot hiện đang ở ${client.guilds.cache.size} máy chủ, phục vụ ${cmdcount} lệnh chữ và ${slscount} lệnh gạch chéo`);
         console.log('=========================================================================================================');
     });
 
