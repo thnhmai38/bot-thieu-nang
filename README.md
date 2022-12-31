@@ -32,6 +32,7 @@
 - B5: Đăng tải commit lên Remote: `git push -u origin <branch-name>`
 - B6: Gửi một Pull Request về repository này
 
+**Vui lòng không Contribute những branch sourcecode cũ hơn (như `v2`) và không được sửa `PRIVACY.md`, `LICENSE`, `SERVICE.md`**
 ## Chủ Sở hữu
 - [thanhgaming5550](https://github.com/thanhgaming5550)
 

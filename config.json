@@ -21,6 +21,6 @@
     "source": {
         "command": "src/Commands/commands",
         "slash": "src/Commands/slash",
-        "assets": "assets"
+        "assets": "src/Assets"
     }
 }
