@@ -1,5 +1,10 @@
 # Table of contents
 
-* [🎶 Âm nhạc](README.md)
-* [🎲 Giải trí](fun.md)
-* [📰 Thông tin](thong-tin.md)
+* [🏠 Bot Thieu Nang Guide](README.md)
+
+## Guide
+
+* [🎶 Âm nhạc](guide/master.md)
+* [🎲 Giải trí](guide/fun.md)
+* [📰 Thông tin](guide/thong-tin.md)
+* [⛩ Anime](guide/anime.md)
