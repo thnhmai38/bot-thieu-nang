@@ -1,6 +1,5 @@
 const weather = require('weather-js');
 const Discord = require('discord.js');
-const colors = require('colors');
 
 module.exports = {
     name: "weather",
@@ -12,7 +11,7 @@ module.exports = {
         // 'C' can be changed to 'F' for farneheit results
         if(!args[0]) return message.reply('Vui lòng đưa ra 1 vị trí')
         if (error) {
-            console.log(colors.red(error));
+            console.error(error);
             return message.reply({content: `Đã xảy ra lỗi, vui lòng thử lại.`});
         }
 

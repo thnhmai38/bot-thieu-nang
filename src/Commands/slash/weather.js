@@ -31,7 +31,7 @@ module.exports = {
 			{ search: option[0].value, degreeType: "C" },
 			function (error, result) {
 				if (error) {
-					console.log(colors.red(error));
+					console.error(error);
 					return interaction.reply({
 						content: `Đã xảy ra lỗi, vui lòng thử lại.`,
 						ephemeral: true,

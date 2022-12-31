@@ -1,5 +1,4 @@
 const figlet = require('figlet');
-const colors = require("colors");
 
 module.exports = {
     name: "ascii",
@@ -13,8 +12,7 @@ module.exports = {
         figlet.text(msg, function (err, data){
             if(err){
                 message.reply("Đã xảy ra lỗi, xin vui lòng thử lại")
-                console.log(colors.red('LỖI (ascii.js)'))
-                console.dir(err)
+                console.error(err);
             }
             if(data.length > 2000) return message.reply('VUI LÒNG ĐIỀN NGẮN HƠN 2000 KÍ TỰ')
 

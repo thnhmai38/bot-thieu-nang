@@ -25,7 +25,7 @@ module.exports = {
         figlet.text(msg, function (err, data) {
             if (err) {
                 interaction.reply({content: "Đã xảy ra lỗi, xin vui lòng thử lại", ephemeral: true})
-                console.dir(colors.red(err))
+                console.error(err);
             }
             if(data.length > 2000) return interaction.reply({content: 'VUI LÒNG ĐIỀN NGẮN HƠN 2000 KÍ TỰ', ephemeral: true})
 
