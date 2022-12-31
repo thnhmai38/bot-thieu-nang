@@ -340,7 +340,7 @@ module.exports = {
                     if (option[0].options.length === 0) query = Hentaitype[randomXToY(1, Hentaitype.length)-1]; else query = option[0].options[0].value;
                     sendIMG(query, true);
                 } else {
-                    interaction.editReply({content: `Bạn chỉ có thể sử dụng loại lệnh này ở kênh NSFW!`, ephemeral: true})
+                    interaction.editReply({content: `Bạn chỉ có thể sử dụng loại lệnh này ở kênh **NSFW**!`, ephemeral: true})
                 }
             break;
             case "search":

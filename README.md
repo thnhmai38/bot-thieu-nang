@@ -3,8 +3,10 @@
 </h3>
 <h1 align="center">Bot Thieu Nang</h1>
 <p align="center">Discord Bot Tiếng Việt giải trí với nhiều chức năng thú vị
-<bR>
+<br>
 <b><a href="https://botthieunang.blogspot.com/">Website</a> - <a href="https://thanhgaming5550.gitbook.io/bot-thieu-nang-guide/">Guide</a> - <a href="https://top.gg/bot/848103224854315018/invite">Invite</a></b>
+<br>
+<b><a href="https://github.com/thanhgaming5550/bot-thieu-nang/blob/PRIVACY.md">Privacy Policy</a> - <a href="https://github.com/thanhgaming5550/bot-thieu-nang/blob/main/SERVICE.md">Terms of Service</a></b>
 </p>
 
 ## Yêu cầu

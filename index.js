@@ -33,6 +33,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
     const cmdcount = fs.readdirSync(cmdFolder).length;
     const slscount = fs.readdirSync(slsFolder).length;
     
+    //?Text Command
     console.log(colors.bold(colors.yellow(`Starting load Commands...`)))
     var loaded = true; var count = 0;
     for (const file of commandFiles) {
@@ -52,6 +53,8 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
     
     const rest = new REST({ version: "9" }).setToken(process.env.TOKEN);
     count = 0;
+
+    //?Slash Command
     console.log(colors.bold(colors.yellow(`Starting load Slash Commands...`)))
     const slashFiles = readdirSync(join(__dirname, slsFolder)).filter(file => file.endsWith(".js"));
     const arrayOfSlashCommands = [];
@@ -84,10 +87,8 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
 
     client.on ("error", console.error);
 
-    var activities;
-
     client.on('ready', () => {
-        let i = 0;
+        let i = 0, activities;
         activities = [`v${package.version}`,`/>help`,`/>invite`,`/>changelog`,`/>support`,`${client.guilds.cache.size} máy chủ`,`${client.channels.cache.size} kênh`,`${cmdcount} lệnh chữ`, `${slscount} lệnh gạch chéo`, `${client.users.cache.size} người dùng`]
         client.user.setActivity(`${activities[i ++ % activities.length]}`, {type: ActivityType.Listening})
         setInterval(() => {
@@ -252,10 +253,18 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
             if(!client.commands.has(command)) return;
 
             try {
-                client.commands.get(command).run(client, message, args);
-                console.log(colors.yellow(`[Command] `) + `${message.author.tag} ${message.author} : ${message}`)
-            } catch (error){ 
+                if (command === "oantuti") client.commands.get(command).run(client, message, args); else {
+                //! Phần chạy lệnh Command Bình thường: client.commands.get(command).run(client, message, args);
+                    const movedEmbed = new Discord.EmbedBuilder()
+                        .setColor('Red')
+                        .setDescription(`**Lệnh \`${prefix}${command}\` đã được chuyển sang Slash Command.**\n**Vui lòng sử dụng \`/${command}\`**`)
+                        .setTimestamp()
+                    message.reply({embeds: [movedEmbed]});
+                    console.log(colors.yellow(`[Command] `) + `${message.author.tag} ${message.author} : ${message}`)
+                }    
+            } catch (error) { 
                 console.error(error);
+                message.reply({content: "Đã xảy ra lỗi! Vui lòng thử lại"})
             }
         }
     });
@@ -285,7 +294,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
                 console.log(colors.yellow(`[Slash]   `) + `${interaction.user.tag} ${interaction.user} : /${interaction.commandName} ${JSON.stringify(option)}`)
             } catch (error) {
                 console.error(colors.red(error))
-                await interaction.reply({ content: "Đã xảy ra lỗi! Vui lòng thử lại.", ephemeral: true })
+                await interaction.reply({ content: "Đã xảy ra lỗi! Vui lòng thử lại", ephemeral: true })
             }
         }
     })
@@ -295,7 +304,6 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
     });
 
     console.log(colors.bold(colors.cyan('Logging in...')));
-
     client.login(process.env.TOKEN).then((token) => {
         client.user.setPresence({
             status: 'online',
