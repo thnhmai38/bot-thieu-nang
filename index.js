@@ -14,6 +14,7 @@ const { SpotifyPlugin } = require('@distube/spotify');
 const { Routes } = require("discord-api-types/v9")
 const { REST } = require("@discordjs/rest")
 const { YtDlpPlugin } = require("@distube/yt-dlp");
+var crypto = require('crypto-js');
 
     console.log(colors.bold(colors.cyan('Preparing and Running...')));
 
@@ -260,7 +261,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
                         .setDescription(`**Lệnh \`${prefix}${command}\` đã được chuyển sang Slash Command.**\n**Vui lòng sử dụng \`/${command}\`**`)
                         .setTimestamp()
                     message.reply({embeds: [movedEmbed]});
-                    console.log(colors.yellow(`[Command] `) + `${message.author.tag} ${message.author} : ${message}`)
+                    console.log(colors.yellow(`[Command] ${message.author.id} : ` + crypto.AES.encrypt(message.content, process.env.keyEncrypt)))
                 }    
             } catch (error) { 
                 console.error(error);
@@ -291,7 +292,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
                 }
                 interaction.member = interaction.guild.members.cache.get(interaction.user.id);
                 command.run(client, interaction, option);
-                console.log(colors.yellow(`[Slash]   `) + `${interaction.user.tag} ${interaction.user} : /${interaction.commandName} ${JSON.stringify(option)}`)
+                console.log(colors.white(`[Slash]   ${interaction.user.id} : ` + crypto.AES.encrypt(`/${interaction.commandName} ${JSON.stringify(option)}`, process.env.keyEncrypt)))
             } catch (error) {
                 console.error(colors.red(error))
                 await interaction.reply({ content: "Đã xảy ra lỗi! Vui lòng thử lại", ephemeral: true })

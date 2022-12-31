@@ -19,6 +19,7 @@
     TOKEN= # Discord Bot TOKEN: https://discord.com/developers/applications
     DAGPITOKEN= # DAGGPI TOKEN: https://dagpi.xyz/
     clientID= # Discord Bot ClientID
+    keyEncrypt= # Những kí tự làm nhiễu để mã hóa dữ liệu người dùng gửi
     ```
 - B4: Chạy `npm run start` để khởi động Bot
 

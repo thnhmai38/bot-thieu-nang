@@ -360,7 +360,7 @@ module.exports = {
                     })
             })
         } catch (e) {
-            if (e !== "ended") {
+            if (e.toString() !== "ended") {
                 console.error(e);
             } 
         }
