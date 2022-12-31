@@ -18,7 +18,7 @@
     ```env
     TOKEN= # Discord Bot TOKEN: https://discord.com/developers/applications
     DAGPITOKEN= # DAGGPI TOKEN: https://dagpi.xyz/
-    clientID= # Discord BBot ClientID
+    clientID= # Discord Bot ClientID
     ```
 - B4: Chạy `npm run start` để khởi động Bot
 
