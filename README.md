@@ -19,11 +19,12 @@
     TOKEN= # Discord Bot TOKEN: https://discord.com/developers/applications
     DAGPITOKEN= # DAGGPI TOKEN: https://dagpi.xyz/
     clientID= # Discord Bot ClientID
-    keyEncrypt= # Những kí tự làm nhiễu để mã hóa dữ liệu người dùng gửi
     ```
 - B4: Chạy `npm run start` để khởi động Bot
 
-**Vui lòng không clone bot để giả danh/cạnh tranh với bot hoặc nhằm mục đích thương mại!**
+*Nếu bạn muốn mã hóa Log (thông tin người dùng gửi tới), vui lòng clone [commit này](https://github.com/thanhgaming5550/bot-thieu-nang/commit/2537a7db395d4bff6a75644a73ca7a2ba17f5f8c)*
+
+**Vui lòng không sử dụng bot nhằm mục đích thương mại!**
 
 ## Contributing
 - B1: [Fork repository này](https://github.com/thanhgaming5550/bot-thieu-nang/fork)
@@ -33,7 +34,7 @@
 - B5: Đăng tải commit lên Remote: `git push -u origin <branch-name>`
 - B6: Gửi một Pull Request về repository này
 
-**Vui lòng không Contribute những branch sourcecode cũ hơn (như `v2`) và không được sửa `PRIVACY.md`, `LICENSE`, `SERVICE.md`**
+**Vui lòng không Contribute những branch sourcecode cũ hơn (như `v2`) và không sửa `PRIVACY.md`, `LICENSE`, `SERVICE.md`**
 ## Chủ Sở hữu
 - [thanhgaming5550](https://github.com/thanhgaming5550)
 
