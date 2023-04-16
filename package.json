@@ -1,6 +1,6 @@
 {
   "name": "bot-thieu-nang",
-  "version": "3.4.3",
+  "version": "3.4.4",
   "description": "Bot thieu nang - Entertainment Discord Bot",
   "main": "index.js",
   "scripts": {
@@ -28,7 +28,6 @@
     "advanced-calculator": "^1.1.0",
     "axios": "^1.2.1",
     "colors": "^1.4.0",
-    "crypto-js": "^4.1.1",
     "discord-api-types": "^0.37.21",
     "discord-together": "^1.3.31",
     "discord.js": "^14.7.1",
