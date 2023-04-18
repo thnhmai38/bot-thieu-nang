@@ -11,6 +11,8 @@
 
 ## Yêu cầu
 - <a href="https://nodejs.dev/en/download/">Node.js</a> >=16.19.0
+- <a href="https://www.ffmpeg.org/download.html">FFmpeg</a>
+   (nếu bạn không có điều kiện để dùng FFmpeg thì có thể cài **ffmpeg-static** bằng `npm install ffmpeg-static`)
 ## Setup
 - B1: ```git clone https://github.com/thanhgaming5550/bot-thieu-nang.git ```
 - B2: ```npm install```
