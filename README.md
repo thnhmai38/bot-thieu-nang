@@ -29,6 +29,8 @@
 **Vui lòng không sử dụng bot nhằm mục đích thương mại!**
 
 ## Contributing
+_Chú ý: Đừng đọc code của bot, thật đấy bạn sẽ không đọc được code đâu (Template và đã được viết lại [tại đây](https://github.com/thanhgaming5550/discord-bot-template))._
+
 - B1: [Fork repository này](https://github.com/thanhgaming5550/bot-thieu-nang/fork)
 - B2: Clone repository vừa fork: `git clone https://github.com/<your_username>/bot-thieu-nang`
 - B3: Tạo một Branch mới: `git checkout -b <branch_name>`
